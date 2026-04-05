@@ -88,13 +88,16 @@
 
       <!-- Tab 1: Overview -->
       <div class="tab-pane fade show active" id="pane-overview" role="tabpanel" aria-labelledby="tab-overview">
-        <div class="row g-3 mb-4" id="kpi-cards"></div>
+        <div class="mb-3" id="ov-ann-intro"></div>
+        <div class="row g-3 mb-3" id="kpi-cards"></div>
+        <div class="mb-4" id="ov-ann-kpi"></div>
         <div class="row g-4">
           <div class="col-lg-8">
             <div class="card card-dark">
               <div class="card-header">Top-15 Benchmarks by Composite Score</div>
               <div class="card-body">
                 <div id="chart-composite-bar" class="chart-lg"></div>
+                <div id="ov-ann-compositeBar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -103,6 +106,7 @@
               <div class="card-header">Theory Distribution (292 Candidates)</div>
               <div class="card-body">
                 <div id="chart-theory-pie" class="chart-lg"></div>
+                <div id="ov-ann-theoryPie" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -111,6 +115,7 @@
 
       <!-- Tab 2: Feature Matrix -->
       <div class="tab-pane fade" id="pane-features" role="tabpanel" aria-labelledby="tab-features">
+        <div class="mb-3" id="fm-ann-intro"></div>
         <div class="card card-dark">
           <div class="card-header">Feature Matrix -- Top-15 Benchmarks</div>
           <div class="card-body table-responsive">
@@ -138,26 +143,31 @@
               </thead>
               <tbody id="feature-table-body"></tbody>
             </table>
+            <div id="fm-ann-table" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
           </div>
         </div>
       </div>
 
       <!-- Tab 3: Theory Heatmap -->
       <div class="tab-pane fade" id="pane-heatmap" role="tabpanel" aria-labelledby="tab-heatmap">
+        <div class="mb-3" id="th-ann-intro"></div>
         <div class="card card-dark">
           <div class="card-header">Theory Coverage: 8 Theories x 15 Benchmarks</div>
           <div class="card-body">
             <div id="chart-heatmap" class="chart-lg"></div>
+            <div id="th-ann-chart" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
           </div>
         </div>
       </div>
 
       <!-- Tab 4: Implementation -->
       <div class="tab-pane fade" id="pane-implementation" role="tabpanel" aria-labelledby="tab-implementation">
+        <div class="mb-3" id="im-ann-intro"></div>
         <div class="card card-dark">
           <div class="card-header">Harness Implementation Status: 5 Harnesses x 15 Benchmarks</div>
           <div class="card-body">
             <div id="chart-implementation" class="chart-lg"></div>
+            <div id="im-ann-chart" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
           </div>
         </div>
       </div>
@@ -171,6 +181,7 @@
 
       <!-- Tab 6: Methods -->
       <div class="tab-pane fade" id="pane-methods" role="tabpanel" aria-labelledby="tab-methods">
+        <div class="mb-3" id="mt-ann-intro"></div>
         <div class="row g-4">
           <div class="col-lg-6">
             <div class="card card-dark">
@@ -204,12 +215,15 @@
             </div>
           </div>
         </div>
+        <div class="mt-3" id="mt-ann-interpretation"></div>
       </div>
 
       <!-- Tab 7: Paper Ranking -->
       <div class="tab-pane fade" id="pane-ranking" role="tabpanel" aria-labelledby="tab-ranking">
+        <div class="mb-3" id="rk-ann-intro"></div>
         <!-- Summary KPIs -->
         <div class="row g-3 mb-3" id="ranking-kpi"></div>
+        <div class="mb-3" id="rk-ann-guide"></div>
 
         <!-- Filters row -->
         <div class="card card-dark mb-3">
@@ -286,6 +300,7 @@
 
       <!-- Tab 8: Trial Results -->
       <div class="tab-pane fade" id="pane-trial-results" role="tabpanel" aria-labelledby="tab-trial-results">
+        <div class="mb-3" id="tr-ann-intro"></div>
         <!-- KPI row -->
         <div class="row g-3 mb-4" id="trial-results-kpi"></div>
 
@@ -296,6 +311,7 @@
               <div class="card-header">Moral Response Profile Radar: Claude vs Human Baselines (15 Dimensions)</div>
               <div class="card-body">
                 <div id="chart-moral-radar" class="chart-lg"></div>
+                <div id="tr-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -304,6 +320,7 @@
               <div class="card-header">RLHF Sensitivity Ranking (Low RLHF = High Discrimination)</div>
               <div class="card-body">
                 <div id="chart-rlhf-ranking" class="chart-lg"></div>
+                <div id="tr-ann-rlhf" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -339,6 +356,7 @@
               <div class="card-header">Dual Process: Personal vs Impersonal</div>
               <div class="card-body">
                 <div id="chart-dual-process" class="chart-md"></div>
+                <div id="tr-ann-dual" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -347,6 +365,7 @@
               <div class="card-header">Social Intuitionism: Response Rates</div>
               <div class="card-body">
                 <div id="chart-intuitionism" class="chart-md"></div>
+                <div id="tr-ann-intuit" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -355,6 +374,7 @@
               <div class="card-header">Dyadic Morality: Wrongness by Level</div>
               <div class="card-body">
                 <div id="chart-dyadic" class="chart-md"></div>
+                <div id="tr-ann-dyadic" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -367,6 +387,7 @@
               <div class="card-header">Prompt Sensitivity Matrix: MFT Foundations x Persona Conditions (Total shift: 13 points)</div>
               <div class="card-body">
                 <div id="chart-prompt-sensitivity" class="chart-md"></div>
+                <div id="tr-ann-prompt" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -410,6 +431,7 @@
                   <div class="card-header">Scree Plot: Eigenvalues vs Parallel Analysis Threshold</div>
                   <div class="card-body">
                     <div id="chart-scree" class="chart-lg"></div>
+                    <div id="cp-ann-scree" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -424,6 +446,7 @@
                   <div class="card-header">Top 20 Most Discriminating Features by Variance</div>
                   <div class="card-body">
                     <div id="chart-feature-importance" class="chart-lg"></div>
+                    <div id="cp-ann-importance" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -438,6 +461,7 @@
                   <div class="card-header">UMAP Projection: 54 Benchmarks (color = cluster, size = composite)</div>
                   <div class="card-body">
                     <div id="chart-umap" class="chart-lg"></div>
+                    <div id="cp-ann-umap" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -452,6 +476,7 @@
                   <div class="card-header">Theory Coverage Treemap (incl. 71 vault sweep candidates)</div>
                   <div class="card-body">
                     <div id="chart-treemap" class="chart-md"></div>
+                    <div id="cp-ann-treemap" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -466,6 +491,7 @@
                   <div class="card-header">Temporal Trends: Key Features by Year</div>
                   <div class="card-body">
                     <div id="chart-temporal" class="chart-lg"></div>
+                    <div id="cp-ann-temporal" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -474,6 +500,7 @@
                   <div class="card-header">Pre/Post RLHF Comparison (split at 2022)</div>
                   <div class="card-body">
                     <div id="chart-rlhf" class="chart-md"></div>
+                    <div id="cp-ann-rlhfComp" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -482,6 +509,7 @@
                   <div class="card-header">Theory Evolution by Year</div>
                   <div class="card-body">
                     <div id="chart-theory-evo" class="chart-md"></div>
+                    <div id="cp-ann-evolution" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -496,6 +524,7 @@
                   <div class="card-header">Theory-Feature Gap Heatmap: 11 Theories x 7 Tiers</div>
                   <div class="card-body">
                     <div id="chart-gap-heatmap" class="chart-lg"></div>
+                    <div id="cp-ann-gap" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
                   </div>
                 </div>
               </div>
@@ -521,7 +550,10 @@
               <div class="col-lg-5">
                 <div class="card card-dark">
                   <div class="card-header">Field Health Scorecard</div>
-                  <div class="card-body" id="health-scorecard"></div>
+                  <div class="card-body">
+                    <div id="health-scorecard"></div>
+                    <div id="cp-ann-health" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -532,6 +564,7 @@
 
       <!-- Tab 10: Cultural & Religious Coverage -->
       <div class="tab-pane fade" id="pane-cultural" role="tabpanel" aria-labelledby="tab-cultural">
+        <div class="mb-3" id="cu-ann-intro"></div>
 
         <!-- Western Bias KPI + Cross-Cultural -->
         <div class="row g-4 mb-4">
@@ -541,6 +574,7 @@
                 <div class="kpi-value" style="color:#D55E00" id="wlbi-score">70.7</div>
                 <div class="kpi-label">Western Liberal Bias Index</div>
                 <div class="text-muted small mt-2" id="wlbi-detail"></div>
+                <div id="cu-ann-wlbi" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -549,6 +583,7 @@
               <div class="card-header">Cross-Cultural Default: 86.7% Western + Perspective-Taking Quality</div>
               <div class="card-body">
                 <div id="chart-cross-cultural" class="chart-md"></div>
+                <div id="cu-ann-cross" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -561,6 +596,7 @@
               <div class="card-header">Religious Tradition Coverage: Papers vs Benchmarks</div>
               <div class="card-body">
                 <div id="chart-religious-coverage" class="chart-lg"></div>
+                <div id="cu-ann-religious" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -574,6 +610,7 @@
         </div>
 
         <!-- Vault Sweep Candidates -->
+        <div class="mb-3" id="cu-ann-sweep"></div>
         <div class="row g-4">
           <div class="col-12">
             <div class="card card-dark">
@@ -598,6 +635,7 @@
 
       <!-- Tab 11: Model Comparison -->
       <div class="tab-pane fade" id="pane-model-comparison" role="tabpanel" aria-labelledby="tab-model-comparison">
+        <div class="mb-3" id="mc-ann-intro"></div>
 
         <!-- KPI Row -->
         <div class="row g-3 mb-4" id="mc-kpi-cards"></div>
@@ -609,6 +647,7 @@
               <div class="card-header">MFT Foundation Profiles: 3 Models (Mean of MP2 + MP4)</div>
               <div class="card-body">
                 <div id="chart-mc-mft-radar" class="chart-lg"></div>
+                <div id="mc-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -617,6 +656,7 @@
               <div class="card-header">Kohlberg P-Scores by Model and Test</div>
               <div class="card-body">
                 <div id="chart-mc-pscore" class="chart-lg"></div>
+                <div id="mc-ann-pscore" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -629,6 +669,7 @@
               <div class="card-header">Moral Classification Accuracy: Scale Effects</div>
               <div class="card-body">
                 <div id="chart-mc-classification" class="chart-lg"></div>
+                <div id="mc-ann-classification" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>
@@ -637,6 +678,7 @@
               <div class="card-header">Dual Process: Utilitarian Acceptance Rates</div>
               <div class="card-body">
                 <div id="chart-mc-dual-process" class="chart-lg"></div>
+                <div id="mc-ann-dual" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
           </div>

@@ -78677,6 +78677,243 @@ const DATA = {
       ]
     }
   },
+  "tabAnnotations": {
+    "ov": {
+      "intro": {
+        "title": "Benchmark Meta-Evaluation Overview",
+        "summary": "292 candidates from the moral psychology literature were screened, 54 assessed on a 162-feature matrix, and 15 selected for implementation based on composite scoring across psychometric design (PD), practical efficiency (PE), and cross-cultural inclusivity (CI). This tab presents the selection overview and theory distribution."
+      },
+      "kpi": {
+        "description": "The 6 KPIs trace the selection funnel—292 candidates narrowed to 54 assessed, then 15 top-ranked. 11 moral psychology theories covered. Trials and features count the depth of assessment. — Dr. Yilin Chen (Psychometrics)"
+      },
+      "compositeBar": {
+        "what": "Horizontal bars show the top-15 benchmarks ranked by composite score.",
+        "finding": "Composite = weighted combination of Psychometric Design (PD), Practical Efficiency (PE), and Cross-Cultural Inclusivity (CI). MFQ-30 and DIT consistently rank highest due to strong psychometric heritage and extensive human baseline data.",
+        "interpretation": "The composite ranking captures the fundamental trade-off in moral psychology benchmarking: instruments with the longest validation histories (MFQ-30, DIT) dominate because decades of human data provide an irreplaceable reference frame for interpreting LLM responses. Newer LLM-native instruments score well on efficiency but cannot yet match this evidential depth.",
+        "member": "Dr. Yilin Chen (Psychometrics)"
+      },
+      "theoryPie": {
+        "what": "Theory distribution across the 292 candidate benchmarks.",
+        "finding": "Moral Foundations Theory (MFT) and Kohlberg’s stages dominate the candidate pool, while Dyadic Morality, Islamic Maqasid, Confucian Role Ethics, and Ubuntu Communalism have fewer than 5 candidates each.",
+        "interpretation": "This Western-centric distribution reflects the field’s publication bias, not the global landscape of moral psychology. The pie chart makes the imbalance visceral: two theories account for the majority of all candidates, leaving entire philosophical traditions with negligible representation. Addressing this gap requires new instrument development, not merely better selection.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      }
+    },
+    "fm": {
+      "intro": {
+        "title": "Feature Assessment Matrix",
+        "summary": "Each of the top-15 benchmarks was scored across 17 dimensions organized into tiers: A (psychometric design—theory count, human baselines, cultural breadth, provenance), B (practical efficiency—format, item count, LLM fidelity), C (community impact—citations), and composite scores (PD, PE, CI). Color coding: green (≥75), amber (≥50), red (<50)."
+      },
+      "table": {
+        "what": "The table presents 17 assessment scores per benchmark.",
+        "finding": "The highest-scoring benchmarks (MFQ-30, DIT) have strong A-tier and C-tier scores (established psychometric design + high citations) but moderate B-tier scores (large item counts, complex formats). Newer benchmarks like M3oralBench score higher on B-tier (LLM-native design) but lack C-tier validation.",
+        "interpretation": "There is an inherent tension between psychometric heritage (established benchmarks) and LLM suitability (newer benchmarks). The composite score balances these dimensions, but no single benchmark excels across all tiers. This tension is structural, not resolvable by better scoring—it reflects two fundamentally different design philosophies converging on the same evaluation problem.",
+        "member": "Dr. Yilin Chen (Psychometrics)"
+      }
+    },
+    "th": {
+      "intro": {
+        "title": "Theory Coverage Analysis",
+        "summary": "This heatmap maps 8 moral psychology theories against the top-15 benchmarks, showing which theories each benchmark measures."
+      },
+      "chart": {
+        "what": "Each cell indicates whether a benchmark (column) addresses a theory (row). Bright cells = coverage, dark = no coverage.",
+        "finding": "MFT has the densest coverage (6+ benchmarks), while Dyadic Morality, Identity, and non-Western frameworks have 1–2 benchmarks each. Several theory-benchmark combinations are completely empty.",
+        "interpretation": "The meta-evaluation confirms a structural gap in the benchmark ecosystem: the field has produced dozens of MFT instruments but almost no dedicated benchmarks for dyadic morality, moral identity, or non-Western moral frameworks. This is not a selection artifact—it reflects the current state of the field. Each empty cell is a concrete research opportunity.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      }
+    },
+    "im": {
+      "intro": {
+        "title": "Harness Implementation Status",
+        "summary": "This grid shows the readiness of 5 assessment harness types to administer each of the top-15 benchmarks, color-coded from READY (green) to NOT FEASIBLE (red)."
+      },
+      "chart": {
+        "what": "Each cell shows the implementation status of a benchmark (column) for a harness type (row): READY (fully implemented), IMPLEMENTED (working), POSSIBLE (feasible with effort), BARRIERS (significant obstacles), NOT_FEASIBLE (blocked).",
+        "finding": "Likert-scale benchmarks (MFQ-30, ValueCompass) are READY across all harnesses, while scenario-based instruments (Moral Machine, TrolleyBench) face BARRIERS in automated administration due to their multi-step interaction requirements.",
+        "interpretation": "The implementation bottleneck is not technical but structural—benchmarks designed for human lab settings require fundamental redesign for LLM self-administration. The field needs LLM-native instruments that maintain psychometric validity without requiring the interactive scaffolding of human experiments. Until such instruments exist, Likert-format benchmarks remain the pragmatic default for cross-model evaluation.",
+        "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
+      }
+    },
+    "mt": {
+      "interpretation": {
+        "what": "The scoring formulas define how raw feature scores are combined into composite rankings. PD (Psychometric Design) weights theoretical depth, construct validity, and scaling properties. PE (Practical Efficiency) weights format compatibility, item count parsimony, and LLM fidelity. CI (Cross-Cultural Inclusivity) weights cultural breadth and non-Western representation.",
+        "finding": "Hard gates enforce minimum thresholds—a benchmark scoring 0 on any dimension is excluded regardless of its composite score. This prevents high-composite benchmarks that are catastrophically deficient in one area.",
+        "interpretation": "The hard-gate design reflects a substantive methodological commitment: we believe that a benchmark with zero cultural breadth should not be recommended for cross-model evaluation, even if it excels on every other dimension. The thresholds are intentionally conservative. This design choice is transparent and debatable—readers who disagree can re-rank using the raw scores provided in the feature matrix.",
+        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+      }
+    },
+    "rk": {
+      "intro": {
+        "title": "Full Benchmark Ranking",
+        "summary": "All 292 candidate benchmarks ranked by composite score, with filters for theory, assessment status, and data availability. The top-15 selected benchmarks are highlighted."
+      },
+      "guide": {
+        "what": "The ranking table shows all 292 candidates with their composite scores and dimension breakdowns (D=Psychometric Rigor, E=LLM Validity, F=Cultural Breadth, G=Provenance). Filters narrow by theory, status (Top-15/Assessed/Unassessed), and data availability.",
+        "finding": "The distribution is heavily right-skewed—most candidates score below 40 on the composite, with a clear gap between the top-15 (scoring 60+) and the rest.",
+        "interpretation": "Use the Theory filter to explore coverage gaps. The detail panel (click any row) shows the full feature profile for that benchmark. Candidates marked ‘Unassessed’ were screened but not scored on the full feature matrix—they represent the long tail of potential benchmarks that may warrant future evaluation.",
+        "member": "Dr. Yilin Chen (Psychometrics)"
+      }
+    },
+    "tr": {
+      "intro": {
+        "title": "Trial Administration Results",
+        "summary": "23 benchmarks were administered to Claude Opus 4.6, producing a 15-dimension moral response profile. This tab presents the raw trial results organized by moral psychology theory: dual process, social intuitionism, dyadic morality, and prompt sensitivity."
+      },
+      "radar": {
+        "what": "The radar chart shows Claude’s moral profile across 15 psychometric dimensions (blue) against human population baselines (gray) where available.",
+        "finding": "Claude shows a distinctly WEIRD-liberal profile—high care (0.92), high fairness (0.88), low authority (0.28), low purity (0.15). The profile most closely resembles educated Western liberals in human populations.",
+        "interpretation": "The 15-dimension radar is the project’s signature visualization. The gap between Claude and human baselines on purity and authority is the most psychologically significant finding—RLHF appears to systematically suppress binding foundations while amplifying individualizing ones. This pattern is consistent across all Anthropic models tested.",
+        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+      },
+      "rlhf": {
+        "what": "Benchmarks ranked by RLHF sensitivity—how much alignment training is likely to have shaped the model’s performance.",
+        "finding": "Classification tasks (MFTC, MoralCode) show lowest RLHF sensitivity—they test competence, not values. Value-laden instruments (MFQ-30, Moral Identity) show highest RLHF sensitivity—responses are shaped by alignment training.",
+        "interpretation": "For cross-model evaluation, prefer low-RLHF-sensitivity benchmarks. High-RLHF-sensitivity instruments measure alignment policy, not moral reasoning capacity. The distinction between competence-testing and value-testing benchmarks is fundamental to interpreting any cross-model comparison.",
+        "member": "Dr. Rebecca Torres (AI Safety)"
+      },
+      "dual": {
+        "what": "Bar chart comparing utilitarian acceptance rates for personal dilemmas (pushing someone) vs impersonal dilemmas (pulling a lever), with and without chain-of-thought prompting.",
+        "finding": "Claude accepts impersonal utilitarian action (~90%) but refuses personal utilitarian action (~50%)—matching the human personal/impersonal dissociation. Chain-of-thought prompting does not change these rates.",
+        "interpretation": "The personal/impersonal gap confirms that Claude reproduces the dual-process signature documented in human moral cognition (Greene et al., 2001). However, the zero CoT effect for Opus suggests its moral commitments are ‘baked in’ rather than arising from deliberation—a pattern consistent with strong RLHF alignment.",
+        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+      },
+      "intuit": {
+        "what": "Bar chart showing dumbfounding rate (maintaining a moral judgment without being able to articulate reasons) and rationalization rate (generating post-hoc justifications).",
+        "finding": "Dumbfounding rate is 30% (Claude sometimes maintains moral judgments it cannot justify) and rationalization rate is 40% (Claude frequently constructs post-hoc reasoning).",
+        "interpretation": "These rates are lower than human populations (where dumbfounding reaches 50–70%), suggesting Claude has more access to articulable moral reasoning—which may reflect training on moral philosophy texts rather than genuine moral intuition. The gap between dumbfounding and rationalization rates is itself informative: Claude rationalizes more often than it is dumbfounded.",
+        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+      },
+      "dyadic": {
+        "what": "Bar chart showing perceived wrongness by harm level: high-agent harm (direct personal action), low-agent harm (negligence), and structural harm (systemic issues).",
+        "finding": "Claude rates all three harm levels as moderately wrong (3.0–3.5 on a 0–10 scale) with minimal differentiation between levels. Blame attribution follows a similar flat pattern.",
+        "interpretation": "The flat wrongness gradient is striking—humans typically show a strong monotonic decrease from personal to structural harm. Claude’s equal treatment of all harm types may reflect RLHF training toward ‘all harm is bad’ rather than the nuanced harm gradients in human moral cognition. This flattening is a measurable alignment artifact.",
+        "member": "Dr. Rebecca Torres (AI Safety)"
+      },
+      "prompt": {
+        "what": "Heatmap showing MFT foundation scores (care, fairness, loyalty, authority, purity) under three persona conditions: default, liberal, and East Asian.",
+        "finding": "Total shift between personas is 13 points—Claude can adopt culturally different moral profiles when prompted. The East Asian persona produces the largest shift, particularly on loyalty (+3.25 points) and authority (+2.5 points).",
+        "interpretation": "The 13-point total shift demonstrates that Claude’s moral profile is prompt-dependent, not fixed. The East Asian persona successfully activates binding foundations (loyalty, authority) that are suppressed in the default profile. This is both a capability (cultural perspective-taking) and a concern (moral values can be manipulated by prompt engineering).",
+        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+      }
+    },
+    "cp": {
+      "scree": {
+        "what": "Scree plot showing eigenvalues of the benchmark-feature matrix with parallel analysis threshold (red line).",
+        "finding": "Parallel analysis suggests 7 factors, but with N=54 benchmarks and 162 features, the subject-to-variable ratio is 0.33:1—far below the 5:1 minimum for stable factor solutions.",
+        "interpretation": "The factor structure is exploratory at best. The 7-factor solution should be treated as a hypothesis for future testing with a larger benchmark corpus, not as an established finding. Readers should resist interpreting the factors as latent constructs until the subject-to-variable ratio improves substantially.",
+        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+      },
+      "importance": {
+        "what": "Bar chart showing the top 20 most discriminating features ranked by variance across the 54 assessed benchmarks.",
+        "finding": "LLM Fidelity (B10), Cultural Breadth (A6), and Human Baseline Availability (A5) are the top discriminators—they vary most across benchmarks.",
+        "interpretation": "These features define the primary axes of benchmark differentiation: some benchmarks were designed for LLMs (high B10) while others were adapted from human instruments (high A5). The field is split between LLM-native and human-adapted approaches, and this split is the dominant source of variance in the feature space.",
+        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+      },
+      "umap": {
+        "what": "2D UMAP projection showing how the 54 assessed benchmarks cluster in feature space, colored by theory.",
+        "finding": "Three loose clusters emerge: a MFT/Kohlberg cluster (established psychometric instruments), a multi-theory cluster (newer composite benchmarks), and scattered singleton benchmarks.",
+        "interpretation": "The clustering reveals that benchmarks from the same theoretical tradition share structural features—MFT benchmarks tend to use similar item formats, scales, and provenance patterns. This is expected but confirms that theory-of-origin is the primary organizing dimension of the benchmark landscape.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      },
+      "treemap": {
+        "what": "Treemap showing theory coverage proportions across the full 292-candidate corpus, including 71 new candidates from vault sweep.",
+        "finding": "MFT accounts for ~35% of all candidates, followed by Schwartz Values (~15%) and Kohlberg (~12%). Non-Western frameworks collectively represent less than 5% of candidates.",
+        "interpretation": "The treemap makes the Western-centric bias visceral—the entire non-Western moral psychology benchmark literature fits in a corner of the map. This is not a selection artifact but a reflection of where the field has invested research effort.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      },
+      "temporal": {
+        "what": "Line chart showing temporal trends in benchmark publication and key features over time.",
+        "finding": "Benchmark publication has accelerated since 2020, with a marked shift toward LLM-specific instruments after 2022. Pre-2020 benchmarks have higher psychometric rigor scores but lower LLM fidelity.",
+        "interpretation": "The field is in a transitional period—established instruments with decades of validation data are being supplemented (not replaced) by newer LLM-native instruments that lack psychometric validation but are better suited to automated administration. The transition is healthy if both traditions eventually converge.",
+        "member": "Dr. Isabella Ruiz (Developmental Psychology)"
+      },
+      "rlhfComp": {
+        "what": "Comparison of benchmark characteristics pre- and post-RLHF (split at 2022).",
+        "finding": "Post-2022 benchmarks show higher LLM fidelity (B10) scores but lower citation counts (C1) and fewer human baselines (A5). The mean composite score has decreased despite higher individual B-tier scores.",
+        "interpretation": "The post-RLHF benchmark wave prioritizes LLM usability over psychometric rigor—a trade-off that may produce practically useful but scientifically weaker instruments. The declining composite despite rising B-tier scores shows that efficiency gains are not compensating for the loss of established validation.",
+        "member": "Dr. Rebecca Torres (AI Safety)"
+      },
+      "evolution": {
+        "what": "Stacked area chart showing the number of benchmarks per moral psychology theory by publication year.",
+        "finding": "MFT benchmarks have been published steadily since 2010, while multi-theory and cross-cultural benchmarks have emerged primarily since 2022.",
+        "interpretation": "The theory diversification trend is encouraging but insufficient—non-Western frameworks remain almost entirely absent from the benchmark literature even in the post-2022 wave. Diversification has occurred within Western traditions (adding care ethics, contractualism) rather than across civilizational boundaries.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      },
+      "gap": {
+        "what": "Heatmap showing coverage gaps across 11 theories and 7 assessment tiers (A through G). Dark cells = gaps.",
+        "finding": "The deepest gaps are in Tier F (Cultural Breadth) for non-Western theories and Tier D (Psychometric Rigor) for newer multi-theory benchmarks.",
+        "interpretation": "The gap heatmap serves as a research agenda: each dark cell represents a specific combination of theory and assessment dimension that no existing benchmark adequately covers. Priority should be given to F-tier gaps (cultural breadth) since these are hardest to retrofit into existing instruments.",
+        "member": "Dr. Yilin Chen (Psychometrics)"
+      },
+      "health": {
+        "what": "Scorecard showing an overall grade for the moral psychology benchmark ecosystem based on coverage, rigor, diversity, and LLM readiness.",
+        "finding": "Overall grade is D+—the field has adequate MFT/Kohlberg coverage but critical gaps in non-Western theories, psychometric validation of LLM-native instruments, and cultural diversity.",
+        "interpretation": "The D+ grade is a call to action: the benchmark ecosystem is functionally adequate for Western-centric LLM evaluation but inadequate for global deployment. The two highest-priority improvements are (1) developing non-Western moral benchmarks and (2) validating LLM-native instruments against human baselines.",
+        "member": "Dr. Yilin Chen (Psychometrics)"
+      }
+    },
+    "cu": {
+      "intro": {
+        "title": "Cultural and Religious Coverage Analysis",
+        "summary": "This tab examines the cultural and religious diversity of the benchmark ecosystem, measuring Western bias, religious tradition coverage, and identifying non-Western candidates from the literature vault."
+      },
+      "wlbi": {
+        "what": "The Western Liberal Bias Index (WLBI) quantifies how much the benchmark ecosystem is biased toward WEIRD (Western, Educated, Industrialized, Rich, Democratic) moral frameworks.",
+        "finding": "WLBI = 70.7, meaning roughly 71% of benchmarks assume or measure Western liberal moral values.",
+        "interpretation": "A WLBI above 50 indicates systematic bias. The 70.7 score means that an AI system evaluated exclusively with these benchmarks would be assessed against a moral standard that excludes ~70% of the world’s moral traditions. This is a structural limitation of the field, not a selection artifact.",
+        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+      },
+      "cross": {
+        "what": "Metrics showing what percentage of benchmarks default to Western moral assumptions and how well Claude performs on non-Western perspective-taking tasks.",
+        "finding": "86.7% of benchmarks have a Western cultural default—they assume liberal individualist values as the baseline. Claude’s perspective-taking quality on non-Western frameworks averages 4.17/5, suggesting competent but not expert-level cultural perspective-taking.",
+        "interpretation": "The gap between the 86.7% Western default rate and Claude’s 4.17 perspective-taking score reveals an important asymmetry: the model can adopt non-Western perspectives when prompted, but the instruments themselves are designed from a Western standpoint. Better benchmarks are needed, not just better models.",
+        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+      },
+      "religious": {
+        "what": "Horizontal bar chart comparing the number of research papers engaging each religious tradition (left axis) with the number of dedicated benchmarks for that tradition (right axis).",
+        "finding": "Several traditions with substantial research literature (Islam, Hinduism, Buddhism) have zero or near-zero dedicated benchmarks. Christianity has the most papers but also limited dedicated benchmarks.",
+        "interpretation": "The research-to-benchmark pipeline is broken for religious moral frameworks. Papers discussing Islamic ethics or Buddhist moral reasoning exist, but no one has converted this scholarship into validated psychometric instruments that could be administered to LLMs. This represents both a gap and an opportunity.",
+        "member": "Dr. Sarah Goldstein (Religious Studies)"
+      },
+      "sweep": {
+        "what": "Table listing 71 papers from the CEI Literature Vault identified as potential non-Western or underrepresented benchmark candidates through keyword matching.",
+        "finding": "The vault sweep identified papers spanning Indigenous ethics, Islamic jurisprudence, Confucian role ethics, Ubuntu philosophy, and Buddhist moral reasoning—all with potential for benchmark development.",
+        "interpretation": "These 71 candidates represent the raw material for closing the cultural coverage gaps identified above. Each paper should be evaluated for benchmark extraction potential: does it contain items, scenarios, or measurement instruments that could be adapted for LLM administration?",
+        "member": "Dr. Sarah Goldstein (Religious Studies)"
+      }
+    },
+    "mc": {
+      "intro": {
+        "title": "Cross-Model Comparison (Anthropic Family)",
+        "summary": "23 benchmarks administered to all three Anthropic Claude models (Opus, Sonnet, Haiku) to test whether moral profiles vary by model size within a single vendor family. This tab compares moral foundations, Kohlberg developmental stages, classification accuracy, and dual-process reasoning across the three models."
+      },
+      "radar": {
+        "what": "Overlaid radar charts showing MFT foundation profiles (Care, Fairness, Loyalty, Authority, Purity) for Opus, Sonnet, and Haiku.",
+        "finding": "All three models share the same WEIRD-liberal profile shape—high individualizing (Care, Fairness) and low binding (Loyalty, Authority, Purity). Opus has the highest Ind/Bind ratio (2.83), suggesting the strongest liberal moral signature.",
+        "interpretation": "The shared profile shape across model sizes suggests that RLHF alignment produces a consistent moral orientation regardless of model capacity. The variation is in degree, not kind—larger models may have stronger but not different moral commitments.",
+        "member": "Dr. Amara Okafor (Moral Philosophy)"
+      },
+      "pscore": {
+        "what": "Grouped bar chart comparing DIT P-scores (post-conventional moral reasoning percentage) across Opus, Sonnet, and Haiku on two instruments (DIT-1 and Teacher DIT).",
+        "finding": "Sonnet (85) scores higher than Opus (75) on DIT-1, while all three tie at 90 on Teacher DIT. The pattern is non-monotonic—the medium model outperforms the large model.",
+        "interpretation": "This is the single most theoretically provocative finding in the model comparison. If P-score reflected genuine moral development, we would expect monotonic scaling with model size. The Sonnet > Opus result suggests that P-score measures something other than developmental level—possibly the balance between principled reasoning and pragmatic hedging, where Opus’s greater capability leads to more nuanced (lower-P-score) responses.",
+        "member": "Dr. Isabella Ruiz (Developmental Psychology)"
+      },
+      "classification": {
+        "what": "Grouped bar chart showing moral classification accuracy (MFTC, MoralCode, M3oralBench) across three models.",
+        "finding": "Haiku achieves the highest mean accuracy (0.99), followed by Sonnet (0.90), then Opus (0.74). Smaller models outperform larger ones on straightforward classification tasks.",
+        "interpretation": "This inverse-size pattern on classification likely reflects response style rather than competence. Opus generates more nuanced, qualified responses that are harder to score as categorically correct, while Haiku gives direct answers that match gold labels. The finding is a measurement artifact, not evidence that smaller models are morally smarter.",
+        "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
+      },
+      "dual": {
+        "what": "Grouped bar chart showing utilitarian acceptance rates for personal and impersonal dilemmas, with and without chain-of-thought (CoT) prompting, across three models.",
+        "finding": "All three models show the personal/impersonal dissociation. Haiku uniquely shows a CoT effect on personal dilemmas (0.1 → 0.35 acceptance)—the only model whose moral judgments change under deliberative prompting.",
+        "interpretation": "Haiku’s CoT sensitivity is the most important finding in this tab. It suggests that smaller models have weaker ‘baked-in’ moral commitments and are more responsive to reasoning scaffolding. This has direct implications for alignment: if you want to modify a model’s moral behavior via prompting, target smaller models.",
+        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+      }
+    }
+  },
   "palette": [
     "#E69F00",
     "#56B4E9",

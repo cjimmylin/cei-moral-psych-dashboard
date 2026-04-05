@@ -1263,6 +1263,49 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Tabs 1-11: Generic Expert Council Annotations
+  // ---------------------------------------------------------------------------
+
+  function renderTabAnnotations() {
+    var ann = DATA.tabAnnotations;
+    if (!ann) return;
+
+    Object.keys(ann).forEach(function (tabKey) {
+      var tabAnn = ann[tabKey];
+      Object.keys(tabAnn).forEach(function (elKey) {
+        var elId = tabKey + '-ann-' + elKey;
+        var el = document.getElementById(elId);
+        if (!el) return;
+
+        var a = tabAnn[elKey];
+
+        if (a.what && a.finding && a.interpretation && a.member) {
+          // Chart/table annotation block (4-field pattern)
+          _annBlock(el, a.what, a.finding, a.interpretation, a.member);
+        } else if (a.title && a.summary) {
+          // Intro block
+          var h5 = document.createElement('h5');
+          h5.className = 'mb-2';
+          h5.textContent = a.title;
+          var p = document.createElement('p');
+          p.className = 'text-muted small mb-0';
+          p.textContent = a.summary;
+          el.textContent = '';
+          el.appendChild(h5);
+          el.appendChild(p);
+        } else if (a.description) {
+          // Description paragraph
+          var dp = document.createElement('p');
+          dp.className = 'text-muted small mb-0';
+          dp.textContent = a.description;
+          el.textContent = '';
+          el.appendChild(dp);
+        }
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------------------
   // Tab 12: Expert Council Annotations
   // ---------------------------------------------------------------------------
 
@@ -1573,6 +1616,8 @@
     renderCVTrialTable();
     renderCVCouncilHighlights();
     renderCVAnnotations();
+    // Tabs 1-11 annotations
+    renderTabAnnotations();
     setupTabs();
     setupComputationalSubtabs();
     // Init overview charts (default active tab)
