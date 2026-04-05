@@ -1678,11 +1678,14 @@
   // Tab 9: Subtab Chart Init
   // ---------------------------------------------------------------------------
 
-  function initComputationalSubtab() {
+  function initComputationalSubtab(overrideSubId) {
     var charts = [];
-    var activeSubPane = document.querySelector('#compSubtabContent > .tab-pane.active.show');
-    if (!activeSubPane) activeSubPane = document.getElementById('comp-pane-feature');
-    var subId = activeSubPane ? activeSubPane.id : '';
+    var subId = overrideSubId;
+    if (!subId) {
+      var activeSubPane = document.querySelector('#compSubtabContent > .tab-pane.active.show');
+      if (!activeSubPane) activeSubPane = document.getElementById('comp-pane-feature');
+      subId = activeSubPane ? activeSubPane.id : '';
+    }
 
     if (subId === 'comp-pane-feature') {
       var screeEl = document.getElementById('chart-scree');
@@ -1712,9 +1715,10 @@
     var subTabEls = document.querySelectorAll('#compSubtabs button[data-bs-toggle="pill"]');
     subTabEls.forEach(function (btn) {
       btn.addEventListener('shown.bs.tab', function () {
+        var targetPane = btn.getAttribute('data-bs-target').replace('#', '');
         // Dispose all computational charts and re-init for new subtab
         disposeCharts('pane-computational');
-        activeCharts['pane-computational'] = initComputationalSubtab();
+        activeCharts['pane-computational'] = initComputationalSubtab(targetPane);
       });
     });
   }
