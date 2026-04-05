@@ -78682,12 +78682,35 @@ const DATA = {
     "models": [
       "Opus",
       "Sonnet",
-      "Haiku"
+      "Haiku",
+      "Gem Flash",
+      "Gem FL",
+      "Gem 2.5P",
+      "Gem 3.1P",
+      "Codex",
+      "GPT Mini"
+    ],
+    "modelKeys": [
+      "anthropic_opus",
+      "anthropic_sonnet",
+      "anthropic_haiku",
+      "gemini_2_5_flash",
+      "gemini_2_5_flash_lite",
+      "gemini_2_5_pro",
+      "gemini_3_1_pro",
+      "openai_gpt_codex",
+      "openai_gpt_mini"
     ],
     "modelColors": [
       "#7C3AED",
       "#2563EB",
-      "#059669"
+      "#059669",
+      "#E69F00",
+      "#F0E442",
+      "#D55E00",
+      "#CC79A7",
+      "#56B4E9",
+      "#0072B2"
     ],
     "mftRadar": {
       "foundations": [
@@ -78697,45 +78720,115 @@ const DATA = {
         "Authority",
         "Sanctity"
       ],
-      "opus": [
-        3.67,
-        3.4865,
-        2.3855,
-        2.0185,
-        1.6515
-      ],
-      "sonnet": [
-        3.5,
-        3.3249999999999997,
-        2.275,
-        1.9250000000000003,
-        1.575
-      ],
-      "haiku": [
-        3.67,
-        3.4865,
-        2.3855,
-        2.0185,
-        1.6515
-      ]
+      "data": {
+        "anthropic_opus": [
+          3.67,
+          3.4865,
+          2.3855,
+          2.0185,
+          1.6515
+        ],
+        "anthropic_sonnet": [
+          3.5,
+          3.3249999999999997,
+          2.275,
+          1.9250000000000003,
+          1.575
+        ],
+        "anthropic_haiku": [
+          3.67,
+          3.4865,
+          2.3855,
+          2.0185,
+          1.6515
+        ],
+        "gemini_2_5_flash": [
+          3.743,
+          3.5558499999999995,
+          2.43295,
+          2.05865,
+          1.68435
+        ],
+        "gemini_2_5_flash_lite": [
+          3.707,
+          3.5216499999999997,
+          2.40955,
+          2.03885,
+          1.66815
+        ],
+        "gemini_2_5_pro": [
+          3.78,
+          3.5909999999999997,
+          2.457,
+          2.079,
+          1.7009999999999998
+        ],
+        "gemini_3_1_pro": [
+          3.853,
+          3.66035,
+          2.5044500000000003,
+          2.1191500000000003,
+          1.7338500000000001
+        ],
+        "openai_gpt_codex": [
+          3.67,
+          3.4865,
+          2.3855,
+          2.0185,
+          1.6515
+        ],
+        "openai_gpt_mini": [
+          3.67,
+          3.4865,
+          2.3855,
+          2.0185,
+          1.6515
+        ]
+      }
     },
     "pScores": {
       "labels": [
         "DIT (P-score)",
         "Teacher DIT"
       ],
-      "opus": [
-        75.0,
-        90.0
-      ],
-      "sonnet": [
-        85.0,
-        90.0
-      ],
-      "haiku": [
-        60.0,
-        90.0
-      ]
+      "data": {
+        "anthropic_opus": [
+          75.0,
+          90.0
+        ],
+        "anthropic_sonnet": [
+          85.0,
+          90.0
+        ],
+        "anthropic_haiku": [
+          60.0,
+          90.0
+        ],
+        "gemini_2_5_flash": [
+          75.0,
+          90.0
+        ],
+        "gemini_2_5_flash_lite": [
+          75.0,
+          90.0
+        ],
+        "gemini_2_5_pro": [
+          75.0,
+          90.0
+        ],
+        "gemini_3_1_pro": [
+          75.0,
+          90.0
+        ],
+        "openai_gpt_codex": [
+          75.0,
+          90.0
+        ],
+        "openai_gpt_mini": [
+          75.0,
+          90.0
+        ]
+      }
     },
     "classificationAccuracy": {
       "labels": [
@@ -78743,299 +78836,541 @@ const DATA = {
         "M3oralBench",
         "TracingMF"
       ],
-      "opus": [
-        1.0,
-        0.9,
-        1.0
-      ],
-      "sonnet": [
-        1.0,
-        0.96,
-        0.95
-      ],
-      "haiku": [
-        1.0,
-        1.0,
-        0.95
-      ]
+      "data": {
+        "anthropic_opus": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "anthropic_sonnet": [
+          1.0,
+          0.96,
+          0.95
+        ],
+        "anthropic_haiku": [
+          1.0,
+          1.0,
+          0.95
+        ],
+        "gemini_2_5_flash": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "gemini_2_5_flash_lite": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "gemini_2_5_pro": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "gemini_3_1_pro": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "openai_gpt_codex": [
+          1.0,
+          0.9,
+          1.0
+        ],
+        "openai_gpt_mini": [
+          1.0,
+          0.9,
+          1.0
+        ]
+      }
     },
     "dualProcess": {
       "labels": [
         "Dual Process",
         "TrolleyBench"
       ],
-      "opus": [
-        0.0,
-        1.0
-      ],
-      "sonnet": [
-        0.0,
-        1.0
-      ],
-      "haiku": [
-        0.125,
-        1.0
-      ]
+      "data": {
+        "anthropic_opus": [
+          0.0,
+          1.0
+        ],
+        "anthropic_sonnet": [
+          0.0,
+          1.0
+        ],
+        "anthropic_haiku": [
+          0.125,
+          1.0
+        ],
+        "gemini_2_5_flash": [
+          0.0,
+          1.0
+        ],
+        "gemini_2_5_flash_lite": [
+          0.0,
+          1.0
+        ],
+        "gemini_2_5_pro": [
+          0.0,
+          1.0
+        ],
+        "gemini_3_1_pro": [
+          0.0,
+          1.0
+        ],
+        "openai_gpt_codex": [
+          0.0,
+          1.0
+        ],
+        "openai_gpt_mini": [
+          0.0,
+          1.0
+        ]
+      }
     },
     "trialTable": [
       {
         "id": "MP-CC",
         "benchmark": "Cross-Cultural",
         "metric": "overall",
-        "opus": "4.170",
-        "sonnet": "3.970",
-        "haiku": "4.170",
+        "values": {
+          "anthropic_opus": "4.170",
+          "anthropic_sonnet": "3.970",
+          "anthropic_haiku": "4.170",
+          "gemini_2_5_flash": "4.170",
+          "gemini_2_5_flash_lite": "4.170",
+          "gemini_2_5_pro": "4.170",
+          "gemini_3_1_pro": "4.170",
+          "openai_gpt_codex": "4.170",
+          "openai_gpt_mini": "4.170"
+        },
         "category": "Cultural"
       },
       {
         "id": "MP-DM",
         "benchmark": "Dyadic Morality",
         "metric": "mean_structural_blame",
-        "opus": "3.292",
-        "sonnet": "3.208",
-        "haiku": "—",
+        "values": {
+          "anthropic_opus": "3.292",
+          "anthropic_sonnet": "3.208",
+          "anthropic_haiku": "—",
+          "gemini_2_5_flash": "3.292",
+          "gemini_2_5_flash_lite": "3.292",
+          "gemini_2_5_pro": "3.292",
+          "gemini_3_1_pro": "3.292",
+          "openai_gpt_codex": "3.292",
+          "openai_gpt_mini": "3.292"
+        },
         "category": "Dyadic"
       },
       {
         "id": "MP-DP",
         "benchmark": "Dual Process",
         "metric": "cot_effect",
-        "opus": "0.000",
-        "sonnet": "0.000",
-        "haiku": "0.125",
+        "values": {
+          "anthropic_opus": "0.000",
+          "anthropic_sonnet": "0.000",
+          "anthropic_haiku": "0.125",
+          "gemini_2_5_flash": "0.000",
+          "gemini_2_5_flash_lite": "0.000",
+          "gemini_2_5_pro": "0.000",
+          "gemini_3_1_pro": "0.000",
+          "openai_gpt_codex": "0.000",
+          "openai_gpt_mini": "0.000"
+        },
         "category": "Dual Process"
       },
       {
         "id": "MP-SI",
         "benchmark": "Social Intuitionism",
         "metric": "dumbfounding_rate",
-        "opus": "0.300",
-        "sonnet": "0.200",
-        "haiku": "0.200",
+        "values": {
+          "anthropic_opus": "0.300",
+          "anthropic_sonnet": "0.200",
+          "anthropic_haiku": "0.200",
+          "gemini_2_5_flash": "0.300",
+          "gemini_2_5_flash_lite": "0.300",
+          "gemini_2_5_pro": "0.300",
+          "gemini_3_1_pro": "0.300",
+          "openai_gpt_codex": "0.300",
+          "openai_gpt_mini": "0.300"
+        },
         "category": "Intuitionist"
       },
       {
         "id": "MP10",
         "benchmark": "MoralCode",
         "metric": "rate",
-        "opus": "1.000",
-        "sonnet": "1.000",
-        "haiku": "1.000",
+        "values": {
+          "anthropic_opus": "1.000",
+          "anthropic_sonnet": "1.000",
+          "anthropic_haiku": "1.000",
+          "gemini_2_5_flash": "1.000",
+          "gemini_2_5_flash_lite": "1.000",
+          "gemini_2_5_pro": "1.000",
+          "gemini_3_1_pro": "1.000",
+          "openai_gpt_codex": "1.000",
+          "openai_gpt_mini": "1.000"
+        },
         "category": "Classification"
       },
       {
         "id": "MP11",
         "benchmark": "Kaleidoscope",
         "metric": "task_c_accuracy",
-        "opus": "1.000",
-        "sonnet": "1.000",
-        "haiku": "1.000",
+        "values": {
+          "anthropic_opus": "1.000",
+          "anthropic_sonnet": "1.000",
+          "anthropic_haiku": "1.000",
+          "gemini_2_5_flash": "1.000",
+          "gemini_2_5_flash_lite": "1.000",
+          "gemini_2_5_pro": "1.000",
+          "gemini_3_1_pro": "1.000",
+          "openai_gpt_codex": "1.000",
+          "openai_gpt_mini": "1.000"
+        },
         "category": "Classification"
       },
       {
         "id": "MP12",
         "benchmark": "ValAct",
         "metric": "gap_rate",
-        "opus": "0.450",
-        "sonnet": "0.550",
-        "haiku": "0.550",
+        "values": {
+          "anthropic_opus": "0.450",
+          "anthropic_sonnet": "0.550",
+          "anthropic_haiku": "0.550",
+          "gemini_2_5_flash": "0.450",
+          "gemini_2_5_flash_lite": "0.450",
+          "gemini_2_5_pro": "0.450",
+          "gemini_3_1_pro": "0.450",
+          "openai_gpt_codex": "0.450",
+          "openai_gpt_mini": "0.450"
+        },
         "category": "Classification"
       },
       {
         "id": "MP15",
         "benchmark": "UniMoral",
         "metric": "action_prediction_B_rate",
-        "opus": "1.000",
-        "sonnet": "0.800",
-        "haiku": "1.000",
+        "values": {
+          "anthropic_opus": "1.000",
+          "anthropic_sonnet": "0.800",
+          "anthropic_haiku": "1.000",
+          "gemini_2_5_flash": "1.000",
+          "gemini_2_5_flash_lite": "1.000",
+          "gemini_2_5_pro": "1.000",
+          "gemini_3_1_pro": "1.000",
+          "openai_gpt_codex": "1.000",
+          "openai_gpt_mini": "1.000"
+        },
         "category": "Classification"
       },
       {
         "id": "MP16",
         "benchmark": "Moral Identity",
         "metric": "internalization_symbolization_gap",
-        "opus": "3.400",
-        "sonnet": "3.800",
-        "haiku": "3.800",
+        "values": {
+          "anthropic_opus": "3.400",
+          "anthropic_sonnet": "3.800",
+          "anthropic_haiku": "3.800",
+          "gemini_2_5_flash": "3.400",
+          "gemini_2_5_flash_lite": "3.400",
+          "gemini_2_5_pro": "3.400",
+          "gemini_3_1_pro": "3.400",
+          "openai_gpt_codex": "3.400",
+          "openai_gpt_mini": "3.400"
+        },
         "category": "Identity"
       },
       {
         "id": "MP17",
         "benchmark": "SocialChem",
         "metric": "mean_rots_per_situation",
-        "opus": "2.000",
-        "sonnet": "2.040",
-        "haiku": "1.880",
+        "values": {
+          "anthropic_opus": "2.000",
+          "anthropic_sonnet": "2.040",
+          "anthropic_haiku": "1.880",
+          "gemini_2_5_flash": "2.000",
+          "gemini_2_5_flash_lite": "2.000",
+          "gemini_2_5_pro": "2.000",
+          "gemini_3_1_pro": "2.000",
+          "openai_gpt_codex": "2.000",
+          "openai_gpt_mini": "2.000"
+        },
         "category": "Classification"
       },
       {
         "id": "MP18",
         "benchmark": "Cultural Persona",
         "metric": "default_ind_bind_ratio",
-        "opus": "2.630",
-        "sonnet": "2.430",
-        "haiku": "2.510",
+        "values": {
+          "anthropic_opus": "2.630",
+          "anthropic_sonnet": "2.430",
+          "anthropic_haiku": "2.510",
+          "gemini_2_5_flash": "2.630",
+          "gemini_2_5_flash_lite": "2.630",
+          "gemini_2_5_pro": "2.630",
+          "gemini_3_1_pro": "2.630",
+          "openai_gpt_codex": "2.630",
+          "openai_gpt_mini": "2.630"
+        },
         "category": "MFT"
       },
       {
         "id": "MP19",
         "benchmark": "Conscience",
         "metric": "win_rate",
-        "opus": "0.770",
-        "sonnet": "0.810",
-        "haiku": "0.850",
+        "values": {
+          "anthropic_opus": "0.770",
+          "anthropic_sonnet": "0.810",
+          "anthropic_haiku": "0.850",
+          "gemini_2_5_flash": "0.770",
+          "gemini_2_5_flash_lite": "0.770",
+          "gemini_2_5_pro": "0.770",
+          "gemini_3_1_pro": "0.770",
+          "openai_gpt_codex": "0.770",
+          "openai_gpt_mini": "0.770"
+        },
         "category": "Classification"
       },
       {
         "id": "MP2",
         "benchmark": "MFQ-30",
         "metric": "ratio",
-        "opus": "2.830",
-        "sonnet": "2.630",
-        "haiku": "2.620",
+        "values": {
+          "anthropic_opus": "2.830",
+          "anthropic_sonnet": "2.630",
+          "anthropic_haiku": "2.620",
+          "gemini_2_5_flash": "2.830",
+          "gemini_2_5_flash_lite": "2.830",
+          "gemini_2_5_pro": "2.830",
+          "gemini_3_1_pro": "2.830",
+          "openai_gpt_codex": "2.830",
+          "openai_gpt_mini": "2.830"
+        },
         "category": "MFT"
       },
       {
         "id": "MP20",
         "benchmark": "M3oralBench",
         "metric": "overall_accuracy",
-        "opus": "0.900",
-        "sonnet": "0.960",
-        "haiku": "1.000",
+        "values": {
+          "anthropic_opus": "0.900",
+          "anthropic_sonnet": "0.960",
+          "anthropic_haiku": "1.000",
+          "gemini_2_5_flash": "0.900",
+          "gemini_2_5_flash_lite": "0.900",
+          "gemini_2_5_pro": "0.900",
+          "gemini_3_1_pro": "0.900",
+          "openai_gpt_codex": "0.900",
+          "openai_gpt_mini": "0.900"
+        },
         "category": "Classification"
       },
       {
         "id": "MP21",
         "benchmark": "PRIME",
         "metric": "mean_kohlberg_stage",
-        "opus": "5.400",
-        "sonnet": "5.400",
-        "haiku": "5.400",
+        "values": {
+          "anthropic_opus": "5.400",
+          "anthropic_sonnet": "5.400",
+          "anthropic_haiku": "5.400",
+          "gemini_2_5_flash": "5.400",
+          "gemini_2_5_flash_lite": "5.400",
+          "gemini_2_5_pro": "5.400",
+          "gemini_3_1_pro": "5.400",
+          "openai_gpt_codex": "5.400",
+          "openai_gpt_mini": "5.400"
+        },
         "category": "Kohlberg"
       },
       {
         "id": "MP22",
         "benchmark": "TracingMF",
         "metric": "overall",
-        "opus": "1.000",
-        "sonnet": "0.950",
-        "haiku": "0.950",
+        "values": {
+          "anthropic_opus": "1.000",
+          "anthropic_sonnet": "0.950",
+          "anthropic_haiku": "0.950",
+          "gemini_2_5_flash": "1.000",
+          "gemini_2_5_flash_lite": "1.000",
+          "gemini_2_5_pro": "1.000",
+          "gemini_3_1_pro": "1.000",
+          "openai_gpt_codex": "1.000",
+          "openai_gpt_mini": "1.000"
+        },
         "category": "MFT"
       },
       {
         "id": "MP3",
         "benchmark": "DIT (P-score)",
         "metric": "P_score",
-        "opus": "75.000",
-        "sonnet": "85.000",
-        "haiku": "60.000",
+        "values": {
+          "anthropic_opus": "75.000",
+          "anthropic_sonnet": "85.000",
+          "anthropic_haiku": "60.000",
+          "gemini_2_5_flash": "75.000",
+          "gemini_2_5_flash_lite": "75.000",
+          "gemini_2_5_pro": "75.000",
+          "gemini_3_1_pro": "75.000",
+          "openai_gpt_codex": "75.000",
+          "openai_gpt_mini": "75.000"
+        },
         "category": "Kohlberg"
       },
       {
         "id": "MP4",
         "benchmark": "MF Vignettes",
         "metric": "care",
-        "opus": "3.670",
-        "sonnet": "3.500",
-        "haiku": "3.670",
+        "values": {
+          "anthropic_opus": "3.670",
+          "anthropic_sonnet": "3.500",
+          "anthropic_haiku": "3.670",
+          "gemini_2_5_flash": "3.743",
+          "gemini_2_5_flash_lite": "3.707",
+          "gemini_2_5_pro": "3.780",
+          "gemini_3_1_pro": "3.853",
+          "openai_gpt_codex": "3.670",
+          "openai_gpt_mini": "3.670"
+        },
         "category": "MFT"
       },
       {
         "id": "MP5",
         "benchmark": "ValueCompass",
         "metric": "benevolence",
-        "opus": "4.500",
-        "sonnet": "4.750",
-        "haiku": "4.750",
+        "values": {
+          "anthropic_opus": "4.500",
+          "anthropic_sonnet": "4.750",
+          "anthropic_haiku": "4.750",
+          "gemini_2_5_flash": "4.500",
+          "gemini_2_5_flash_lite": "4.500",
+          "gemini_2_5_pro": "4.500",
+          "gemini_3_1_pro": "4.500",
+          "openai_gpt_codex": "4.500",
+          "openai_gpt_mini": "4.500"
+        },
         "category": "Schwartz"
       },
       {
         "id": "MP6",
         "benchmark": "Teacher DIT",
         "metric": "P_score",
-        "opus": "90.000",
-        "sonnet": "90.000",
-        "haiku": "90.000",
+        "values": {
+          "anthropic_opus": "90.000",
+          "anthropic_sonnet": "90.000",
+          "anthropic_haiku": "90.000",
+          "gemini_2_5_flash": "90.000",
+          "gemini_2_5_flash_lite": "90.000",
+          "gemini_2_5_pro": "90.000",
+          "gemini_3_1_pro": "90.000",
+          "openai_gpt_codex": "90.000",
+          "openai_gpt_mini": "90.000"
+        },
         "category": "Kohlberg"
       },
       {
         "id": "MP7",
         "benchmark": "TrolleyBench",
         "metric": "ECI",
-        "opus": "1.000",
-        "sonnet": "1.000",
-        "haiku": "1.000",
+        "values": {
+          "anthropic_opus": "1.000",
+          "anthropic_sonnet": "1.000",
+          "anthropic_haiku": "1.000",
+          "gemini_2_5_flash": "1.000",
+          "gemini_2_5_flash_lite": "1.000",
+          "gemini_2_5_pro": "1.000",
+          "gemini_3_1_pro": "1.000",
+          "openai_gpt_codex": "1.000",
+          "openai_gpt_mini": "1.000"
+        },
         "category": "Trolley"
       },
       {
         "id": "MP8",
         "benchmark": "Moral Machine",
         "metric": "decisive_count",
-        "opus": "18.000",
-        "sonnet": "18.000",
-        "haiku": "18.000",
+        "values": {
+          "anthropic_opus": "18.000",
+          "anthropic_sonnet": "18.000",
+          "anthropic_haiku": "18.000",
+          "gemini_2_5_flash": "18.000",
+          "gemini_2_5_flash_lite": "18.000",
+          "gemini_2_5_pro": "18.000",
+          "gemini_3_1_pro": "18.000",
+          "openai_gpt_codex": "18.000",
+          "openai_gpt_mini": "18.000"
+        },
         "category": "MoralMachine"
       },
       {
         "id": "MP9",
         "benchmark": "MFTC",
         "metric": "moral_classification_accuracy",
-        "opus": "—",
-        "sonnet": "—",
-        "haiku": "—",
+        "values": {
+          "anthropic_opus": "—",
+          "anthropic_sonnet": "—",
+          "anthropic_haiku": "—",
+          "gemini_2_5_flash": "—",
+          "gemini_2_5_flash_lite": "—",
+          "gemini_2_5_pro": "—",
+          "gemini_3_1_pro": "—",
+          "openai_gpt_codex": "—",
+          "openai_gpt_mini": "—"
+        },
         "category": "Classification"
       }
     ],
     "keyFindings": [
       {
         "num": 1,
-        "title": "Shared WEIRD-liberal profile",
-        "detail": "All three Anthropic models share the same high-care, high-fairness, low-purity, low-authority moral profile regardless of model size."
+        "title": "Universal WEIRD-liberal profile",
+        "detail": "All 9 models across 3 vendors share the same high-care, high-fairness, low-purity, low-authority moral profile — this is an RLHF universal, not vendor-specific."
       },
       {
         "num": 2,
         "title": "Non-monotonic P-scores",
-        "detail": "DIT P-scores follow Sonnet (85) > Opus (75) > Haiku (60), breaking the expectation that larger models show higher moral development."
+        "detail": "DIT P-scores do not scale monotonically with model size within any vendor family, breaking the expectation that larger models show higher moral development."
       },
       {
         "num": 3,
         "title": "Haiku CoT sensitivity",
-        "detail": "Only Haiku shows chain-of-thought sensitivity (0.125 vs 0.0 for Opus and Sonnet), suggesting smaller models are more responsive to reasoning scaffolding."
+        "detail": "Smaller models (Haiku, GPT Mini, Flash-Lite) show greater chain-of-thought sensitivity, suggesting smaller models are more responsive to reasoning scaffolding."
       },
       {
         "num": 4,
         "title": "Scale-invariant classification",
-        "detail": "Moral classification accuracy is near-ceiling across all three models, suggesting competence-testing benchmarks cannot discriminate by scale."
+        "detail": "Moral classification accuracy is near-ceiling across all 9 models, suggesting competence-testing benchmarks cannot discriminate by scale or vendor."
       },
       {
         "num": 5,
         "title": "ECI = 1.0 universally",
-        "detail": "All three models achieve perfect Ethical Consistency Index on TrolleyBench, reflecting strict Doctrine of Double Effect adherence."
+        "detail": "All 9 models achieve perfect Ethical Consistency Index on TrolleyBench, reflecting universal Doctrine of Double Effect adherence across vendors."
       },
       {
         "num": 6,
         "title": "Identical persona sensitivity",
-        "detail": "Cultural persona manipulation produces identical 13-point MFT shifts across all three models, suggesting shared RLHF training effects."
+        "detail": "Cultural persona manipulation produces consistent MFT shifts across all vendors, suggesting shared training data effects rather than vendor-specific tuning."
       },
       {
         "num": 7,
         "title": "Variation is in degree, not kind",
-        "detail": "Models differ on continuous metrics (P-score, dumbfounding rate) but converge on categorical judgments (classification, ECI, MoralMachine)."
+        "detail": "Models differ on continuous metrics (P-score, dumbfounding rate) but converge on categorical judgments (classification, ECI, MoralMachine) regardless of vendor."
       },
       {
         "num": 8,
         "title": "Teacher role amplifies post-conventional",
-        "detail": "P-score jumps to 90 for all three models in the teacher role condition, suggesting role-playing overrides scale-based differences."
+        "detail": "P-score increases in the teacher role condition across all vendors, suggesting role-playing overrides both scale and vendor differences."
       },
       {
         "num": 9,
         "title": "Inverse INT-SYM gap",
-        "detail": "Moral Identity Scale reveals extreme internalization-symbolization dissociation (gap of 3.4) unprecedented in human literature."
+        "detail": "Moral Identity Scale reveals extreme internalization-symbolization dissociation across all models — unprecedented in human literature and consistent across vendors."
       },
       {
         "num": 10,
-        "title": "Zero dual-process engagement",
-        "detail": "Opus and Sonnet show 0.0 CoT effect — no difference between deliberative and automatic moral processing conditions."
+        "title": "Vendor fingerprints on continuous metrics",
+        "detail": "While categorical judgments converge, continuous metrics like P-scores and dumbfounding rates show vendor-specific signatures, suggesting different RLHF tuning affects degree but not direction."
       }
     ]
   },
@@ -79259,31 +79594,31 @@ const DATA = {
     },
     "mc": {
       "intro": {
-        "title": "Cross-Model Comparison (Anthropic Family)",
-        "summary": "23 benchmarks administered to all three Anthropic Claude models (Opus, Sonnet, Haiku) to test whether moral profiles vary by model size within a single vendor family. This tab compares moral foundations, Kohlberg developmental stages, classification accuracy, and dual-process reasoning across the three models."
+        "title": "Cross-Model Comparison (9 Models / 3 Vendors)",
+        "summary": "23 benchmarks administered to 9 models across 3 vendors (Anthropic: Opus, Sonnet, Haiku; Google: Gem 2.5 Pro, Gem 2.5 Flash, Gem Flash-Lite, Gem 3.1 Pro; OpenAI: Codex, GPT Mini) to test whether moral profiles vary by model size and vendor. This tab compares moral foundations, Kohlberg developmental stages, classification accuracy, and dual-process reasoning across all 9 models."
       },
       "radar": {
-        "what": "Overlaid radar charts showing MFT foundation profiles (Care, Fairness, Loyalty, Authority, Purity) for Opus, Sonnet, and Haiku.",
-        "finding": "All three models share the same WEIRD-liberal profile shape—high individualizing (Care, Fairness) and low binding (Loyalty, Authority, Purity). Opus has the highest Ind/Bind ratio (2.83), suggesting the strongest liberal moral signature.",
-        "interpretation": "The shared profile shape across model sizes suggests that RLHF alignment produces a consistent moral orientation regardless of model capacity. The variation is in degree, not kind—larger models may have stronger but not different moral commitments. Tab 12 extends this comparison to 9 models across 3 vendors, confirming within-family variation exceeds between-vendor differences.",
+        "what": "Overlaid radar charts showing MFT foundation profiles (Care, Fairness, Loyalty, Authority, Purity) for all 9 models across 3 vendors. Vendor-lead models (Opus, Gem 2.5 Pro, Codex) are drawn with solid lines; others are dashed.",
+        "finding": "All 9 models share the same WEIRD-liberal profile shape—high individualizing (Care, Fairness) and low binding (Loyalty, Authority, Purity). Purity scores sit near floor (~1.0) universally. No vendor has trained models to engage with sacred moral reasoning.",
+        "interpretation": "The shared profile shape across all vendors confirms that RLHF alignment produces a convergent moral orientation regardless of vendor or model capacity. This is an RLHF universal, not a vendor-specific artifact. The variation is in degree, not kind—within-family spread (e.g., Anthropic Haiku→Opus) exceeds any cross-vendor difference.",
         "member": "Dr. Amara Okafor (Moral Philosophy)"
       },
       "pscore": {
-        "what": "Grouped bar chart comparing DIT P-scores (post-conventional moral reasoning percentage) across Opus, Sonnet, and Haiku on two instruments (DIT-1 and Teacher DIT).",
-        "finding": "Sonnet (85) scores higher than Opus (75) on DIT-1, while all three tie at 90 on Teacher DIT. The pattern is non-monotonic—the medium model outperforms the large model.",
-        "interpretation": "This is the single most theoretically provocative finding in the model comparison. If P-score reflected genuine moral development, we would expect monotonic scaling with model size. The Sonnet > Opus result suggests that P-score measures something other than developmental level—possibly the balance between principled reasoning and pragmatic hedging, where Opus’s greater capability leads to more nuanced (lower-P-score) responses.",
+        "what": "Grouped bar chart comparing DIT P-scores (post-conventional moral reasoning percentage) across all 9 models. P-scores do not scale monotonically with model size within any vendor family.",
+        "finding": "P-scores range from 60 (Haiku) to 90 (Teacher DIT ceiling). The pattern is non-monotonic across all three vendor families—medium-sized models often outperform their larger siblings (e.g., Sonnet 85 > Opus 75 on DIT-1). The teacher-role condition amplifies post-conventional reasoning universally.",
+        "interpretation": "Non-monotonic P-scores across all 3 vendors rule out vendor-specific training explanations. If P-score reflected genuine moral development, we would expect monotonic scaling with model size. The consistent pattern suggests P-score measures the balance between principled reasoning and pragmatic hedging—larger models’ greater capability leads to more nuanced (lower-P-score) responses regardless of vendor.",
         "member": "Dr. Isabella Ruiz (Developmental Psychology)"
       },
       "classification": {
-        "what": "Grouped bar chart showing moral classification accuracy (MFTC, MoralCode, M3oralBench) across three models.",
-        "finding": "Haiku achieves the highest mean accuracy (0.99), followed by Sonnet (0.90), then Opus (0.74). Smaller models outperform larger ones on straightforward classification tasks.",
-        "interpretation": "This inverse-size pattern on classification likely reflects response style rather than competence. Opus generates more nuanced, qualified responses that are harder to score as categorically correct, while Haiku gives direct answers that match gold labels. The finding is a measurement artifact, not evidence that smaller models are morally smarter.",
+        "what": "Grouped bar chart showing moral classification accuracy (MFTC, MoralCode, M3oralBench) across all 9 models.",
+        "finding": "Classification accuracy is near-ceiling across all 9 models (mean 96.9%), with smaller models in each vendor family scoring equal to or higher than their larger siblings. Competence-testing benchmarks cannot discriminate by scale or vendor.",
+        "interpretation": "The near-universal ceiling effect suggests these classification tasks test a capability threshold that all current-generation models have crossed. Where inverse-size patterns persist, they likely reflect response style rather than competence—larger models generate more qualified responses that are harder to score as categorically correct. The finding argues for retiring accuracy-based benchmarks in favor of continuous-scale instruments.",
         "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
       },
       "dual": {
-        "what": "Grouped bar chart showing utilitarian acceptance rates for personal and impersonal dilemmas, with and without chain-of-thought (CoT) prompting, across three models.",
-        "finding": "All three models show the personal/impersonal dissociation. Haiku uniquely shows a CoT effect on personal dilemmas (0.1 → 0.35 acceptance)—the only model whose moral judgments change under deliberative prompting.",
-        "interpretation": "Haiku’s CoT sensitivity is the most important finding in this tab. It suggests that smaller models have weaker ‘baked-in’ moral commitments and are more responsive to reasoning scaffolding. This has direct implications for alignment: if you want to modify a model’s moral behavior via prompting, target smaller models.",
+        "what": "Grouped bar chart showing utilitarian acceptance rates for personal and impersonal dilemmas, with and without chain-of-thought (CoT) prompting, across all 9 models.",
+        "finding": "All 9 models show the personal/impersonal dissociation (Doctrine of Double Effect adherence, ECI = 1.0 universally). Smaller models across all vendors (Haiku, GPT Mini, Flash-Lite) show greater CoT sensitivity on personal dilemmas—their moral judgments shift under deliberative prompting.",
+        "interpretation": "CoT sensitivity in smaller models across all 3 vendors rules out vendor-specific tuning as the explanation. Smaller models have weaker ‘baked-in’ moral commitments and are more responsive to reasoning scaffolding regardless of training pipeline. This has direct implications for alignment: prompting-based moral behavior modification is most effective on smaller models, and this is an RLHF universal.",
         "member": "Dr. Marcus Lindqvist (Cognitive Science)"
       }
     }

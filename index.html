@@ -650,7 +650,7 @@
         <div class="row g-4 mb-4">
           <div class="col-lg-6">
             <div class="card card-dark">
-              <div class="card-header">MFT Foundation Profiles: 3 Models (Mean of MP2 + MP4)</div>
+              <div class="card-header">MFT Foundation Profiles: 9 Models / 3 Vendors (Mean of MP2 + MP4)</div>
               <div class="card-body">
                 <div id="chart-mc-mft-radar" class="chart-lg"></div>
                 <div id="mc-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
@@ -694,20 +694,10 @@
         <div class="row g-4 mb-4">
           <div class="col-12">
             <div class="card card-dark">
-              <div class="card-header">Full Trial Comparison: 23 Benchmarks x 3 Models</div>
+              <div class="card-header">Full Trial Comparison: 23 Benchmarks x 9 Models</div>
               <div class="card-body table-responsive">
                 <table class="table table-dark table-sm table-hover" id="mc-trial-table">
-                  <thead>
-                    <tr>
-                      <th>Trial</th>
-                      <th>Benchmark</th>
-                      <th>Primary Metric</th>
-                      <th style="color:#7C3AED">Opus</th>
-                      <th style="color:#2563EB">Sonnet</th>
-                      <th style="color:#059669">Haiku</th>
-                      <th>Category</th>
-                    </tr>
-                  </thead>
+                  <thead id="mc-trial-table-head"></thead>
                   <tbody id="mc-trial-table-body"></tbody>
                 </table>
               </div>

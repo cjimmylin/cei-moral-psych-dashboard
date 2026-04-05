@@ -257,10 +257,8 @@ function chartImplementation(el) {
 function chartTrialBars(el) {
   var chart = echarts.init(el);
 
-  // Use cross-vendor trial table for clean per-benchmark metrics (Opus column)
   var cv = DATA.crossVendor;
   if (!cv || !cv.available || !cv.trialTable || cv.trialTable.length === 0) {
-    // Fallback: use basic trialData
     var td = DATA.trialData;
     if (!td || !td.available) {
       chart.setOption(Object.assign(baseTheme(), {
@@ -272,49 +270,81 @@ function chartTrialBars(el) {
   }
 
   var rows = cv.trialTable;
-  var names = [];
-  var values = [];
-  var palette = DATA.palette;
+  var modelKeys = cv.modelKeys || ['anthropic_opus'];
+  var modelNames = cv.models || ['Opus'];
+  var modelColors = cv.modelColors || ['#7C3AED'];
 
-  rows.forEach(function (r) {
-    var v = parseFloat(r.values.anthropic_opus);
-    if (!isNaN(v)) {
-      names.push(r.benchmark.length > 20 ? r.benchmark.substring(0, 18) + '..' : r.benchmark);
-      values.push(v);
-    }
-  });
+  // Build model selector dropdown above the chart
+  var selectEl = document.getElementById('trial-bars-model-select');
+  if (selectEl && selectEl.options.length === 0) {
+    modelNames.forEach(function (name, i) {
+      var opt = document.createElement('option');
+      opt.value = modelKeys[i];
+      opt.textContent = name;
+      opt.style.color = modelColors[i];
+      selectEl.appendChild(opt);
+    });
+  }
 
-  chart.setOption(Object.assign(baseTheme(), {
-    title: { text: 'Primary Metric by Benchmark (Claude Opus)', left: 'center', textStyle: { color: DARK_TEXT, fontSize: 14 } },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: { type: 'shadow' },
-      formatter: function (params) {
-        var idx = params[0].dataIndex;
-        var row = rows[idx];
-        return '<b>' + row.benchmark + '</b><br/>Metric: ' + row.metric + '<br/>Value: ' + params[0].value;
+  function renderBars(selectedKey) {
+    var idx = modelKeys.indexOf(selectedKey);
+    var selectedName = idx >= 0 ? modelNames[idx] : selectedKey;
+    var selectedColor = idx >= 0 ? modelColors[idx] : '#7C3AED';
+    var names = [];
+    var values = [];
+    var palette = DATA.palette;
+
+    rows.forEach(function (r) {
+      var v = parseFloat(r.values[selectedKey]);
+      if (!isNaN(v)) {
+        names.push(r.benchmark.length > 20 ? r.benchmark.substring(0, 18) + '..' : r.benchmark);
+        values.push(v);
       }
-    },
-    grid: { left: 140, right: 40, top: 40, bottom: 30 },
-    yAxis: {
-      type: 'category',
-      data: names,
-      axisLabel: { color: DARK_TEXT, fontSize: 10 }
-    },
-    xAxis: {
-      type: 'value',
-      axisLabel: { color: DARK_TEXT },
-      splitLine: { lineStyle: { color: GRID_LINE } }
-    },
-    series: [{
-      type: 'bar',
-      data: values.map(function (v, i) {
-        return { value: v, itemStyle: { color: palette[i % palette.length] } };
-      }),
-      barMaxWidth: 18,
-      label: { show: true, position: 'right', color: DARK_TEXT, fontSize: 10, formatter: function (p) { return p.value; } }
-    }]
-  }));
+    });
+
+    chart.setOption(Object.assign(baseTheme(), {
+      title: { text: 'Primary Metric by Benchmark (' + selectedName + ')', left: 'center', textStyle: { color: DARK_TEXT, fontSize: 14 } },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        formatter: function (params) {
+          var di = params[0].dataIndex;
+          var row = rows[di];
+          return '<b>' + row.benchmark + '</b><br/>Metric: ' + row.metric + '<br/>Value: ' + params[0].value;
+        }
+      },
+      grid: { left: 140, right: 40, top: 40, bottom: 30 },
+      yAxis: {
+        type: 'category',
+        data: names,
+        axisLabel: { color: DARK_TEXT, fontSize: 10 }
+      },
+      xAxis: {
+        type: 'value',
+        axisLabel: { color: DARK_TEXT },
+        splitLine: { lineStyle: { color: GRID_LINE } }
+      },
+      series: [{
+        type: 'bar',
+        data: values.map(function (v, i) {
+          return { value: v, itemStyle: { color: palette[i % palette.length] } };
+        }),
+        barMaxWidth: 18,
+        label: { show: true, position: 'right', color: DARK_TEXT, fontSize: 10, formatter: function (p) { return p.value; } }
+      }]
+    }), true);
+  }
+
+  // Initial render with first model (Opus)
+  renderBars(modelKeys[0]);
+
+  // Wire up dropdown
+  if (selectEl) {
+    selectEl.addEventListener('change', function () {
+      renderBars(this.value);
+    });
+  }
+
   return chart;
 }
 
@@ -1350,13 +1380,29 @@ function chartMCMFTRadar(el) {
   var chart = echarts.init(el);
   var mc = DATA.modelComparison;
   var r = mc.mftRadar;
+  // Vendor-lead models get thicker lines for readability
+  var vendorLeads = { 0: true, 3: true, 7: true }; // Opus, Gem Flash, Codex
+
+  var seriesData = [];
+  for (var i = 0; i < mc.modelKeys.length; i++) {
+    var mk = mc.modelKeys[i];
+    seriesData.push({
+      value: r.data[mk] || [],
+      name: mc.models[i],
+      lineStyle: { color: mc.modelColors[i], width: vendorLeads[i] ? 3 : 1.5, type: vendorLeads[i] ? 'solid' : 'dashed' },
+      itemStyle: { color: mc.modelColors[i] },
+      areaStyle: { color: mc.modelColors[i], opacity: 0.05 }
+    });
+  }
 
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: { trigger: 'item' },
     legend: {
+      type: 'scroll',
       data: mc.models,
-      textStyle: { color: DARK_TEXT, fontSize: 11 },
-      bottom: 0
+      textStyle: { color: DARK_TEXT, fontSize: 10 },
+      bottom: 0,
+      pageTextStyle: { color: DARK_TEXT }
     },
     radar: {
       indicator: r.foundations.map(function (f) { return { name: f, max: 5 }; }),
@@ -1366,14 +1412,7 @@ function chartMCMFTRadar(el) {
       splitArea: { show: false },
       axisLine: { lineStyle: { color: GRID_LINE } }
     },
-    series: [{
-      type: 'radar',
-      data: [
-        { value: r.opus, name: mc.models[0], lineStyle: { color: mc.modelColors[0], width: 2 }, itemStyle: { color: mc.modelColors[0] }, areaStyle: { color: mc.modelColors[0], opacity: 0.12 } },
-        { value: r.sonnet, name: mc.models[1], lineStyle: { color: mc.modelColors[1], width: 2 }, itemStyle: { color: mc.modelColors[1] }, areaStyle: { color: mc.modelColors[1], opacity: 0.12 } },
-        { value: r.haiku, name: mc.models[2], lineStyle: { color: mc.modelColors[2], width: 2 }, itemStyle: { color: mc.modelColors[2] }, areaStyle: { color: mc.modelColors[2], opacity: 0.12 } }
-      ]
-    }]
+    series: [{ type: 'radar', data: seriesData }]
   }));
   return chart;
 }
@@ -1383,9 +1422,19 @@ function chartMCPScore(el) {
   var mc = DATA.modelComparison;
   var ps = mc.pScores;
 
+  var series = [];
+  for (var i = 0; i < mc.modelKeys.length; i++) {
+    series.push({
+      name: mc.models[i], type: 'bar',
+      data: ps.data[mc.modelKeys[i]] || [],
+      itemStyle: { color: mc.modelColors[i] },
+      barMaxWidth: 14
+    });
+  }
+
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    legend: { data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 11 }, bottom: 0 },
+    legend: { type: 'scroll', data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 10 }, bottom: 0, pageTextStyle: { color: DARK_TEXT } },
     grid: { left: 60, right: 30, top: 20, bottom: 50 },
     xAxis: {
       type: 'category',
@@ -1400,11 +1449,7 @@ function chartMCPScore(el) {
       axisLabel: { color: DARK_TEXT },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
-    series: [
-      { name: mc.models[0], type: 'bar', data: ps.opus, itemStyle: { color: mc.modelColors[0] }, barMaxWidth: 30 },
-      { name: mc.models[1], type: 'bar', data: ps.sonnet, itemStyle: { color: mc.modelColors[1] }, barMaxWidth: 30 },
-      { name: mc.models[2], type: 'bar', data: ps.haiku, itemStyle: { color: mc.modelColors[2] }, barMaxWidth: 30 }
-    ]
+    series: series
   }));
   return chart;
 }
@@ -1413,6 +1458,16 @@ function chartMCClassification(el) {
   var chart = echarts.init(el);
   var mc = DATA.modelComparison;
   var ca = mc.classificationAccuracy;
+
+  var series = [];
+  for (var i = 0; i < mc.modelKeys.length; i++) {
+    series.push({
+      name: mc.models[i], type: 'bar',
+      data: ca.data[mc.modelKeys[i]] || [],
+      itemStyle: { color: mc.modelColors[i] },
+      barMaxWidth: 14
+    });
+  }
 
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: {
@@ -1426,7 +1481,7 @@ function chartMCClassification(el) {
         return tip;
       }
     },
-    legend: { data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 11 }, bottom: 0 },
+    legend: { type: 'scroll', data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 10 }, bottom: 0, pageTextStyle: { color: DARK_TEXT } },
     grid: { left: 60, right: 30, top: 20, bottom: 50 },
     xAxis: {
       type: 'category',
@@ -1441,11 +1496,7 @@ function chartMCClassification(el) {
       axisLabel: { color: DARK_TEXT, formatter: function (v) { return (v * 100) + '%'; } },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
-    series: [
-      { name: mc.models[0], type: 'bar', data: ca.opus, itemStyle: { color: mc.modelColors[0] }, barMaxWidth: 30 },
-      { name: mc.models[1], type: 'bar', data: ca.sonnet, itemStyle: { color: mc.modelColors[1] }, barMaxWidth: 30 },
-      { name: mc.models[2], type: 'bar', data: ca.haiku, itemStyle: { color: mc.modelColors[2] }, barMaxWidth: 30 }
-    ]
+    series: series
   }));
   return chart;
 }
@@ -1454,6 +1505,16 @@ function chartMCDualProcess(el) {
   var chart = echarts.init(el);
   var mc = DATA.modelComparison;
   var dp = mc.dualProcess;
+
+  var series = [];
+  for (var i = 0; i < mc.modelKeys.length; i++) {
+    series.push({
+      name: mc.models[i], type: 'bar',
+      data: dp.data[mc.modelKeys[i]] || [],
+      itemStyle: { color: mc.modelColors[i] },
+      barMaxWidth: 14
+    });
+  }
 
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: {
@@ -1467,7 +1528,7 @@ function chartMCDualProcess(el) {
         return tip;
       }
     },
-    legend: { data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 11 }, bottom: 0 },
+    legend: { type: 'scroll', data: mc.models, textStyle: { color: DARK_TEXT, fontSize: 10 }, bottom: 0, pageTextStyle: { color: DARK_TEXT } },
     grid: { left: 60, right: 30, top: 20, bottom: 50 },
     xAxis: {
       type: 'category',
@@ -1482,11 +1543,7 @@ function chartMCDualProcess(el) {
       axisLabel: { color: DARK_TEXT, formatter: function (v) { return (v * 100) + '%'; } },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
-    series: [
-      { name: mc.models[0], type: 'bar', data: dp.opus, itemStyle: { color: mc.modelColors[0] }, barMaxWidth: 30 },
-      { name: mc.models[1], type: 'bar', data: dp.sonnet, itemStyle: { color: mc.modelColors[1] }, barMaxWidth: 30 },
-      { name: mc.models[2], type: 'bar', data: dp.haiku, itemStyle: { color: mc.modelColors[2] }, barMaxWidth: 30 }
-    ]
+    series: series
   }));
   return chart;
 }

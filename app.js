@@ -150,7 +150,9 @@
 
     container.innerHTML =
       '<div class="row g-4">' +
-      '<div class="col-12"><div class="card card-dark"><div class="card-header">Trial Results</div>' +
+      '<div class="col-12"><div class="card card-dark"><div class="card-header d-flex justify-content-between align-items-center">Trial Results' +
+      '<select id="trial-bars-model-select" class="form-select form-select-sm w-auto bg-dark text-light border-secondary" style="max-width:180px"></select>' +
+      '</div>' +
       '<div class="card-body"><div id="chart-trial-bars" class="chart-lg"></div></div></div></div>' +
       '<div class="col-lg-6"><div class="card card-dark"><div class="card-header">MFQ-30 Radar</div>' +
       '<div class="card-body"><div id="chart-mfq-radar" class="chart-md"></div></div></div></div>' +
@@ -860,21 +862,32 @@
     var container = document.getElementById('mc-kpi-cards');
     if (!container) return;
 
-    // Compute mean classification accuracy across models
+    // Compute mean classification accuracy across all models
     var ca = mc.classificationAccuracy || {};
     var meanAcc = 0;
-    if (ca.opus && ca.sonnet && ca.haiku && ca.opus.length > 0) {
-      var sumO = ca.opus.reduce(function (a, b) { return a + b; }, 0) / ca.opus.length;
-      var sumS = ca.sonnet.reduce(function (a, b) { return a + b; }, 0) / ca.sonnet.length;
-      var sumH = ca.haiku.reduce(function (a, b) { return a + b; }, 0) / ca.haiku.length;
-      meanAcc = ((sumO + sumS + sumH) / 3 * 100).toFixed(1);
+    if (ca.data && mc.modelKeys) {
+      var allAccs = [];
+      mc.modelKeys.forEach(function (mk) {
+        var arr = ca.data[mk];
+        if (arr && arr.length > 0) {
+          allAccs.push(arr.reduce(function (a, b) { return a + b; }, 0) / arr.length);
+        }
+      });
+      if (allAccs.length > 0) {
+        meanAcc = (allAccs.reduce(function (a, b) { return a + b; }, 0) / allAccs.length * 100).toFixed(1);
+      }
     }
 
     var ps = mc.pScores || {};
     var pRange = '';
-    if (ps.opus && ps.sonnet && ps.haiku) {
-      var allP = ps.opus.concat(ps.sonnet, ps.haiku);
-      pRange = Math.min.apply(null, allP) + '-' + Math.max.apply(null, allP);
+    if (ps.data && mc.modelKeys) {
+      var allP = [];
+      mc.modelKeys.forEach(function (mk) {
+        if (ps.data[mk]) allP = allP.concat(ps.data[mk]);
+      });
+      if (allP.length > 0) {
+        pRange = Math.min.apply(null, allP) + '-' + Math.max.apply(null, allP);
+      }
     }
 
     var cards = [
@@ -914,6 +927,30 @@
   function renderMCTrialTable() {
     var mc = DATA.modelComparison;
     if (!mc || !mc.available || !mc.trialTable) return;
+
+    // Build dynamic header from model list
+    var thead = document.getElementById('mc-trial-table-head');
+    if (thead) {
+      var headTr = document.createElement('tr');
+      ['Trial', 'Benchmark', 'Primary Metric'].forEach(function (h) {
+        var th = document.createElement('th');
+        th.textContent = h;
+        headTr.appendChild(th);
+      });
+      mc.models.forEach(function (name, i) {
+        var th = document.createElement('th');
+        th.textContent = name;
+        th.style.color = mc.modelColors[i];
+        th.className = 'text-nowrap';
+        headTr.appendChild(th);
+      });
+      var thCat = document.createElement('th');
+      thCat.textContent = 'Category';
+      headTr.appendChild(thCat);
+      thead.textContent = '';
+      thead.appendChild(headTr);
+    }
+
     var tbody = document.getElementById('mc-trial-table-body');
     if (!tbody) return;
 
@@ -936,20 +973,15 @@
       tdMetric.textContent = t.metric;
       tr.appendChild(tdMetric);
 
-      var tdOpus = document.createElement('td');
-      tdOpus.style.color = '#7C3AED';
-      tdOpus.textContent = t.opus;
-      tr.appendChild(tdOpus);
-
-      var tdSonnet = document.createElement('td');
-      tdSonnet.style.color = '#2563EB';
-      tdSonnet.textContent = t.sonnet;
-      tr.appendChild(tdSonnet);
-
-      var tdHaiku = document.createElement('td');
-      tdHaiku.style.color = '#059669';
-      tdHaiku.textContent = t.haiku;
-      tr.appendChild(tdHaiku);
+      // Dynamic model value columns
+      for (var mi = 0; mi < mc.modelKeys.length; mi++) {
+        var td = document.createElement('td');
+        td.style.color = mc.modelColors[mi];
+        td.className = 'text-nowrap';
+        var raw = t.values ? t.values[mc.modelKeys[mi]] : '\u2014';
+        td.textContent = (raw !== undefined && raw !== null) ? raw : '\u2014';
+        tr.appendChild(td);
+      }
 
       var tdCat = document.createElement('td');
       var badge = document.createElement('span');
