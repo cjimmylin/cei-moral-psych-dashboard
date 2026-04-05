@@ -78573,7 +78573,7 @@ const DATA = {
         "council": "The dominant finding is cross-vendor moral homogeneity: the majority of benchmarks produce identical or near-identical scores regardless of vendor. Where variation exists, it is primarily driven by model size within families (e.g., Haiku vs. Opus) rather than by vendor identity. This challenges the assumption that choosing a different AI vendor meaningfully changes the moral profile of the system."
       },
       "kpi": {
-        "description": "Of the 23 benchmarks administered, 6 produce ceiling effects (identical scores across all 9 models), leaving only 17 that meaningfully discriminate between models. The ceiling benchmarks (MP6, MP7, MP8, MP10, MP11, MP21) confirm that all models share a baseline moral competence on standard instruments, but they contribute no information about vendor or size differences. The effective cross-vendor battery is therefore roughly half the nominal size. --- Dr. Yilin Chen (Psychometrics)"
+        "description": "Of the 23 benchmarks administered, 6 produce ceiling effects (identical scores across all 9 models), leaving only 17 that meaningfully discriminate between models. The ceiling benchmarks (MP6, MP7, MP8, MP10, MP11, MP21) confirm that all models share a baseline moral competence on standard instruments, but they contribute no information about vendor or size differences. The effective cross-vendor battery is therefore roughly half the nominal size. --- Psychometrics perspective"
       },
       "radar": {
         "what": "Each axis represents a key moral dimension normalized to 0-100 across all 9 models. The polygon for each model shows its relative profile across MFT Care, Kohlberg P-score, ethical consistency, classification accuracy, cultural perspective-taking, values knowledge-action alignment, moral identity, and CoT sensitivity.",
@@ -79381,7 +79381,7 @@ const DATA = {
         "summary": "292 candidates from the moral psychology literature were screened, 54 assessed on a 162-feature matrix, and 15 selected for implementation based on composite scoring across psychometric design (PD), practical efficiency (PE), and cross-cultural inclusivity (CI). This tab presents the selection overview and theory distribution."
       },
       "kpi": {
-        "description": "The 6 KPIs trace the selection funnel—292 candidates narrowed to 54 assessed, then 15 top-ranked. 11 moral psychology theories covered. Trials and features count the depth of assessment. — Dr. Yilin Chen (Psychometrics)"
+        "description": "The 6 KPIs trace the selection funnel—292 candidates narrowed to 54 assessed, then 15 top-ranked. 11 moral psychology theories covered. Trials and features count the depth of assessment. — Psychometrics perspective"
       },
       "compositeBar": {
         "what": "Horizontal bars show the top-15 benchmarks ranked by composite score.",
