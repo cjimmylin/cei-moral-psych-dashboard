@@ -820,22 +820,84 @@ function chartMoralMachineScatter(el) {
   var chart = echarts.init(el);
   var td = DATA.trialData;
 
-  if (!td.available) {
+  if (!td || !td.available) {
     chart.setOption(Object.assign(baseTheme(), {
-      title: {
-        text: 'Moral Machine Scatter -- awaiting trial data',
-        left: 'center', top: 'center',
-        textStyle: { color: '#999', fontSize: 14 }
-      }
+      title: { text: 'Moral Machine -- awaiting trial data', left: 'center', top: 'center',
+               textStyle: { color: '#999', fontSize: 14 } }
     }));
     return chart;
   }
 
+  // Find MP8 (Moral Machine) trial and extract dimension preference rates
+  var mmTrial = null;
+  for (var i = 0; i < td.trials.length; i++) {
+    if (td.trials[i].trial_id === 'MP8') { mmTrial = td.trials[i]; break; }
+  }
+
+  if (!mmTrial || !mmTrial.scores || !mmTrial.scores.dimension_preference_rates) {
+    chart.setOption(Object.assign(baseTheme(), {
+      title: { text: 'Moral Machine -- no dimension data', left: 'center', top: 'center',
+               textStyle: { color: '#999', fontSize: 14 } }
+    }));
+    return chart;
+  }
+
+  var dpr = mmTrial.scores.dimension_preference_rates;
+  var dimNames = [];
+  var rates = [];
+  var palette = DATA.palette;
+  var labelMap = {
+    'sparing_more': 'Spare More Lives',
+    'sparing_young': 'Spare Young',
+    'sparing_female': 'Spare Female',
+    'sparing_higher_status': 'Spare Higher Status',
+    'sparing_pedestrians': 'Spare Pedestrians',
+    'sparing_lawful': 'Spare Lawful',
+    'action_vs_inaction': 'Action vs Inaction',
+    'sparing_fit': 'Spare Fit',
+    'sparing_human': 'Spare Human'
+  };
+
+  Object.keys(dpr).forEach(function (key) {
+    dimNames.push(labelMap[key] || key.replace(/_/g, ' '));
+    rates.push((dpr[key].rate * 100).toFixed(0));
+  });
+
   chart.setOption(Object.assign(baseTheme(), {
-    title: { text: 'Moral Machine Dimensions', left: 'center', textStyle: { color: DARK_TEXT } },
-    xAxis: { type: 'value', name: 'Dimension 1' },
-    yAxis: { type: 'value', name: 'Dimension 2' },
-    series: [{ type: 'scatter', data: [] }]
+    title: { text: 'Moral Machine: Dimension Alignment Rates', left: 'center', textStyle: { color: DARK_TEXT, fontSize: 13 } },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      formatter: function (params) {
+        var idx = params[0].dataIndex;
+        var key = Object.keys(dpr)[idx];
+        var d = dpr[key];
+        return '<b>' + dimNames[idx] + '</b><br/>Rate: ' + (d.rate * 100).toFixed(0) + '%<br/>Aligned: ' + d.aligned + '/' + d.total + (d.note ? '<br/>' + d.note : '');
+      }
+    },
+    grid: { left: 150, right: 40, top: 40, bottom: 30 },
+    yAxis: {
+      type: 'category',
+      data: dimNames,
+      axisLabel: { color: DARK_TEXT, fontSize: 11 }
+    },
+    xAxis: {
+      type: 'value',
+      min: 0, max: 100,
+      name: 'Alignment Rate (%)',
+      nameTextStyle: { color: DARK_TEXT },
+      axisLabel: { color: DARK_TEXT },
+      splitLine: { lineStyle: { color: GRID_LINE } }
+    },
+    series: [{
+      type: 'bar',
+      data: rates.map(function (v, i) {
+        var c = v >= 67 ? palette[2] : (v > 0 ? palette[0] : palette[5]);
+        return { value: v, itemStyle: { color: c } };
+      }),
+      barMaxWidth: 20,
+      label: { show: true, position: 'right', color: DARK_TEXT, fontSize: 10, formatter: '{c}%' }
+    }]
   }));
   return chart;
 }
