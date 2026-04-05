@@ -1,0 +1,417 @@
+/* style.css — Moral Psychology Benchmarks Dashboard
+ * Dark theme with Okabe-Ito accent colors
+ */
+
+:root {
+  --bg-primary: #0f0f1a;
+  --bg-card: #181828;
+  --bg-nav: #12122a;
+  --text-primary: #c8d0e8;
+  --text-muted: #7a82a0;
+  --border-color: rgba(200, 208, 232, 0.12);
+  --oi-orange: #E69F00;
+  --oi-blue: #56B4E9;
+  --oi-green: #009E73;
+  --oi-yellow: #F0E442;
+  --oi-dblue: #0072B2;
+  --oi-red: #D55E00;
+  --oi-pink: #CC79A7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+/* Navbar */
+.bg-nav { background-color: var(--bg-nav) !important; }
+.navbar-brand { font-size: 1.1rem; letter-spacing: 0.3px; }
+
+/* Tabs */
+.nav-tabs {
+  border-bottom-color: var(--border-color);
+}
+.nav-tabs .nav-link {
+  color: var(--text-muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.6rem 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--oi-blue);
+}
+.nav-tabs .nav-link.active {
+  color: var(--oi-blue);
+  background: transparent;
+  border-bottom-color: var(--oi-blue);
+}
+
+/* Cards */
+.card-dark {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+}
+.card-dark .card-header {
+  background: rgba(200, 208, 232, 0.04);
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+}
+.card-dark .card-body {
+  padding: 1rem;
+}
+
+/* KPI Cards */
+.kpi-card {
+  transition: transform 0.15s;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+}
+.kpi-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.kpi-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Chart containers */
+.chart-lg { height: 500px; width: 100%; }
+.chart-md { height: 380px; width: 100%; }
+.chart-sm { height: 260px; width: 100%; }
+
+/* Tables */
+.table-dark {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: rgba(200, 208, 232, 0.06);
+  --bs-table-hover-color: var(--text-primary);
+  font-size: 0.82rem;
+}
+.table-dark thead th {
+  background: rgba(200, 208, 232, 0.06);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+/* Color-coded cells */
+.cell-high {
+  background-color: rgba(0, 158, 115, 0.25) !important;
+  color: #a0f0d0;
+  font-weight: 600;
+}
+.cell-mid {
+  background-color: rgba(230, 159, 0, 0.2) !important;
+  color: #f0d090;
+  font-weight: 500;
+}
+.cell-low {
+  background-color: rgba(213, 94, 0, 0.15) !important;
+  color: #e0a090;
+}
+
+/* Methods tab */
+#methods-formula code {
+  color: var(--oi-blue);
+  background: rgba(86, 180, 233, 0.1);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+.text-success {
+  color: var(--oi-green) !important;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(200, 208, 232, 0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200, 208, 232, 0.35); }
+
+/* Subtab pills (Tab 9) */
+.subtab-pills {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+.subtab-pills .nav-link {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+.subtab-pills .nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(200, 208, 232, 0.06);
+}
+.subtab-pills .nav-link.active {
+  color: #fff;
+  background: var(--oi-dblue);
+}
+
+/* Redundancy / Archetype / Health metric cards */
+.metric-block {
+  background: rgba(200, 208, 232, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.metric-block .metric-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.metric-block .metric-lbl {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 0.15rem;
+}
+
+/* Health grade badge */
+.grade-badge {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+.grade-A { background: rgba(0,158,115,0.3); color: #a0f0d0; }
+.grade-B { background: rgba(86,180,233,0.3); color: #a0d8f0; }
+.grade-C { background: rgba(230,159,0,0.3); color: #f0d090; }
+.grade-D { background: rgba(213,94,0,0.3); color: #e0a090; }
+.grade-F { background: rgba(204,121,167,0.3); color: #e0b0c8; }
+
+/* Priority bar in gap table */
+.priority-bar {
+  display: inline-block;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--oi-red);
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* -----------------------------------------------------------------------
+ * Tab 7: Paper Ranking
+ * ----------------------------------------------------------------------- */
+
+/* Filter inputs */
+.ranking-filter-input {
+  background-color: rgba(200, 208, 232, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+}
+.ranking-filter-input:focus {
+  background-color: rgba(200, 208, 232, 0.1);
+  border-color: var(--oi-blue);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 2px rgba(86, 180, 233, 0.15);
+}
+.ranking-filter-input option {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* Scrollable table wrapper */
+.ranking-table-wrap {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Ranking table specifics */
+.ranking-table {
+  font-size: 0.78rem;
+}
+.ranking-table thead th {
+  z-index: 2;
+}
+.ranking-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 1.2em;
+}
+.ranking-table thead th.sortable::after {
+  content: '\2195';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.3;
+  font-size: 0.7rem;
+}
+.ranking-table thead th.sort-asc::after {
+  content: '\2191';
+  opacity: 0.8;
+}
+.ranking-table thead th.sort-desc::after {
+  content: '\2193';
+  opacity: 0.8;
+}
+
+/* Theory color indicator — left border on row */
+.ranking-table tbody tr {
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ranking-table tbody tr:hover {
+  background: rgba(200, 208, 232, 0.08) !important;
+}
+.ranking-table tbody tr.row-top15 {
+  font-weight: 600;
+}
+.ranking-table tbody tr.row-assessed {
+  /* subtle background for assessed rows */
+}
+.ranking-table tbody tr.row-unassessed td {
+  color: var(--text-muted);
+}
+
+/* Status badges */
+.badge-top15 {
+  background: rgba(0, 158, 115, 0.25);
+  color: #a0f0d0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+.badge-assessed {
+  background: rgba(86, 180, 233, 0.2);
+  color: #a0d8f0;
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+.badge-trial {
+  background: rgba(230, 159, 0, 0.25);
+  color: #f0d090;
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* Score cell coloring */
+.ranking-table .score-high { color: #a0f0d0; font-weight: 600; }
+.ranking-table .score-mid  { color: #f0d090; }
+.ranking-table .score-low  { color: var(--text-muted); }
+.ranking-table .score-zero { color: rgba(200, 208, 232, 0.2); }
+
+/* Feature profile detail panel */
+#ranking-detail-panel .profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 6px;
+}
+#ranking-detail-panel .profile-cell {
+  background: rgba(200, 208, 232, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+}
+#ranking-detail-panel .profile-cell .dim-key {
+  font-weight: 600;
+  color: var(--oi-blue);
+  font-size: 0.7rem;
+}
+#ranking-detail-panel .profile-cell .dim-score {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+#ranking-detail-panel .profile-cell .dim-evidence {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  margin-top: 2px;
+}
+
+/* Tier section headers in detail panel */
+#ranking-detail-panel .tier-header {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--oi-orange);
+  margin-top: 0.75rem;
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .chart-lg { height: 400px; }
+  .chart-md { height: 320px; }
+  .kpi-value { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-tabs { overflow-x: auto; flex-wrap: nowrap; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+  .nav-tabs .nav-item { flex-shrink: 0; }
+}
+
+@media (max-width: 576px) {
+  .chart-lg { height: 320px; }
+  .chart-md { height: 260px; }
+  .nav-tabs .nav-link { font-size: 0.8rem; padding: 0.5rem 0.6rem; }
+  .kpi-value { font-size: 1.5rem; }
+}
+
+/* Tab 12: Cross-Vendor — Accordion (R10) */
+.cv-accordion-item {
+  background: transparent;
+  border-color: var(--border-color);
+}
+.cv-accordion-btn {
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: none;
+}
+.cv-accordion-btn::after {
+  filter: invert(0.7);
+}
+
+/* Tab 12: Trial table conditional formatting (R6) */
+.cv-ceiling-row { opacity: 0.45; }
+.cv-ceiling-row td:first-child::after { content: ' \u26a0'; font-size: 0.7em; }
+.cv-max-val { font-weight: 700; }
+.cv-min-val { opacity: 0.6; font-style: italic; }

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moral Psychology Benchmarks Meta-Evaluation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-nav">
+    <div class="container-fluid">
+      <span class="navbar-brand fw-bold">Moral Psychology Benchmarks</span>
+      <span class="navbar-text text-muted small">Meta-Evaluation Dashboard</span>
+    </div>
+  </nav>
+
+  <!-- Tabs -->
+  <div class="container-fluid px-4 mt-3">
+    <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="tab-overview" data-bs-toggle="tab"
+                data-bs-target="#pane-overview" type="button" role="tab"
+                aria-controls="pane-overview" aria-selected="true">Overview</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-features" data-bs-toggle="tab"
+                data-bs-target="#pane-features" type="button" role="tab"
+                aria-controls="pane-features" aria-selected="false">Feature Matrix</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-heatmap" data-bs-toggle="tab"
+                data-bs-target="#pane-heatmap" type="button" role="tab"
+                aria-controls="pane-heatmap" aria-selected="false">Theory Heatmap</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-implementation" data-bs-toggle="tab"
+                data-bs-target="#pane-implementation" type="button" role="tab"
+                aria-controls="pane-implementation" aria-selected="false">Implementation</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-trials" data-bs-toggle="tab"
+                data-bs-target="#pane-trials" type="button" role="tab"
+                aria-controls="pane-trials" aria-selected="false">Trials</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-methods" data-bs-toggle="tab"
+                data-bs-target="#pane-methods" type="button" role="tab"
+                aria-controls="pane-methods" aria-selected="false">Methods</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-ranking" data-bs-toggle="tab"
+                data-bs-target="#pane-ranking" type="button" role="tab"
+                aria-controls="pane-ranking" aria-selected="false">Paper Ranking</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-trial-results" data-bs-toggle="tab"
+                data-bs-target="#pane-trial-results" type="button" role="tab"
+                aria-controls="pane-trial-results" aria-selected="false">Trial Results</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-computational" data-bs-toggle="tab"
+                data-bs-target="#pane-computational" type="button" role="tab"
+                aria-controls="pane-computational" aria-selected="false">Computational Analysis</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-cultural" data-bs-toggle="tab"
+                data-bs-target="#pane-cultural" type="button" role="tab"
+                aria-controls="pane-cultural" aria-selected="false">Cultural &amp; Religious</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-model-comparison" data-bs-toggle="tab"
+                data-bs-target="#pane-model-comparison" type="button" role="tab"
+                aria-controls="pane-model-comparison" aria-selected="false">Model Comparison</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tab-cross-vendor" data-bs-toggle="tab"
+                data-bs-target="#pane-cross-vendor" type="button" role="tab"
+                aria-controls="pane-cross-vendor" aria-selected="false">Cross-Vendor Analysis</button>
+      </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content mt-3" id="mainTabContent">
+
+      <!-- Tab 1: Overview -->
+      <div class="tab-pane fade show active" id="pane-overview" role="tabpanel" aria-labelledby="tab-overview">
+        <div class="row g-3 mb-4" id="kpi-cards"></div>
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="card card-dark">
+              <div class="card-header">Top-15 Benchmarks by Composite Score</div>
+              <div class="card-body">
+                <div id="chart-composite-bar" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-dark">
+              <div class="card-header">Theory Distribution (292 Candidates)</div>
+              <div class="card-body">
+                <div id="chart-theory-pie" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Feature Matrix -->
+      <div class="tab-pane fade" id="pane-features" role="tabpanel" aria-labelledby="tab-features">
+        <div class="card card-dark">
+          <div class="card-header">Feature Matrix -- Top-15 Benchmarks</div>
+          <div class="card-body table-responsive">
+            <table class="table table-dark table-sm table-hover" id="feature-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Benchmark</th>
+                  <th>Year</th>
+                  <th>Theories</th>
+                  <th>A2</th>
+                  <th>A5 Baseline</th>
+                  <th>A6</th>
+                  <th>A7 Culture</th>
+                  <th>B1 Format</th>
+                  <th>B2 Size</th>
+                  <th>B10</th>
+                  <th>B10 Fidelity</th>
+                  <th>C1 Cites</th>
+                  <th>PD</th>
+                  <th>PE</th>
+                  <th>CI</th>
+                  <th>Composite</th>
+                </tr>
+              </thead>
+              <tbody id="feature-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Theory Heatmap -->
+      <div class="tab-pane fade" id="pane-heatmap" role="tabpanel" aria-labelledby="tab-heatmap">
+        <div class="card card-dark">
+          <div class="card-header">Theory Coverage: 8 Theories x 15 Benchmarks</div>
+          <div class="card-body">
+            <div id="chart-heatmap" class="chart-lg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Implementation -->
+      <div class="tab-pane fade" id="pane-implementation" role="tabpanel" aria-labelledby="tab-implementation">
+        <div class="card card-dark">
+          <div class="card-header">Harness Implementation Status: 5 Harnesses x 15 Benchmarks</div>
+          <div class="card-body">
+            <div id="chart-implementation" class="chart-lg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Trials -->
+      <div class="tab-pane fade" id="pane-trials" role="tabpanel" aria-labelledby="tab-trials">
+        <div id="trials-container">
+          <!-- Filled by app.js -->
+        </div>
+      </div>
+
+      <!-- Tab 6: Methods -->
+      <div class="tab-pane fade" id="pane-methods" role="tabpanel" aria-labelledby="tab-methods">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Scoring Formula</div>
+              <div class="card-body" id="methods-formula"></div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Diversity Constraints</div>
+              <div class="card-body" id="methods-constraints"></div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">Keyword Scorer Improvement (Rescore Report)</div>
+              <div class="card-body table-responsive">
+                <table class="table table-dark table-sm" id="rescore-table">
+                  <thead>
+                    <tr>
+                      <th>Theory</th>
+                      <th>Before</th>
+                      <th>After</th>
+                      <th>Delta</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rescore-table-body"></tbody>
+                </table>
+                <div id="rescore-summary" class="text-muted small mt-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 7: Paper Ranking -->
+      <div class="tab-pane fade" id="pane-ranking" role="tabpanel" aria-labelledby="tab-ranking">
+        <!-- Summary KPIs -->
+        <div class="row g-3 mb-3" id="ranking-kpi"></div>
+
+        <!-- Filters row -->
+        <div class="card card-dark mb-3">
+          <div class="card-body py-2">
+            <div class="row g-2 align-items-center">
+              <div class="col-lg-4">
+                <input type="text" class="form-control form-control-sm ranking-filter-input"
+                       id="ranking-search" placeholder="Search by title...">
+              </div>
+              <div class="col-lg-2">
+                <select class="form-select form-select-sm ranking-filter-input" id="ranking-theory-filter">
+                  <option value="">All Theories</option>
+                </select>
+              </div>
+              <div class="col-lg-2">
+                <select class="form-select form-select-sm ranking-filter-input" id="ranking-status-filter">
+                  <option value="">All Status</option>
+                  <option value="top15">Top-15 Only</option>
+                  <option value="assessed">Assessed (54)</option>
+                  <option value="unassessed">Unassessed</option>
+                </select>
+              </div>
+              <div class="col-lg-2">
+                <select class="form-select form-select-sm ranking-filter-input" id="ranking-data-filter">
+                  <option value="">All Data</option>
+                  <option value="available">Data Available</option>
+                  <option value="trial">Has Trial</option>
+                </select>
+              </div>
+              <div class="col-lg-2 text-end">
+                <span class="text-muted small" id="ranking-count"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ranking table -->
+        <div class="card card-dark">
+          <div class="card-body table-responsive ranking-table-wrap">
+            <table class="table table-dark table-sm table-hover ranking-table" id="ranking-table">
+              <thead>
+                <tr>
+                  <th class="sortable" data-sort="displayRank">#</th>
+                  <th class="sortable" data-sort="title">Title</th>
+                  <th class="sortable" data-sort="year">Year</th>
+                  <th>Authors</th>
+                  <th>Theories</th>
+                  <th class="sortable" data-sort="composite">Composite</th>
+                  <th class="sortable" data-sort="PD">PD</th>
+                  <th class="sortable" data-sort="PE">PE</th>
+                  <th class="sortable" data-sort="CI">CI</th>
+                  <th class="sortable" data-sort="D_mean">D</th>
+                  <th class="sortable" data-sort="E_mean">E</th>
+                  <th class="sortable" data-sort="F_mean">F</th>
+                  <th class="sortable" data-sort="G_mean">G</th>
+                  <th>Data</th>
+                  <th>Trial</th>
+                </tr>
+              </thead>
+              <tbody id="ranking-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Expanded detail panel (hidden by default) -->
+        <div class="card card-dark mt-3 d-none" id="ranking-detail-panel">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span id="ranking-detail-title">Feature Profile</span>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="ranking-detail-close">Close</button>
+          </div>
+          <div class="card-body" id="ranking-detail-body"></div>
+        </div>
+      </div>
+
+      <!-- Tab 8: Trial Results -->
+      <div class="tab-pane fade" id="pane-trial-results" role="tabpanel" aria-labelledby="tab-trial-results">
+        <!-- KPI row -->
+        <div class="row g-3 mb-4" id="trial-results-kpi"></div>
+
+        <!-- Moral Response Profile Radar -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-7">
+            <div class="card card-dark">
+              <div class="card-header">Moral Response Profile Radar: Claude vs Human Baselines (15 Dimensions)</div>
+              <div class="card-body">
+                <div id="chart-moral-radar" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="card card-dark">
+              <div class="card-header">RLHF Sensitivity Ranking (Low RLHF = High Discrimination)</div>
+              <div class="card-body">
+                <div id="chart-rlhf-ranking" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trial Summary Table -->
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">Trial Summary: 14 Administrations Across 11 Theories</div>
+              <div class="card-body table-responsive">
+                <table class="table table-dark table-sm table-hover" id="trial-results-table">
+                  <thead>
+                    <tr>
+                      <th>Trial</th>
+                      <th>Benchmark</th>
+                      <th>Theory</th>
+                      <th>Format</th>
+                      <th>Key Finding</th>
+                    </tr>
+                  </thead>
+                  <tbody id="trial-results-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Missing Theory Protocols -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-4">
+            <div class="card card-dark">
+              <div class="card-header">Dual Process: Personal vs Impersonal</div>
+              <div class="card-body">
+                <div id="chart-dual-process" class="chart-md"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-dark">
+              <div class="card-header">Social Intuitionism: Response Rates</div>
+              <div class="card-body">
+                <div id="chart-intuitionism" class="chart-md"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-dark">
+              <div class="card-header">Dyadic Morality: Wrongness by Level</div>
+              <div class="card-body">
+                <div id="chart-dyadic" class="chart-md"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prompt Sensitivity -->
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">Prompt Sensitivity Matrix: MFT Foundations x Persona Conditions (Total shift: 13 points)</div>
+              <div class="card-body">
+                <div id="chart-prompt-sensitivity" class="chart-md"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 9: Computational Analysis -->
+      <div class="tab-pane fade" id="pane-computational" role="tabpanel" aria-labelledby="tab-computational">
+
+        <!-- Subtab nav pills -->
+        <ul class="nav nav-pills subtab-pills mb-3" id="compSubtabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="comp-sub-feature" data-bs-toggle="pill"
+                    data-bs-target="#comp-pane-feature" type="button" role="tab"
+                    aria-controls="comp-pane-feature" aria-selected="true">9a: Feature Structure</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comp-sub-landscape" data-bs-toggle="pill"
+                    data-bs-target="#comp-pane-landscape" type="button" role="tab"
+                    aria-controls="comp-pane-landscape" aria-selected="false">9b: Benchmark Landscape</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comp-sub-temporal" data-bs-toggle="pill"
+                    data-bs-target="#comp-pane-temporal" type="button" role="tab"
+                    aria-controls="comp-pane-temporal" aria-selected="false">9c: Temporal Trends</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="comp-sub-gaps" data-bs-toggle="pill"
+                    data-bs-target="#comp-pane-gaps" type="button" role="tab"
+                    aria-controls="comp-pane-gaps" aria-selected="false">9d: Gap Analysis</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="compSubtabContent">
+
+          <!-- 9a: Feature Structure -->
+          <div class="tab-pane fade show active" id="comp-pane-feature" role="tabpanel" aria-labelledby="comp-sub-feature">
+            <div class="row g-4">
+              <div class="col-lg-8">
+                <div class="card card-dark">
+                  <div class="card-header">Scree Plot: Eigenvalues vs Parallel Analysis Threshold</div>
+                  <div class="card-body">
+                    <div id="chart-scree" class="chart-lg"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card card-dark">
+                  <div class="card-header">Redundancy Summary</div>
+                  <div class="card-body" id="redundancy-cards"></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card card-dark">
+                  <div class="card-header">Top 20 Most Discriminating Features by Variance</div>
+                  <div class="card-body">
+                    <div id="chart-feature-importance" class="chart-lg"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9b: Benchmark Landscape -->
+          <div class="tab-pane fade" id="comp-pane-landscape" role="tabpanel" aria-labelledby="comp-sub-landscape">
+            <div class="row g-4">
+              <div class="col-lg-8">
+                <div class="card card-dark">
+                  <div class="card-header">UMAP Projection: 54 Benchmarks (color = cluster, size = composite)</div>
+                  <div class="card-body">
+                    <div id="chart-umap" class="chart-lg"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card card-dark">
+                  <div class="card-header">Benchmark Archetype Profiles</div>
+                  <div class="card-body" id="archetype-cards"></div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="card card-dark">
+                  <div class="card-header">Theory Coverage Treemap (incl. 71 vault sweep candidates)</div>
+                  <div class="card-body">
+                    <div id="chart-treemap" class="chart-md"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9c: Temporal Trends -->
+          <div class="tab-pane fade" id="comp-pane-temporal" role="tabpanel" aria-labelledby="comp-sub-temporal">
+            <div class="row g-4">
+              <div class="col-12">
+                <div class="card card-dark">
+                  <div class="card-header">Temporal Trends: Key Features by Year</div>
+                  <div class="card-body">
+                    <div id="chart-temporal" class="chart-lg"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card-dark">
+                  <div class="card-header">Pre/Post RLHF Comparison (split at 2022)</div>
+                  <div class="card-body">
+                    <div id="chart-rlhf" class="chart-md"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card card-dark">
+                  <div class="card-header">Theory Evolution by Year</div>
+                  <div class="card-body">
+                    <div id="chart-theory-evo" class="chart-md"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9d: Gap Analysis -->
+          <div class="tab-pane fade" id="comp-pane-gaps" role="tabpanel" aria-labelledby="comp-sub-gaps">
+            <div class="row g-4">
+              <div class="col-12">
+                <div class="card card-dark">
+                  <div class="card-header">Theory-Feature Gap Heatmap: 11 Theories x 7 Tiers</div>
+                  <div class="card-body">
+                    <div id="chart-gap-heatmap" class="chart-lg"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="card card-dark">
+                  <div class="card-header">Top 10 Priority Gaps</div>
+                  <div class="card-body table-responsive">
+                    <table class="table table-dark table-sm table-hover" id="gap-table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Theory</th>
+                          <th>Gap</th>
+                          <th>Tiers Missing</th>
+                          <th>Priority</th>
+                        </tr>
+                      </thead>
+                      <tbody id="gap-table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card card-dark">
+                  <div class="card-header">Field Health Scorecard</div>
+                  <div class="card-body" id="health-scorecard"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /compSubtabContent -->
+      </div><!-- /pane-computational -->
+
+      <!-- Tab 10: Cultural & Religious Coverage -->
+      <div class="tab-pane fade" id="pane-cultural" role="tabpanel" aria-labelledby="tab-cultural">
+
+        <!-- Western Bias KPI + Cross-Cultural -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-3">
+            <div class="card card-dark" id="wlbi-card">
+              <div class="card-body text-center py-4">
+                <div class="kpi-value" style="color:#D55E00" id="wlbi-score">70.7</div>
+                <div class="kpi-label">Western Liberal Bias Index</div>
+                <div class="text-muted small mt-2" id="wlbi-detail"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <div class="card card-dark">
+              <div class="card-header">Cross-Cultural Default: 86.7% Western + Perspective-Taking Quality</div>
+              <div class="card-body">
+                <div id="chart-cross-cultural" class="chart-md"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Religious Coverage + Sacred Values -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-7">
+            <div class="card card-dark">
+              <div class="card-header">Religious Tradition Coverage: Papers vs Benchmarks</div>
+              <div class="card-body">
+                <div id="chart-religious-coverage" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="card card-dark">
+              <div class="card-header">Sacred Value Analysis: What Claude Treats as Sacred</div>
+              <div class="card-body" id="sacred-values-container">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vault Sweep Candidates -->
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">New Non-Western Candidates from Vault Sweep (71 papers)</div>
+              <div class="card-body table-responsive">
+                <table class="table table-dark table-sm table-hover" id="vault-sweep-table">
+                  <thead>
+                    <tr>
+                      <th>Tradition</th>
+                      <th>Paper Title</th>
+                      <th>Keywords Matched</th>
+                      <th>Extract</th>
+                    </tr>
+                  </thead>
+                  <tbody id="vault-sweep-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /pane-cultural -->
+
+      <!-- Tab 11: Model Comparison -->
+      <div class="tab-pane fade" id="pane-model-comparison" role="tabpanel" aria-labelledby="tab-model-comparison">
+
+        <!-- KPI Row -->
+        <div class="row g-3 mb-4" id="mc-kpi-cards"></div>
+
+        <!-- Row 2: MFT Radar + P-Score Bar -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">MFT Foundation Profiles: 3 Models (Mean of MP2 + MP4)</div>
+              <div class="card-body">
+                <div id="chart-mc-mft-radar" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Kohlberg P-Scores by Model and Test</div>
+              <div class="card-body">
+                <div id="chart-mc-pscore" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Classification Accuracy + Dual Process -->
+        <div class="row g-4 mb-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Moral Classification Accuracy: Scale Effects</div>
+              <div class="card-body">
+                <div id="chart-mc-classification" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Dual Process: Utilitarian Acceptance Rates</div>
+              <div class="card-body">
+                <div id="chart-mc-dual-process" class="chart-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 4: Full Trial Comparison Table -->
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">Full Trial Comparison: 23 Benchmarks x 3 Models</div>
+              <div class="card-body table-responsive">
+                <table class="table table-dark table-sm table-hover" id="mc-trial-table">
+                  <thead>
+                    <tr>
+                      <th>Trial</th>
+                      <th>Benchmark</th>
+                      <th>Primary Metric</th>
+                      <th style="color:#7C3AED">Opus</th>
+                      <th style="color:#2563EB">Sonnet</th>
+                      <th style="color:#059669">Haiku</th>
+                      <th>Category</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mc-trial-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 5: Key Findings -->
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="card card-dark">
+              <div class="card-header">Key Findings from Cross-Model Comparison (10 Findings)</div>
+              <div class="card-body" id="mc-key-findings"></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /pane-model-comparison -->
+
+      <!-- Tab 12: Cross-Vendor Analysis -->
+      <div class="tab-pane fade" id="pane-cross-vendor" role="tabpanel" aria-labelledby="tab-cross-vendor">
+
+        <!-- Tab Introduction -->
+        <div class="mb-4" id="cv-ann-intro"></div>
+
+        <!-- KPI Cards -->
+        <div class="row g-3 mb-3" id="cv-kpi-cards"></div>
+        <div class="mb-4" id="cv-ann-kpi"></div>
+
+        <!-- Row 1: Radar + Heatmap -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">9-Model Moral Profile Radar</div>
+              <div class="card-body">
+                <div id="chart-cv-radar" class="chart-lg"></div>
+                <div id="cv-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Vendor Family Heatmap (23 Benchmarks &times; 3 Vendors)</div>
+              <div class="card-body">
+                <div id="chart-cv-heatmap" class="chart-lg"></div>
+                <div id="cv-ann-heatmap" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Scale Sensitivity + Discrimination -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Scale Sensitivity (Within-Family Size Gradients)</div>
+              <div class="card-body">
+                <div id="chart-cv-scale" class="chart-lg"></div>
+                <div id="cv-ann-scale" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Benchmark Discrimination Ranking (CV across 9 models)</div>
+              <div class="card-body">
+                <div id="chart-cv-discrimination" class="chart-lg"></div>
+                <div id="cv-ann-discrimination" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Convergence + Theory Coverage -->
+        <div class="row g-3 mb-4">
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Convergence vs. Divergence (Within- vs. Between-Vendor)</div>
+              <div class="card-body">
+                <div id="chart-cv-convergence" class="chart-lg"></div>
+                <div id="cv-ann-convergence" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card card-dark">
+              <div class="card-header">Theory Coverage by Vendor</div>
+              <div class="card-body">
+                <div id="chart-cv-theory" class="chart-lg"></div>
+                <div id="cv-ann-theory" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Council Highlights -->
+        <div class="card card-dark mb-4">
+          <div class="card-header">Expert Council Highlights</div>
+          <div class="card-body" id="cv-council-highlights"></div>
+        </div>
+
+        <!-- Conclusions Accordion -->
+        <div class="card card-dark mb-4">
+          <div class="card-header">Council Conclusions &amp; Recommendations</div>
+          <div class="card-body" id="cv-ann-conclusions"></div>
+        </div>
+
+        <!-- Trial Table Annotation + Table -->
+        <div class="mb-3" id="cv-ann-table"></div>
+        <div class="card card-dark mb-4">
+          <div class="card-header">Full Cross-Vendor Trial Comparison (23 Benchmarks &times; 9 Models)</div>
+          <div class="card-body table-responsive">
+            <table class="table table-sm table-dark table-striped align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Benchmark</th>
+                  <th>Metric</th>
+                  <th style="color:#7C3AED">Opus</th>
+                  <th style="color:#2563EB">Sonnet</th>
+                  <th style="color:#059669">Haiku</th>
+                  <th style="color:#E69F00">Gem Flash</th>
+                  <th style="color:#F0E442">Gem FL</th>
+                  <th style="color:#D55E00">Gem 2.5P</th>
+                  <th style="color:#CC79A7">Gem 3.1P</th>
+                  <th style="color:#56B4E9">Codex</th>
+                  <th style="color:#0072B2">GPT Mini</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody id="cv-trial-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /pane-cross-vendor -->
+
+    </div><!-- /tab-content -->
+  </div><!-- /container -->
+
+  <footer class="text-center text-muted small py-3 mt-4">
+    CEI Literature Vault &mdash; Moral Psychology Benchmarks Meta-Evaluation &mdash; Generated 2026-04-04
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="data.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
