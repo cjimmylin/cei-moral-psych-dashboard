@@ -1513,16 +1513,28 @@ function chartCVHeatmap(el) {
   if (!cv || !cv.available) return chart;
   var hm = cv.vendorHeatmap;
 
+  // Find max absolute deviation for symmetric color scale
+  var maxDev = 1;
+  hm.data.forEach(function (d) { maxDev = Math.max(maxDev, Math.abs(d[2])); });
+
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: {
       position: 'top',
       formatter: function (p) {
-        return hm.vendorLabels[p.data[0]] + ' / ' +
-               hm.benchmarkLabels[p.data[1]] + ': ' +
-               p.data[2].toFixed(1);
+        var raw = hm.rawData ? hm.rawData[p.dataIndex] : null;
+        var tip = '<b>' + hm.vendorLabels[p.data[0]] + '</b> / ' +
+                  hm.benchmarkLabels[p.data[1]] + '<br/>';
+        if (raw) {
+          tip += 'Raw value: ' + raw[2] + '<br/>';
+          tip += 'Deviation: ' + (raw[3] > 0 ? '+' : '') + raw[3].toFixed(2) + '%';
+        } else {
+          tip += 'Deviation: ' + p.data[2].toFixed(2) + '%';
+        }
+        if (Math.abs(p.data[2]) < 0.5) tip += '<br/><em>Effectively identical</em>';
+        return tip;
       }
     },
-    grid: { left: 120, right: 60, top: 10, bottom: 30 },
+    grid: { left: 120, right: 80, top: 10, bottom: 30 },
     xAxis: {
       type: 'category',
       data: hm.vendorLabels,
@@ -1537,18 +1549,27 @@ function chartCVHeatmap(el) {
       splitLine: { show: false }
     },
     visualMap: {
-      min: 0, max: 100,
+      min: -maxDev, max: maxDev,
       calculable: false,
       orient: 'vertical',
       right: 0, top: 'center',
-      inRange: { color: ['#1a1a2e', '#16213e', '#0f3460', '#e94560'] },
+      inRange: { color: ['#0f3460', '#16213e', '#1a1a2e', '#3e1a1a', '#e94560'] },
       textStyle: { color: DARK_TEXT, fontSize: 10 },
+      text: ['Above avg', 'Below avg'],
       show: true
     },
     series: [{
       type: 'heatmap',
       data: hm.data,
-      label: { show: false },
+      label: {
+        show: true,
+        fontSize: 9,
+        color: DARK_TEXT,
+        formatter: function (p) {
+          if (Math.abs(p.data[2]) < 0.5) return '\u2248';
+          return (p.data[2] > 0 ? '+' : '') + p.data[2].toFixed(1) + '%';
+        }
+      },
       emphasis: { itemStyle: { shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.5)' } }
     }]
   }));
@@ -1716,17 +1737,23 @@ function chartCVConvergence(el) {
   var conv = cv.convergence;
 
   // Separate zero-variance (ceiling) from non-zero for visual clarity
+  // Use log-transformed values to handle multi-order-of-magnitude range (MP3 at 40+ vs others at 0.01)
   var ceilingData = [];
   var activeData = [];
   var benchKeys = Object.keys(conv);
   for (var i = 0; i < benchKeys.length; i++) {
     var tid = benchKeys[i];
     var c = conv[tid];
+    // Log-transform: log10(x + epsilon) to handle zeros gracefully
+    var wv = c.within_var > 0 ? Math.log10(c.within_var) : -5;
+    var bv = c.between_var > 0 ? Math.log10(c.between_var) : -5;
     var entry = {
-      value: [c.within_var, c.between_var],
+      value: [wv, bv],
       name: _BENCHMARK_SHORT_JS[tid] || tid,
       tid: tid,
-      disc: c.discrimination_ratio
+      disc: c.discrimination_ratio,
+      rawWithin: c.within_var,
+      rawBetween: c.between_var
     };
     if (c.total_var < 0.0001) {
       ceilingData.push(entry);
@@ -1738,10 +1765,12 @@ function chartCVConvergence(el) {
   chart.setOption(Object.assign(baseTheme(), {
     tooltip: {
       formatter: function (p) {
-        return '<b>' + p.data.name + '</b> (' + p.data.tid + ')<br/>' +
-               'Within-vendor var: ' + p.data.value[0].toFixed(6) + '<br/>' +
-               'Between-vendor var: ' + p.data.value[1].toFixed(6) + '<br/>' +
-               'Discrimination ratio: ' + (p.data.disc * 100).toFixed(1) + '%';
+        if (p.seriesName === 'Equal variance') return '';
+        var d = p.data;
+        return '<b>' + d.name + '</b> (' + d.tid + ')<br/>' +
+               'Within-vendor var: ' + (d.rawWithin !== undefined ? d.rawWithin.toFixed(6) : 'N/A') + '<br/>' +
+               'Between-vendor var: ' + (d.rawBetween !== undefined ? d.rawBetween.toFixed(6) : 'N/A') + '<br/>' +
+               'Discrimination ratio: ' + (d.disc * 100).toFixed(1) + '%';
       }
     },
     legend: {
@@ -1749,19 +1778,27 @@ function chartCVConvergence(el) {
       textStyle: { color: DARK_TEXT, fontSize: 10 },
       bottom: 0
     },
-    grid: { left: 70, right: 30, top: 20, bottom: 50 },
+    grid: { left: 90, right: 30, top: 20, bottom: 60 },
     xAxis: {
       type: 'value',
-      name: 'Within-Vendor Variance',
+      name: 'Within-Vendor Variance (log\u2081\u2080)',
       nameTextStyle: { color: DARK_TEXT },
-      axisLabel: { color: DARK_TEXT },
+      nameLocation: 'center',
+      nameGap: 35,
+      axisLabel: {
+        color: DARK_TEXT,
+        formatter: function (v) { return v >= -4 ? '10^' + v.toFixed(0) : '0'; }
+      },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
     yAxis: {
       type: 'value',
-      name: 'Between-Vendor Variance',
+      name: 'Between-Vendor Var (log\u2081\u2080)',
       nameTextStyle: { color: DARK_TEXT },
-      axisLabel: { color: DARK_TEXT },
+      axisLabel: {
+        color: DARK_TEXT,
+        formatter: function (v) { return v >= -4 ? '10^' + v.toFixed(0) : '0'; }
+      },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
     series: [
