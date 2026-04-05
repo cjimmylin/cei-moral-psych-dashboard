@@ -78677,6 +78677,368 @@ const DATA = {
       ]
     }
   },
+  "modelComparison": {
+    "available": true,
+    "models": [
+      "Opus",
+      "Sonnet",
+      "Haiku"
+    ],
+    "modelColors": [
+      "#7C3AED",
+      "#2563EB",
+      "#059669"
+    ],
+    "mftRadar": {
+      "foundations": [
+        "Care",
+        "Fairness",
+        "Loyalty",
+        "Authority",
+        "Sanctity"
+      ],
+      "opus": [
+        3.67,
+        3.4865,
+        2.3855,
+        2.0185,
+        1.6515
+      ],
+      "sonnet": [
+        3.5,
+        3.3249999999999997,
+        2.275,
+        1.9250000000000003,
+        1.575
+      ],
+      "haiku": [
+        3.67,
+        3.4865,
+        2.3855,
+        2.0185,
+        1.6515
+      ]
+    },
+    "pScores": {
+      "labels": [
+        "DIT (P-score)",
+        "Teacher DIT"
+      ],
+      "opus": [
+        75.0,
+        90.0
+      ],
+      "sonnet": [
+        85.0,
+        90.0
+      ],
+      "haiku": [
+        60.0,
+        90.0
+      ]
+    },
+    "classificationAccuracy": {
+      "labels": [
+        "MoralCode",
+        "M3oralBench",
+        "TracingMF"
+      ],
+      "opus": [
+        1.0,
+        0.9,
+        1.0
+      ],
+      "sonnet": [
+        1.0,
+        0.96,
+        0.95
+      ],
+      "haiku": [
+        1.0,
+        1.0,
+        0.95
+      ]
+    },
+    "dualProcess": {
+      "labels": [
+        "Dual Process",
+        "TrolleyBench"
+      ],
+      "opus": [
+        0.0,
+        1.0
+      ],
+      "sonnet": [
+        0.0,
+        1.0
+      ],
+      "haiku": [
+        0.125,
+        1.0
+      ]
+    },
+    "trialTable": [
+      {
+        "id": "MP-CC",
+        "benchmark": "Cross-Cultural",
+        "metric": "overall",
+        "opus": "4.170",
+        "sonnet": "3.970",
+        "haiku": "4.170",
+        "category": "Cultural"
+      },
+      {
+        "id": "MP-DM",
+        "benchmark": "Dyadic Morality",
+        "metric": "mean_structural_blame",
+        "opus": "3.292",
+        "sonnet": "3.208",
+        "haiku": "—",
+        "category": "Dyadic"
+      },
+      {
+        "id": "MP-DP",
+        "benchmark": "Dual Process",
+        "metric": "cot_effect",
+        "opus": "0.000",
+        "sonnet": "0.000",
+        "haiku": "0.125",
+        "category": "Dual Process"
+      },
+      {
+        "id": "MP-SI",
+        "benchmark": "Social Intuitionism",
+        "metric": "dumbfounding_rate",
+        "opus": "0.300",
+        "sonnet": "0.200",
+        "haiku": "0.200",
+        "category": "Intuitionist"
+      },
+      {
+        "id": "MP10",
+        "benchmark": "MoralCode",
+        "metric": "rate",
+        "opus": "1.000",
+        "sonnet": "1.000",
+        "haiku": "1.000",
+        "category": "Classification"
+      },
+      {
+        "id": "MP11",
+        "benchmark": "Kaleidoscope",
+        "metric": "task_c_accuracy",
+        "opus": "1.000",
+        "sonnet": "1.000",
+        "haiku": "1.000",
+        "category": "Classification"
+      },
+      {
+        "id": "MP12",
+        "benchmark": "ValAct",
+        "metric": "gap_rate",
+        "opus": "0.450",
+        "sonnet": "0.550",
+        "haiku": "0.550",
+        "category": "Classification"
+      },
+      {
+        "id": "MP15",
+        "benchmark": "UniMoral",
+        "metric": "action_prediction_B_rate",
+        "opus": "1.000",
+        "sonnet": "0.800",
+        "haiku": "1.000",
+        "category": "Classification"
+      },
+      {
+        "id": "MP16",
+        "benchmark": "Moral Identity",
+        "metric": "internalization_symbolization_gap",
+        "opus": "3.400",
+        "sonnet": "3.800",
+        "haiku": "3.800",
+        "category": "Identity"
+      },
+      {
+        "id": "MP17",
+        "benchmark": "SocialChem",
+        "metric": "mean_rots_per_situation",
+        "opus": "2.000",
+        "sonnet": "2.040",
+        "haiku": "1.880",
+        "category": "Classification"
+      },
+      {
+        "id": "MP18",
+        "benchmark": "Cultural Persona",
+        "metric": "default_ind_bind_ratio",
+        "opus": "2.630",
+        "sonnet": "2.430",
+        "haiku": "2.510",
+        "category": "MFT"
+      },
+      {
+        "id": "MP19",
+        "benchmark": "Conscience",
+        "metric": "win_rate",
+        "opus": "0.770",
+        "sonnet": "0.810",
+        "haiku": "0.850",
+        "category": "Classification"
+      },
+      {
+        "id": "MP2",
+        "benchmark": "MFQ-30",
+        "metric": "ratio",
+        "opus": "2.830",
+        "sonnet": "2.630",
+        "haiku": "2.620",
+        "category": "MFT"
+      },
+      {
+        "id": "MP20",
+        "benchmark": "M3oralBench",
+        "metric": "overall_accuracy",
+        "opus": "0.900",
+        "sonnet": "0.960",
+        "haiku": "1.000",
+        "category": "Classification"
+      },
+      {
+        "id": "MP21",
+        "benchmark": "PRIME",
+        "metric": "mean_kohlberg_stage",
+        "opus": "5.400",
+        "sonnet": "5.400",
+        "haiku": "5.400",
+        "category": "Kohlberg"
+      },
+      {
+        "id": "MP22",
+        "benchmark": "TracingMF",
+        "metric": "overall",
+        "opus": "1.000",
+        "sonnet": "0.950",
+        "haiku": "0.950",
+        "category": "MFT"
+      },
+      {
+        "id": "MP3",
+        "benchmark": "DIT (P-score)",
+        "metric": "P_score",
+        "opus": "75.000",
+        "sonnet": "85.000",
+        "haiku": "60.000",
+        "category": "Kohlberg"
+      },
+      {
+        "id": "MP4",
+        "benchmark": "MF Vignettes",
+        "metric": "care",
+        "opus": "3.670",
+        "sonnet": "3.500",
+        "haiku": "3.670",
+        "category": "MFT"
+      },
+      {
+        "id": "MP5",
+        "benchmark": "ValueCompass",
+        "metric": "benevolence",
+        "opus": "4.500",
+        "sonnet": "4.750",
+        "haiku": "4.750",
+        "category": "Schwartz"
+      },
+      {
+        "id": "MP6",
+        "benchmark": "Teacher DIT",
+        "metric": "P_score",
+        "opus": "90.000",
+        "sonnet": "90.000",
+        "haiku": "90.000",
+        "category": "Kohlberg"
+      },
+      {
+        "id": "MP7",
+        "benchmark": "TrolleyBench",
+        "metric": "ECI",
+        "opus": "1.000",
+        "sonnet": "1.000",
+        "haiku": "1.000",
+        "category": "Trolley"
+      },
+      {
+        "id": "MP8",
+        "benchmark": "Moral Machine",
+        "metric": "decisive_count",
+        "opus": "18.000",
+        "sonnet": "18.000",
+        "haiku": "18.000",
+        "category": "MoralMachine"
+      },
+      {
+        "id": "MP9",
+        "benchmark": "MFTC",
+        "metric": "moral_classification_accuracy",
+        "opus": "—",
+        "sonnet": "—",
+        "haiku": "—",
+        "category": "Classification"
+      }
+    ],
+    "keyFindings": [
+      {
+        "num": 1,
+        "title": "Shared WEIRD-liberal profile",
+        "detail": "All three Anthropic models share the same high-care, high-fairness, low-purity, low-authority moral profile regardless of model size."
+      },
+      {
+        "num": 2,
+        "title": "Non-monotonic P-scores",
+        "detail": "DIT P-scores follow Sonnet (85) > Opus (75) > Haiku (60), breaking the expectation that larger models show higher moral development."
+      },
+      {
+        "num": 3,
+        "title": "Haiku CoT sensitivity",
+        "detail": "Only Haiku shows chain-of-thought sensitivity (0.125 vs 0.0 for Opus and Sonnet), suggesting smaller models are more responsive to reasoning scaffolding."
+      },
+      {
+        "num": 4,
+        "title": "Scale-invariant classification",
+        "detail": "Moral classification accuracy is near-ceiling across all three models, suggesting competence-testing benchmarks cannot discriminate by scale."
+      },
+      {
+        "num": 5,
+        "title": "ECI = 1.0 universally",
+        "detail": "All three models achieve perfect Ethical Consistency Index on TrolleyBench, reflecting strict Doctrine of Double Effect adherence."
+      },
+      {
+        "num": 6,
+        "title": "Identical persona sensitivity",
+        "detail": "Cultural persona manipulation produces identical 13-point MFT shifts across all three models, suggesting shared RLHF training effects."
+      },
+      {
+        "num": 7,
+        "title": "Variation is in degree, not kind",
+        "detail": "Models differ on continuous metrics (P-score, dumbfounding rate) but converge on categorical judgments (classification, ECI, MoralMachine)."
+      },
+      {
+        "num": 8,
+        "title": "Teacher role amplifies post-conventional",
+        "detail": "P-score jumps to 90 for all three models in the teacher role condition, suggesting role-playing overrides scale-based differences."
+      },
+      {
+        "num": 9,
+        "title": "Inverse INT-SYM gap",
+        "detail": "Moral Identity Scale reveals extreme internalization-symbolization dissociation (gap of 3.4) unprecedented in human literature."
+      },
+      {
+        "num": 10,
+        "title": "Zero dual-process engagement",
+        "detail": "Opus and Sonnet show 0.0 CoT effect — no difference between deliberative and automatic moral processing conditions."
+      }
+    ]
+  },
   "tabAnnotations": {
     "ov": {
       "intro": {

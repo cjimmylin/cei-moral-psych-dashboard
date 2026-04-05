@@ -7,7 +7,7 @@
   --bg-card: #181828;
   --bg-nav: #12122a;
   --text-primary: #c8d0e8;
-  --text-muted: #7a82a0;
+  --text-muted: #a0a8c4;
   --border-color: rgba(200, 208, 232, 0.12);
   --oi-orange: #E69F00;
   --oi-blue: #56B4E9;
@@ -91,6 +91,9 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+/* Bootstrap text-muted override for dark theme readability */
+.text-muted { color: var(--text-muted) !important; }
 
 /* Chart containers */
 .chart-lg { height: 500px; width: 100%; }
@@ -482,10 +485,10 @@ footer {
   padding-left: 0.75rem;
   margin-top: 0.5rem;
 }
-.ann-block .ann-what { margin-bottom: 0.25rem; font-size: 0.85rem; }
-.ann-block .ann-finding { margin-bottom: 0.25rem; font-size: 0.85rem; }
+.ann-block .ann-what { margin-bottom: 0.25rem; font-size: 0.85rem; color: var(--text-primary); }
+.ann-block .ann-finding { margin-bottom: 0.25rem; font-size: 0.85rem; color: var(--text-primary); }
 .ann-block .ann-interpretation { margin-bottom: 0.25rem; font-size: 0.85rem; color: var(--text-muted); }
-.ann-block .ann-member { font-style: italic; font-size: 0.8rem; color: var(--text-muted); opacity: 0.8; }
+.ann-block .ann-member { font-style: italic; font-size: 0.8rem; color: var(--text-muted); }
 
 /* Domain-colored left borders for annotations */
 .ann-border-psychometrics { border-left-color: var(--oi-orange); }

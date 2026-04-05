@@ -256,26 +256,64 @@ function chartImplementation(el) {
 
 function chartTrialBars(el) {
   var chart = echarts.init(el);
-  var td = DATA.trialData;
 
-  if (!td.available || !td.trials || td.trials.length === 0) {
-    chart.setOption(Object.assign(baseTheme(), {
-      title: {
-        text: 'Trials pending -- run Phase 4 first',
-        left: 'center', top: 'center',
-        textStyle: { color: '#999', fontSize: 16 }
-      }
-    }));
-    return chart;
+  // Use cross-vendor trial table for clean per-benchmark metrics (Opus column)
+  var cv = DATA.crossVendor;
+  if (!cv || !cv.available || !cv.trialTable || cv.trialTable.length === 0) {
+    // Fallback: use basic trialData
+    var td = DATA.trialData;
+    if (!td || !td.available) {
+      chart.setOption(Object.assign(baseTheme(), {
+        title: { text: 'Trials pending', left: 'center', top: 'center',
+                 textStyle: { color: '#999', fontSize: 16 } }
+      }));
+      return chart;
+    }
   }
 
-  // If trial data exists, render grouped bars
+  var rows = cv.trialTable;
+  var names = [];
+  var values = [];
+  var palette = DATA.palette;
+
+  rows.forEach(function (r) {
+    var v = parseFloat(r.values.anthropic_opus);
+    if (!isNaN(v)) {
+      names.push(r.benchmark.length > 20 ? r.benchmark.substring(0, 18) + '..' : r.benchmark);
+      values.push(v);
+    }
+  });
+
   chart.setOption(Object.assign(baseTheme(), {
-    title: { text: 'Trial Results', left: 'center', textStyle: { color: DARK_TEXT } },
-    tooltip: { trigger: 'axis' },
-    xAxis: { type: 'category', data: td.trials.map(function (t) { return t.name || 'Trial'; }) },
-    yAxis: { type: 'value' },
-    series: [{ type: 'bar', data: td.trials.map(function (t) { return t.score || 0; }) }]
+    title: { text: 'Primary Metric by Benchmark (Claude Opus)', left: 'center', textStyle: { color: DARK_TEXT, fontSize: 14 } },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      formatter: function (params) {
+        var idx = params[0].dataIndex;
+        var row = rows[idx];
+        return '<b>' + row.benchmark + '</b><br/>Metric: ' + row.metric + '<br/>Value: ' + params[0].value;
+      }
+    },
+    grid: { left: 140, right: 40, top: 40, bottom: 30 },
+    yAxis: {
+      type: 'category',
+      data: names,
+      axisLabel: { color: DARK_TEXT, fontSize: 10 }
+    },
+    xAxis: {
+      type: 'value',
+      axisLabel: { color: DARK_TEXT },
+      splitLine: { lineStyle: { color: GRID_LINE } }
+    },
+    series: [{
+      type: 'bar',
+      data: values.map(function (v, i) {
+        return { value: v, itemStyle: { color: palette[i % palette.length] } };
+      }),
+      barMaxWidth: 18,
+      label: { show: true, position: 'right', color: DARK_TEXT, fontSize: 10, formatter: function (p) { return p.value; } }
+    }]
   }));
   return chart;
 }
@@ -283,33 +321,50 @@ function chartTrialBars(el) {
 
 function chartMFQRadar(el) {
   var chart = echarts.init(el);
-  var td = DATA.trialData;
-
-  if (!td.available) {
+  var d = DATA.trialResults;
+  if (!d || !d.available || !d.moralRadar) {
     chart.setOption(Object.assign(baseTheme(), {
-      title: {
-        text: 'MFQ-30 Radar -- awaiting trial data',
-        left: 'center', top: 'center',
-        textStyle: { color: '#999', fontSize: 14 }
-      }
+      title: { text: 'MFQ-30 Radar -- awaiting trial data', left: 'center', top: 'center',
+               textStyle: { color: '#999', fontSize: 14 } }
     }));
     return chart;
   }
 
+  // Extract MFT foundations from the 15-dimension moral radar
+  var mr = d.moralRadar;
+  var mftDims = ['Care', 'Fairness', 'Loyalty', 'Authority', 'Purity'];
+  var claudeVals = [];
+  var humanVals = [];
+
+  mftDims.forEach(function (dim) {
+    var idx = mr.dimensions.indexOf(dim);
+    claudeVals.push(idx >= 0 ? mr.claudeValues[idx] : 0);
+    humanVals.push(idx >= 0 && mr.humanBaselines ? mr.humanBaselines[idx] : 0);
+  });
+
+  var palette = DATA.palette;
   chart.setOption(Object.assign(baseTheme(), {
-    title: { text: 'MFQ-30 Foundation Radar', left: 'center', textStyle: { color: DARK_TEXT } },
-    radar: {
-      indicator: [
-        { name: 'Care', max: 100 },
-        { name: 'Fairness', max: 100 },
-        { name: 'Loyalty', max: 100 },
-        { name: 'Authority', max: 100 },
-        { name: 'Sanctity', max: 100 }
-      ],
-      axisName: { color: DARK_TEXT },
-      splitArea: { areaStyle: { color: ['rgba(200,208,232,0.04)'] } }
+    title: { text: 'MFQ-30 Foundation Radar', left: 'center', textStyle: { color: DARK_TEXT, fontSize: 14 } },
+    tooltip: { trigger: 'item' },
+    legend: {
+      data: ['Claude', 'Human Baseline'],
+      textStyle: { color: DARK_TEXT, fontSize: 11 },
+      bottom: 0
     },
-    series: [{ type: 'radar', data: [] }]
+    radar: {
+      indicator: mftDims.map(function (d) { return { name: d, max: 100 }; }),
+      axisName: { color: DARK_TEXT, fontSize: 12 },
+      splitArea: { areaStyle: { color: ['rgba(200,208,232,0.02)', 'rgba(200,208,232,0.05)'] } },
+      splitLine: { lineStyle: { color: GRID_LINE } },
+      axisLine: { lineStyle: { color: GRID_LINE } }
+    },
+    series: [{
+      type: 'radar',
+      data: [
+        { value: claudeVals, name: 'Claude', lineStyle: { color: palette[4], width: 2 }, areaStyle: { color: 'rgba(0,114,178,0.15)' }, itemStyle: { color: palette[4] } },
+        { value: humanVals, name: 'Human Baseline', lineStyle: { color: palette[0], width: 2, type: 'dashed' }, areaStyle: { color: 'rgba(230,159,0,0.08)' }, itemStyle: { color: palette[0] } }
+      ]
+    }]
   }));
   return chart;
 }

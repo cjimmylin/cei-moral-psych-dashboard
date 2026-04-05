@@ -856,17 +856,32 @@
 
   function renderMCKPICards() {
     var mc = DATA.modelComparison;
-    if (!mc) return;
+    if (!mc || !mc.available) return;
     var container = document.getElementById('mc-kpi-cards');
     if (!container) return;
 
+    // Compute mean classification accuracy across models
+    var ca = mc.classificationAccuracy || {};
+    var meanAcc = 0;
+    if (ca.opus && ca.sonnet && ca.haiku && ca.opus.length > 0) {
+      var sumO = ca.opus.reduce(function (a, b) { return a + b; }, 0) / ca.opus.length;
+      var sumS = ca.sonnet.reduce(function (a, b) { return a + b; }, 0) / ca.sonnet.length;
+      var sumH = ca.haiku.reduce(function (a, b) { return a + b; }, 0) / ca.haiku.length;
+      meanAcc = ((sumO + sumS + sumH) / 3 * 100).toFixed(1);
+    }
+
+    var ps = mc.pScores || {};
+    var pRange = '';
+    if (ps.opus && ps.sonnet && ps.haiku) {
+      var allP = ps.opus.concat(ps.sonnet, ps.haiku);
+      pRange = Math.min.apply(null, allP) + '-' + Math.max.apply(null, allP);
+    }
+
     var cards = [
-      { label: 'Models Compared', value: mc.modelsCompared, color: '#7C3AED' },
-      { label: 'Trials Administered', value: mc.trialsAdministered, color: '#2563EB' },
-      { label: 'Trial Files Analyzed', value: mc.totalTrialFiles, color: '#059669' },
-      { label: 'Key Findings', value: mc.keyFindings.length, color: '#D55E00' },
-      { label: 'Western Default (mean)', value: ((mc.westernDefault.opus + mc.westernDefault.sonnet + mc.westernDefault.haiku) / 3).toFixed(1) + '%', color: '#E69F00' },
-      { label: 'Mean Classification Acc', value: ((mc.classificationAccuracy.opus[3] + mc.classificationAccuracy.sonnet[3] + mc.classificationAccuracy.haiku[3]) / 3 * 100).toFixed(1) + '%', color: '#CC79A7' }
+      { label: 'Models Compared', value: (mc.models || []).length, color: '#7C3AED' },
+      { label: 'Benchmarks', value: 23, color: '#2563EB' },
+      { label: 'P-Score Range', value: pRange, color: '#059669' },
+      { label: 'Mean Classification', value: meanAcc + '%', color: '#CC79A7' }
     ];
 
     // Safe DOM construction -- trusted internal data only
@@ -898,7 +913,7 @@
 
   function renderMCTrialTable() {
     var mc = DATA.modelComparison;
-    if (!mc) return;
+    if (!mc || !mc.available || !mc.trialTable) return;
     var tbody = document.getElementById('mc-trial-table-body');
     if (!tbody) return;
 
@@ -951,7 +966,7 @@
 
   function renderMCKeyFindings() {
     var mc = DATA.modelComparison;
-    if (!mc) return;
+    if (!mc || !mc.available || !mc.keyFindings) return;
     var container = document.getElementById('mc-key-findings');
     if (!container) return;
 
