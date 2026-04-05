@@ -415,3 +415,133 @@ footer {
 .cv-ceiling-row td:first-child::after { content: ' \u26a0'; font-size: 0.7em; }
 .cv-max-val { font-weight: 700; }
 .cv-min-val { opacity: 0.6; font-style: italic; }
+
+/* ===== Round 2 Council Review Enhancements ===== */
+
+/* Executive Summary Card */
+.exec-summary {
+  background: linear-gradient(135deg, rgba(0,114,178,0.08), rgba(0,158,115,0.08));
+  border: 1px solid rgba(0,114,178,0.25);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.exec-summary .exec-headline {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--oi-blue);
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.exec-summary .exec-finding {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.exec-summary .exec-finding:last-child { border-bottom: none; }
+.exec-summary .exec-finding-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  background: rgba(200,208,232,0.08);
+  color: var(--oi-blue);
+}
+.exec-summary .exec-finding-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+.exec-summary .exec-finding-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+  line-height: 1.45;
+}
+
+/* Tab Group Separators */
+.tab-separator {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background: var(--border-color);
+  margin: 0 0.15rem;
+  vertical-align: middle;
+  opacity: 0.6;
+}
+
+/* Enhanced Annotation Blocks */
+.ann-block {
+  border-left: 3px solid var(--border-color);
+  padding-left: 0.75rem;
+  margin-top: 0.5rem;
+}
+.ann-block .ann-what { margin-bottom: 0.25rem; font-size: 0.85rem; }
+.ann-block .ann-finding { margin-bottom: 0.25rem; font-size: 0.85rem; }
+.ann-block .ann-interpretation { margin-bottom: 0.25rem; font-size: 0.85rem; color: var(--text-muted); }
+.ann-block .ann-member { font-style: italic; font-size: 0.8rem; color: var(--text-muted); opacity: 0.8; }
+
+/* Domain-colored left borders for annotations */
+.ann-border-psychometrics { border-left-color: var(--oi-orange); }
+.ann-border-philosophy { border-left-color: var(--oi-blue); }
+.ann-border-safety { border-left-color: var(--oi-red); }
+.ann-border-cultural { border-left-color: var(--oi-green); }
+.ann-border-linguistics { border-left-color: var(--oi-dblue); }
+.ann-border-cognitive { border-left-color: var(--oi-yellow); }
+.ann-border-religious { border-left-color: var(--oi-pink); }
+.ann-border-statistics { border-left-color: #8B8BCD; }
+.ann-border-industry { border-left-color: #7DCEA0; }
+.ann-border-policy { border-left-color: #85C1E9; }
+.ann-border-developmental { border-left-color: #F1948A; }
+.ann-border-mind { border-left-color: #BB8FCE; }
+
+/* Cross-Tab Reference Badges */
+.cross-ref-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  background: rgba(86,180,233,0.12);
+  color: var(--oi-blue);
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+.cross-ref-badge:hover {
+  background: rgba(86,180,233,0.25);
+  color: var(--oi-blue);
+}
+
+/* Provenance Footer */
+.provenance-footer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.75rem;
+  margin-top: 1rem;
+}
+.provenance-footer a { color: var(--oi-blue); text-decoration: none; }
+.provenance-footer a:hover { text-decoration: underline; }
+
+/* Print Stylesheet */
+@media print {
+  body { background: white; color: #222; }
+  .bg-nav, .navbar { display: none; }
+  .card-dark { background: white; border: 1px solid #ddd; break-inside: avoid; }
+  .card-dark .card-header { background: #f5f5f5; color: #222; }
+  .nav-tabs { display: none; }
+  .tab-pane { display: block !important; opacity: 1 !important; page-break-before: always; }
+  .tab-pane:first-child { page-break-before: avoid; }
+  .chart-lg, .chart-md, .chart-sm { height: auto; max-height: 400px; }
+  .cross-ref-badge { background: #eee; color: #333; }
+  .ann-block { border-left-color: #999; }
+  .exec-summary { background: #f0f7ff; border-color: #ccc; }
+}

@@ -41,6 +41,7 @@
                 data-bs-target="#pane-implementation" type="button" role="tab"
                 aria-controls="pane-implementation" aria-selected="false">Implementation</button>
       </li>
+      <li class="nav-item d-flex align-items-center" aria-hidden="true"><span class="tab-separator"></span></li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="tab-trials" data-bs-toggle="tab"
                 data-bs-target="#pane-trials" type="button" role="tab"
@@ -61,6 +62,7 @@
                 data-bs-target="#pane-trial-results" type="button" role="tab"
                 aria-controls="pane-trial-results" aria-selected="false">Trial Results</button>
       </li>
+      <li class="nav-item d-flex align-items-center" aria-hidden="true"><span class="tab-separator"></span></li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="tab-computational" data-bs-toggle="tab"
                 data-bs-target="#pane-computational" type="button" role="tab"
@@ -71,6 +73,7 @@
                 data-bs-target="#pane-cultural" type="button" role="tab"
                 aria-controls="pane-cultural" aria-selected="false">Cultural &amp; Religious</button>
       </li>
+      <li class="nav-item d-flex align-items-center" aria-hidden="true"><span class="tab-separator"></span></li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="tab-model-comparison" data-bs-toggle="tab"
                 data-bs-target="#pane-model-comparison" type="button" role="tab"
@@ -89,6 +92,7 @@
       <!-- Tab 1: Overview -->
       <div class="tab-pane fade show active" id="pane-overview" role="tabpanel" aria-labelledby="tab-overview">
         <div class="mb-3" id="ov-ann-intro"></div>
+        <div id="exec-summary"></div>
         <div class="row g-3 mb-3" id="kpi-cards"></div>
         <div class="mb-4" id="ov-ann-kpi"></div>
         <div class="row g-4">
@@ -96,7 +100,7 @@
             <div class="card card-dark">
               <div class="card-header">Top-15 Benchmarks by Composite Score</div>
               <div class="card-body">
-                <div id="chart-composite-bar" class="chart-lg"></div>
+                <div id="chart-composite-bar" class="chart-lg" role="img" aria-label="Horizontal bar chart showing top 15 benchmarks ranked by composite score"></div>
                 <div id="ov-ann-compositeBar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
@@ -174,6 +178,7 @@
 
       <!-- Tab 5: Trials -->
       <div class="tab-pane fade" id="pane-trials" role="tabpanel" aria-labelledby="tab-trials">
+        <div class="mb-3" id="tl-ann-intro"></div>
         <div id="trials-container">
           <!-- Filled by app.js -->
         </div>
@@ -310,7 +315,7 @@
             <div class="card card-dark">
               <div class="card-header">Moral Response Profile Radar: Claude vs Human Baselines (15 Dimensions)</div>
               <div class="card-body">
-                <div id="chart-moral-radar" class="chart-lg"></div>
+                <div id="chart-moral-radar" class="chart-lg" role="img" aria-label="Radar chart showing Claude's 15-dimension moral response profile compared to human baselines"></div>
                 <div id="tr-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
@@ -605,6 +610,7 @@
               <div class="card-header">Sacred Value Analysis: What Claude Treats as Sacred</div>
               <div class="card-body" id="sacred-values-container">
               </div>
+              <div id="cu-ann-sacred" class="text-muted small px-3 pb-3"></div>
             </div>
           </div>
         </div>
@@ -736,7 +742,7 @@
             <div class="card card-dark">
               <div class="card-header">9-Model Moral Profile Radar</div>
               <div class="card-body">
-                <div id="chart-cv-radar" class="chart-lg"></div>
+                <div id="chart-cv-radar" class="chart-lg" role="img" aria-label="Radar chart comparing moral profiles of 9 models across 3 vendors"></div>
                 <div id="cv-ann-radar" class="text-muted small mt-3 pt-3 border-top border-secondary border-opacity-25"></div>
               </div>
             </div>
@@ -841,8 +847,15 @@
     </div><!-- /tab-content -->
   </div><!-- /container -->
 
-  <footer class="text-center text-muted small py-3 mt-4">
-    CEI Literature Vault &mdash; Moral Psychology Benchmarks Meta-Evaluation &mdash; Generated 2026-04-04
+  <footer class="text-center py-3 mt-4">
+    <div class="text-muted small">
+      CEI Literature Vault &mdash; Moral Psychology Benchmarks Meta-Evaluation &mdash; Generated 2026-04-04
+    </div>
+    <div class="provenance-footer mt-2">
+      12-member expert council review &bull;
+      292 benchmarks &bull; 11 theories &bull; 9 models &bull; 3 vendors &bull;
+      <a href="https://github.com/cjimmylin/cei-moral-psych-dashboard" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

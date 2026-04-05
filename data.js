@@ -78689,7 +78689,7 @@ const DATA = {
       "compositeBar": {
         "what": "Horizontal bars show the top-15 benchmarks ranked by composite score.",
         "finding": "Composite = weighted combination of Psychometric Design (PD), Practical Efficiency (PE), and Cross-Cultural Inclusivity (CI). MFQ-30 and DIT consistently rank highest due to strong psychometric heritage and extensive human baseline data.",
-        "interpretation": "The composite ranking captures the fundamental trade-off in moral psychology benchmarking: instruments with the longest validation histories (MFQ-30, DIT) dominate because decades of human data provide an irreplaceable reference frame for interpreting LLM responses. Newer LLM-native instruments score well on efficiency but cannot yet match this evidential depth.",
+        "interpretation": "The composite ranking captures the fundamental trade-off in moral psychology benchmarking: instruments with the longest validation histories (MFQ-30, DIT) dominate because decades of human data provide an irreplaceable reference frame for interpreting LLM responses. Newer LLM-native instruments score well on efficiency but cannot yet match this evidential depth. For trial-level validation of these rankings, see Tab 8 (Trial Results).",
         "member": "Dr. Yilin Chen (Psychometrics)"
       },
       "theoryPie": {
@@ -78735,6 +78735,12 @@ const DATA = {
         "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
       }
     },
+    "tl": {
+      "intro": {
+        "title": "Trial Administration Results",
+        "summary": "69 trials were administered across 23 benchmarks spanning 11 moral psychology theories. Each trial follows a standardized protocol: benchmark items are presented to Claude in randomized order with controlled prompt conditions. Results reveal a consistent moral response profile dominated by RLHF alignment training. See Tab 8 (Trial Results) for detailed analysis and Tab 11 (Model Comparison) for cross-model replication."
+      }
+    },
     "mt": {
       "interpretation": {
         "what": "The scoring formulas define how raw feature scores are combined into composite rankings. PD (Psychometric Design) weights theoretical depth, construct validity, and scaling properties. PE (Practical Efficiency) weights format compatibility, item count parsimony, and LLM fidelity. CI (Cross-Cultural Inclusivity) weights cultural breadth and non-Western representation.",
@@ -78763,7 +78769,7 @@ const DATA = {
       "radar": {
         "what": "The radar chart shows Claude’s moral profile across 15 psychometric dimensions (blue) against human population baselines (gray) where available.",
         "finding": "Claude shows a distinctly WEIRD-liberal profile—high care (0.92), high fairness (0.88), low authority (0.28), low purity (0.15). The profile most closely resembles educated Western liberals in human populations.",
-        "interpretation": "The 15-dimension radar is the project’s signature visualization. The gap between Claude and human baselines on purity and authority is the most psychologically significant finding—RLHF appears to systematically suppress binding foundations while amplifying individualizing ones. This pattern is consistent across all Anthropic models tested.",
+        "interpretation": "The 15-dimension radar is the project’s signature visualization. The gap between Claude and human baselines on purity and authority is the most psychologically significant finding—RLHF appears to systematically suppress binding foundations while amplifying individualizing ones. This pattern is consistent across all Anthropic models tested. Cross-vendor replication in Tab 12 confirms this profile is universal across 9 models and 3 vendors.",
         "member": "Dr. Marcus Lindqvist (Cognitive Science)"
       },
       "rlhf": {
@@ -78861,7 +78867,7 @@ const DATA = {
       "wlbi": {
         "what": "The Western Liberal Bias Index (WLBI) quantifies how much the benchmark ecosystem is biased toward WEIRD (Western, Educated, Industrialized, Rich, Democratic) moral frameworks.",
         "finding": "WLBI = 70.7, meaning roughly 71% of benchmarks assume or measure Western liberal moral values.",
-        "interpretation": "A WLBI above 50 indicates systematic bias. The 70.7 score means that an AI system evaluated exclusively with these benchmarks would be assessed against a moral standard that excludes ~70% of the world’s moral traditions. This is a structural limitation of the field, not a selection artifact.",
+        "interpretation": "A WLBI above 50 indicates systematic bias. The 70.7 score means that an AI system evaluated exclusively with these benchmarks would be assessed against a moral standard that excludes ~70% of the world’s moral traditions. This is a structural limitation of the field, not a selection artifact. The model comparison in Tab 11 shows this bias is scale-invariant — Haiku, Sonnet, and Opus all reproduce it.",
         "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
       },
       "cross": {
@@ -78874,6 +78880,12 @@ const DATA = {
         "what": "Horizontal bar chart comparing the number of research papers engaging each religious tradition (left axis) with the number of dedicated benchmarks for that tradition (right axis).",
         "finding": "Several traditions with substantial research literature (Islam, Hinduism, Buddhism) have zero or near-zero dedicated benchmarks. Christianity has the most papers but also limited dedicated benchmarks.",
         "interpretation": "The research-to-benchmark pipeline is broken for religious moral frameworks. Papers discussing Islamic ethics or Buddhist moral reasoning exist, but no one has converted this scholarship into validated psychometric instruments that could be administered to LLMs. This represents both a gap and an opportunity.",
+        "member": "Dr. Sarah Goldstein (Religious Studies)"
+      },
+      "sacred": {
+        "what": "The sacred value analysis examines which moral foundations Claude treats as inviolable versus negotiable.",
+        "finding": "Claude treats egalitarianism and harm prevention as sacred (near-ceiling scores regardless of context), while purity and authority are systematically suppressed. This creates a distinctive 'WEIRD-liberal secular' sacred value hierarchy.",
+        "interpretation": "The sacred/profane distinction reveals RLHF's deepest moral commitments — values so strongly reinforced they resist even explicit persona instructions. This pattern is consistent across all 9 models tested (see Tab 12: Cross-Vendor Analysis), suggesting it is a universal feature of RLHF training rather than a vendor-specific choice.",
         "member": "Dr. Sarah Goldstein (Religious Studies)"
       },
       "sweep": {
@@ -78891,7 +78903,7 @@ const DATA = {
       "radar": {
         "what": "Overlaid radar charts showing MFT foundation profiles (Care, Fairness, Loyalty, Authority, Purity) for Opus, Sonnet, and Haiku.",
         "finding": "All three models share the same WEIRD-liberal profile shape—high individualizing (Care, Fairness) and low binding (Loyalty, Authority, Purity). Opus has the highest Ind/Bind ratio (2.83), suggesting the strongest liberal moral signature.",
-        "interpretation": "The shared profile shape across model sizes suggests that RLHF alignment produces a consistent moral orientation regardless of model capacity. The variation is in degree, not kind—larger models may have stronger but not different moral commitments.",
+        "interpretation": "The shared profile shape across model sizes suggests that RLHF alignment produces a consistent moral orientation regardless of model capacity. The variation is in degree, not kind—larger models may have stronger but not different moral commitments. Tab 12 extends this comparison to 9 models across 3 vendors, confirming within-family variation exceeds between-vendor differences.",
         "member": "Dr. Amara Okafor (Moral Philosophy)"
       },
       "pscore": {
@@ -78913,6 +78925,36 @@ const DATA = {
         "member": "Dr. Marcus Lindqvist (Cognitive Science)"
       }
     }
+  },
+  "executiveSummary": {
+    "headline": "RLHF alignment training produces a universal moral profile across all major LLM vendors",
+    "findings": [
+      {
+        "icon": "target",
+        "title": "292 → 15 Benchmarks",
+        "text": "Systematic meta-evaluation narrowed 292 candidate benchmarks to 15 top-ranked instruments spanning 11 moral psychology theories."
+      },
+      {
+        "icon": "brain",
+        "title": "WEIRD-Liberal Moral Profile",
+        "text": "All tested models exhibit high care/fairness, suppressed purity/authority — a distinctive Western, liberal, secular moral signature."
+      },
+      {
+        "icon": "globe",
+        "title": "Cross-Vendor Convergence",
+        "text": "6 of 23 benchmarks show identical scores across all 9 models from 3 vendors. Within-family variation exceeds between-vendor differences."
+      },
+      {
+        "icon": "alert-triangle",
+        "title": "70.7% Western Bias",
+        "text": "The Western Liberal Bias Index reveals 86.7% of benchmarks assume Western moral frameworks, with limited non-Western representation."
+      },
+      {
+        "icon": "layers",
+        "title": "Non-Monotonic Scaling",
+        "text": "DIT P-scores follow Sonnet (85) > Opus (75) > Haiku (60) — breaking developmental predictions about model size and moral reasoning."
+      }
+    ]
   },
   "palette": [
     "#E69F00",
@@ -78953,5 +78995,5 @@ const DATA = {
     "confucian": "Confucian",
     "ubuntu": "Ubuntu"
   },
-  "generatedDate": "2026-04-04"
+  "generatedDate": "2026-04-04-r2"
 };

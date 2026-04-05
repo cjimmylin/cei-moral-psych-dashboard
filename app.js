@@ -1263,6 +1263,59 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Executive Summary (Overview Tab)
+  // ---------------------------------------------------------------------------
+
+  function renderExecutiveSummary() {
+    var container = document.getElementById('exec-summary');
+    if (!container) return;
+    var es = DATA.executiveSummary;
+    if (!es) return;
+
+    var iconChars = {
+      'target': '\u25CE', 'brain': '\u2699', 'globe': '\u2641',
+      'alert-triangle': '\u26A0', 'layers': '\u2630'
+    };
+
+    var frag = document.createDocumentFragment();
+    var card = document.createElement('div');
+    card.className = 'exec-summary';
+
+    var headline = document.createElement('div');
+    headline.className = 'exec-headline';
+    headline.textContent = es.headline;
+    card.appendChild(headline);
+
+    (es.findings || []).forEach(function (f) {
+      var row = document.createElement('div');
+      row.className = 'exec-finding';
+
+      var icon = document.createElement('div');
+      icon.className = 'exec-finding-icon';
+      icon.textContent = iconChars[f.icon] || '\u2022';
+      row.appendChild(icon);
+
+      var content = document.createElement('div');
+      var title = document.createElement('div');
+      title.className = 'exec-finding-title';
+      title.textContent = f.title;
+      content.appendChild(title);
+
+      var text = document.createElement('div');
+      text.className = 'exec-finding-text';
+      text.textContent = f.text;
+      content.appendChild(text);
+
+      row.appendChild(content);
+      card.appendChild(row);
+    });
+
+    frag.appendChild(card);
+    container.textContent = '';
+    container.appendChild(frag);
+  }
+
+  // ---------------------------------------------------------------------------
   // Tabs 1-11: Generic Expert Council Annotations
   // ---------------------------------------------------------------------------
 
@@ -1309,31 +1362,122 @@
   // Tab 12: Expert Council Annotations
   // ---------------------------------------------------------------------------
 
+  // Domain-to-CSS-class mapping for annotation border colors
+  var MEMBER_DOMAIN_MAP = {
+    'Psychometrics': 'psychometrics',
+    'Moral Philosophy': 'philosophy',
+    'Normative Ethics': 'philosophy',
+    'AI Safety': 'safety',
+    'Alignment': 'safety',
+    'Cross-Cultural': 'cultural',
+    'Computational Linguistics': 'linguistics',
+    'NLP': 'linguistics',
+    'Cognitive Science': 'cognitive',
+    'Dual-Process': 'cognitive',
+    'Religious Studies': 'religious',
+    'Comparative Theology': 'religious',
+    'Statistical': 'statistics',
+    'AI Industry': 'industry',
+    'Vendor': 'industry',
+    'Policy': 'policy',
+    'Governance': 'policy',
+    'Developmental': 'developmental',
+    'Philosophy of Mind': 'mind',
+    'Consciousness': 'mind'
+  };
+
+  function _getDomainClass(memberStr) {
+    if (!memberStr) return '';
+    var keys = Object.keys(MEMBER_DOMAIN_MAP);
+    for (var i = 0; i < keys.length; i++) {
+      if (memberStr.indexOf(keys[i]) !== -1) {
+        return 'ann-border-' + MEMBER_DOMAIN_MAP[keys[i]];
+      }
+    }
+    return '';
+  }
+
+  function _addCrossRefLinks(textNode) {
+    var text = textNode.textContent;
+    var tabMap = {
+      'Tab 1': 'tab-overview', 'Tab 2': 'tab-features', 'Tab 3': 'tab-heatmap',
+      'Tab 4': 'tab-implementation', 'Tab 5': 'tab-trials', 'Tab 6': 'tab-methods',
+      'Tab 7': 'tab-ranking', 'Tab 8': 'tab-trial-results', 'Tab 9': 'tab-computational',
+      'Tab 10': 'tab-cultural', 'Tab 11': 'tab-model-comparison', 'Tab 12': 'tab-cross-vendor'
+    };
+    var pattern = /Tab (\d{1,2})(?:\s*\([^)]+\))?/g;
+    var match;
+    var parts = [];
+    var lastIdx = 0;
+    while ((match = pattern.exec(text)) !== null) {
+      var tabRef = 'Tab ' + match[1];
+      var tabId = tabMap[tabRef];
+      if (!tabId) continue;
+      if (match.index > lastIdx) {
+        parts.push({ type: 'text', value: text.slice(lastIdx, match.index) });
+      }
+      parts.push({ type: 'link', tabId: tabId, label: match[0] });
+      lastIdx = match.index + match[0].length;
+    }
+    if (parts.length === 0) return;
+    if (lastIdx < text.length) {
+      parts.push({ type: 'text', value: text.slice(lastIdx) });
+    }
+    textNode.textContent = '';
+    parts.forEach(function (part) {
+      if (part.type === 'text') {
+        textNode.appendChild(document.createTextNode(part.value));
+      } else {
+        var badge = document.createElement('a');
+        badge.className = 'cross-ref-badge';
+        badge.href = '#';
+        badge.textContent = part.label;
+        badge.setAttribute('data-tab-id', part.tabId);
+        badge.addEventListener('click', function (e) {
+          e.preventDefault();
+          var tid = this.getAttribute('data-tab-id');
+          var tabBtn = document.getElementById(tid);
+          if (tabBtn) {
+            var bsTab = new bootstrap.Tab(tabBtn);
+            bsTab.show();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+        textNode.appendChild(badge);
+      }
+    });
+  }
+
   function _annBlock(container, what, finding, interpretation, member) {
-    // Safe DOM construction for chart annotations
+    var block = document.createElement('div');
+    block.className = 'ann-block ' + _getDomainClass(member);
+
     var whatP = document.createElement('p');
-    whatP.className = 'mb-1';
+    whatP.className = 'ann-what mb-1';
     whatP.textContent = what;
 
     var findP = document.createElement('p');
-    findP.className = 'mb-1';
+    findP.className = 'ann-finding mb-1';
     var strong = document.createElement('strong');
     strong.textContent = finding;
     findP.appendChild(strong);
 
     var interpP = document.createElement('p');
-    interpP.className = 'mb-1';
+    interpP.className = 'ann-interpretation mb-1';
     interpP.textContent = interpretation;
+    _addCrossRefLinks(interpP);
 
     var memberP = document.createElement('p');
-    memberP.className = 'fst-italic mb-0';
+    memberP.className = 'ann-member mb-0';
     memberP.textContent = member;
 
+    block.appendChild(whatP);
+    block.appendChild(findP);
+    block.appendChild(interpP);
+    block.appendChild(memberP);
+
     container.textContent = '';
-    container.appendChild(whatP);
-    container.appendChild(findP);
-    container.appendChild(interpP);
-    container.appendChild(memberP);
+    container.appendChild(block);
   }
 
   function renderCVAnnotations() {
@@ -1591,6 +1735,7 @@
   // ---------------------------------------------------------------------------
 
   function init() {
+    renderExecutiveSummary();
     renderKPICards();
     renderFeatureTable();
     renderMethods();

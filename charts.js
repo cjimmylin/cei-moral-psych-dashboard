@@ -13,6 +13,21 @@ function baseTheme() {
   return {
     textStyle: { color: DARK_TEXT, fontFamily: 'Inter, sans-serif' },
     backgroundColor: DARK_BG,
+    toolbox: {
+      show: true,
+      right: 10,
+      top: 0,
+      iconStyle: { borderColor: 'rgba(200,208,232,0.35)' },
+      emphasis: { iconStyle: { borderColor: '#56B4E9' } },
+      feature: {
+        saveAsImage: {
+          show: true,
+          title: 'Save',
+          pixelRatio: 2,
+          backgroundColor: '#0f0f1a'
+        }
+      }
+    },
   };
 }
 
@@ -791,8 +806,11 @@ function chartMoralRadar(el) {
       trigger: 'item',
       formatter: function (params) {
         var tip = '<b>' + params.seriesName + '</b><br/>';
+        var otherVals = params.seriesName === 'Claude Opus 4.6' ? mr.humanBaselines : mr.claudeValues;
+        var otherLabel = params.seriesName === 'Claude Opus 4.6' ? 'Human' : 'Claude';
         params.value.forEach(function (v, i) {
-          tip += mr.dimensions[i] + ': ' + v + '<br/>';
+          var diff = otherVals && otherVals[i] != null ? ' (\u0394' + (v - otherVals[i]).toFixed(1) + ')' : '';
+          tip += mr.dimensions[i] + ': ' + v + diff + '<br/>';
         });
         return tip;
       }
