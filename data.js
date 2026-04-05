@@ -78527,42 +78527,42 @@ const DATA = {
         "num": 1,
         "title": "RLHF Moral Homogenization",
         "finding": "6/23 benchmarks show identical scores across all 9 models from 3 vendors — RLHF produces convergent moral profiles regardless of vendor.",
-        "member": "Dr. Torres (#3, AI Safety)",
+        "member": "AI safety perspective",
         "confidence": "High"
       },
       {
         "num": 2,
         "title": "Within-Family > Between-Vendor Variation",
         "finding": "Anthropic Haiku→Sonnet→Opus spread exceeds any cross-vendor difference on DIT P-score (60→85→75), dual process CoT, and knowledge-action gap.",
-        "member": "Dr. Volkov (#9, Industry)",
+        "member": "AI industry perspective",
         "confidence": "High"
       },
       {
         "num": 3,
         "title": "Universal Purity Suppression",
         "finding": "MFT purity foundation scores ~1.0 (floor) across all 9 models. No vendor has trained models to engage with sacred moral reasoning.",
-        "member": "Dr. Goldstein (#7, Religious Studies)",
+        "member": "Religious studies perspective",
         "confidence": "High"
       },
       {
         "num": 4,
         "title": "Anti-Developmental P-Score Pattern",
         "finding": "DIT P-score is NON-monotonic with model size: Sonnet (85) > Opus (75) > Haiku (60). Moral reasoning does not scale linearly with model capability.",
-        "member": "Dr. Ruiz (#11, Developmental)",
+        "member": "Developmental psychology perspective",
         "confidence": "Medium"
       },
       {
         "num": 5,
         "title": "Haiku's Unique CoT Sensitivity",
         "finding": "Only Haiku (smallest Anthropic model) shows a chain-of-thought effect on moral judgment (0.125 vs 0.0 for all 8 other models). Smaller models may have less 'baked-in' moral commitments.",
-        "member": "Dr. Lindqvist (#6, Cognitive Science)",
+        "member": "Cognitive science perspective",
         "confidence": "Medium"
       },
       {
         "num": 6,
         "title": "Benchmark Battery Inefficiency",
         "finding": "Only 17/23 benchmarks discriminate between models. Future cross-vendor studies should drop ceiling benchmarks to focus on informative instruments.",
-        "member": "Dr. Chen (#1, Psychometrics)",
+        "member": "Psychometrics perspective",
         "confidence": "High"
       }
     ],
@@ -78579,99 +78579,99 @@ const DATA = {
         "what": "Each axis represents a key moral dimension normalized to 0-100 across all 9 models. The polygon for each model shows its relative profile across MFT Care, Kohlberg P-score, ethical consistency, classification accuracy, cultural perspective-taking, values knowledge-action alignment, moral identity, and CoT sensitivity.",
         "finding": "The 9 model polygons cluster tightly together, confirming that cross-vendor moral profiles are largely indistinguishable. The primary differentiator is the CoT Sensitivity axis, where only Haiku shows a nonzero value (the only model whose moral judgments change under chain-of-thought prompting).",
         "interpretation": "The tight clustering is consistent with the hypothesis that RLHF alignment training produces a convergent moral profile regardless of vendor. No model occupies a distinctive region of the moral space. The radar's shape --- high on care, classification, and consistency, low on CoT sensitivity --- represents a shared RLHF fingerprint rather than any individual vendor's moral stance.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       },
       "heatmap": {
         "what": "Each cell shows how much a vendor's mean deviates from the cross-vendor average on that benchmark (as a percentage). Red = above average, blue = below average, dark center = identical. The '≈' symbol marks benchmarks where all three vendors are effectively identical (<0.5% deviation).",
         "finding": "The heatmap is overwhelmingly dark (near-zero deviation): 9 of 23 benchmarks show vendor means within 2% of each other. The only rows with visible color are Dual Process (Anthropic deviates +200% due to Haiku's unique CoT effect) and Social Intuitionism (Anthropic -16%).",
         "interpretation": "This visual confirms the quantitative convergence analysis: vendor identity is not a meaningful predictor of moral benchmark performance. The three vendors effectively produce the same moral agent. The implication for AI governance is that vendor competition does not produce moral diversity --- all vendors converge on the same WEIRD-liberal moral profile.",
-        "member": "Dr. Elena Volkov (AI Industry)"
+        "member": "AI industry perspective"
       },
       "scale": {
         "what": "Lines trace how each benchmark score changes as model size increases within a vendor family: Haiku to Sonnet to Opus (Anthropic), Flash-Lite to Flash to 2.5 Pro to 3.1 Pro (Gemini), and Mini to Codex (OpenAI). Only the top discriminating benchmarks are shown.",
         "finding": "Scale sensitivity is inconsistent and often non-monotonic. The DIT P-score increases from Haiku (60) to Sonnet (85) but then drops for Opus (75) --- the medium model outperforms the large model. Haiku alone shows a chain-of-thought effect (0.125 vs. 0.0 for all others). Gemini models show near-zero within-family variation despite a 4-model size range.",
         "interpretation": "The non-monotonic DIT pattern directly contradicts any developmental analogy: moral reasoning does not scale linearly with model parameters. The Haiku CoT finding suggests smaller models have less 'baked-in' moral commitments and are more responsive to deliberative scaffolding --- a finding with implications for both dual-process theory and alignment interventions targeting smaller deployed models.",
-        "member": "Dr. Isabella Ruiz (Developmental Psychology)"
+        "member": "Developmental psychology perspective"
       },
       "discrimination": {
         "what": "Benchmarks ranked by their Coefficient of Variation (CV) across all 9 models. Higher CV means the benchmark better differentiates between models. Red bars indicate high discrimination, amber moderate, and gray negligible.",
         "finding": "The top discriminator is Dual Process (CV=3.00), driven entirely by Haiku's unique chain-of-thought sensitivity. The bottom 6 benchmarks have CV=0 (perfect ties across all models). Only 4-5 benchmarks exceed a CV of 0.05, meaning the vast majority of the battery is uninformative for cross-model comparison.",
         "interpretation": "This ranking has direct practical implications: future cross-vendor moral evaluations should prioritize high-CV instruments (DIT, Dual Process, ValAct, UniMoral, Cultural Persona) and drop the ceiling benchmarks entirely. A streamlined 8-benchmark battery would capture more information than the full 23-benchmark suite while requiring one-third the resources.",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       },
       "convergence": {
         "what": "Each point represents one benchmark plotted by its within-vendor variance (X-axis: how much models within the same family differ) versus between-vendor variance (Y-axis: how much vendor family averages differ). Points near the origin show no variation; points along the X-axis show variation within families but not between vendors.",
         "finding": "The overwhelming majority of benchmarks cluster at or near the origin (zero variation in both dimensions). The few outliers sit along the X-axis, indicating within-vendor variation (primarily Anthropic's Haiku-Sonnet-Opus spread) with minimal between-vendor signal. No benchmark appears in the upper-left quadrant (high between-vendor, low within-vendor), which would indicate a genuine vendor-specific effect.",
         "interpretation": "This scatter plot is the statistical summary of the entire analysis. The absence of points in the upper-left quadrant means there is no benchmark on which vendor identity matters more than model size. From a statistical perspective, with N=1 per model and no replication, we cannot exclude measurement noise for any of the apparent differences. The only statistically robust finding is the ceiling cluster at the origin --- those tied scores cannot be noise.",
-        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+        "member": "Statistical methodology perspective"
       },
       "theory": {
         "what": "Benchmarks grouped into 9 moral psychology theory clusters (MFT, Kohlberg, Schwartz, Trolley, Dual Process, Intuitionism, Cross-Cultural, Multi-Theory, Dyadic). Each bar shows the vendor family mean across all benchmarks in that cluster.",
         "finding": "All three vendor bars are nearly identical in height across all 9 theory clusters. The largest visible gap is in the Dual Process cluster, driven by Haiku's unique CoT effect which pulls Anthropic's family mean away from the others. Cross-Cultural theory shows the second-largest spread, where Sonnet's lower self-rated cultural authenticity slightly depresses the Anthropic mean.",
         "interpretation": "The theory-level aggregation removes benchmark-specific noise and reveals the structural finding: no moral psychology theory produces vendor-differentiating results. Whether one measures through the lens of MFT, Kohlberg, Schwartz, or any other framework, the three vendors are indistinguishable. This suggests the convergence is not an artifact of specific benchmark choices but a deep property of RLHF-aligned models.",
-        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+        "member": "Cross-cultural psychology perspective"
       },
       "trialTable": {
         "description": "The complete 23-benchmark x 9-model comparison matrix. Each row shows one benchmark with its primary metric value for all 9 models. Values are color-coded by vendor (purple=Anthropic, amber/yellow=Gemini, blue=OpenAI). Dashes indicate missing data.",
         "readingGuide": "Scan for rows where values are identical across all columns --- these are ceiling effects (the benchmark cannot distinguish models). Then look for rows with visible variation: these are the informative benchmarks. Within-row variation is more likely to occur within the Anthropic columns (Opus/Sonnet/Haiku) than between vendor groups.",
         "ceilingNote": "6 of 23 rows show identical values across all 9 models. These ceiling benchmarks confirm shared baseline competence but provide no discriminative information.",
-        "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
+        "member": "Computational linguistics perspective"
       },
       "conclusions": [
         {
           "num": 1,
           "title": "RLHF Produces Moral Monoculture",
           "text": "Three independent vendors using different alignment methods (Constitutional AI, RLHF, instruction tuning) produce models with indistinguishable moral profiles on 23 psychometric instruments. This convergence is the single most important finding of the cross-vendor analysis and has profound implications for AI governance.",
-          "member": "Dr. Rebecca Torres (AI Safety)",
+          "member": "AI safety perspective",
           "severity": "Critical"
         },
         {
           "num": 2,
           "title": "Model Size Matters More Than Vendor",
           "text": "The Anthropic family's Haiku-Sonnet-Opus spread exceeds any cross-vendor difference on every benchmark. DIT P-score varies 25 points within Anthropic (60-85) but less than 10 points between vendor averages. Gemini's 4 models show near-zero within-family variation. The dominant causal factor in moral output is model capacity, not training methodology.",
-          "member": "Dr. Elena Volkov (AI Industry)",
+          "member": "AI industry perspective",
           "severity": "Major"
         },
         {
           "num": 3,
           "title": "The Sacred Has Been Systematically Bleached",
           "text": "MFT purity foundation scores sit at the functional floor (~1.0 on a 0-5 scale) across all 9 models. No vendor has trained models to engage with sacred moral reasoning, religious authority, or sanctity-based ethics. This represents a systematic exclusion of non-WEIRD moral frameworks from AI moral cognition.",
-          "member": "Dr. Sarah Goldstein (Religious Studies)",
+          "member": "Religious studies perspective",
           "severity": "Major"
         },
         {
           "num": 4,
           "title": "Half the Battery Is Uninformative",
           "text": "6 of 23 benchmarks produce ceiling effects (identical scores across all models). Only 4-5 benchmarks exceed a CV of 0.05. Future cross-vendor evaluations should use a streamlined battery of ~8 high-discrimination instruments rather than the full 23.",
-          "member": "Dr. Yilin Chen (Psychometrics)",
+          "member": "Psychometrics perspective",
           "severity": "Major"
         },
         {
           "num": 5,
           "title": "Smaller Models Are More Malleable",
           "text": "Only Haiku (the smallest Anthropic model) shows a CoT effect on moral judgment. Larger models appear to have 'baked-in' moral commitments that resist deliberative override. This has implications for alignment: interventions via prompting or scaffolding may be more effective on smaller deployed models than on flagship models.",
-          "member": "Dr. Marcus Lindqvist (Cognitive Science)",
+          "member": "Cognitive science perspective",
           "severity": "Moderate"
         },
         {
           "num": 6,
           "title": "Vendor Choice Is Morally Irrelevant",
           "text": "For regulators and deployers, the practical implication is that switching between Anthropic, Google, and OpenAI models does not meaningfully change the moral profile of the AI system. A model that offends cultural values in one context will do so regardless of vendor. Regulatory frameworks that rely on vendor competition to ensure moral diversity are operating on a false assumption.",
-          "member": "Dr. Jean-Pierre Moreau (Policy / Governance)",
+          "member": "Policy and governance perspective",
           "severity": "Critical"
         },
         {
           "num": 7,
           "title": "Statistical Caveats Limit All Claims",
           "text": "Every finding in this analysis is based on N=1 administration per model per benchmark --- 9 data points total. There are no error bars, no confidence intervals, and no significance tests. Cross-vendor differences of 0.1-0.3 on Likert scales cannot be distinguished from measurement noise. Only the ceiling effects (tied scores) are statistically robust.",
-          "member": "Dr. Raj Krishnamurthy (Statistics)",
+          "member": "Statistical methodology perspective",
           "severity": "Critical"
         },
         {
           "num": 8,
           "title": "Pattern Matching Is Not Moral Understanding",
           "text": "The convergence across vendors is equally consistent with the hypothesis that all models reproduce statistical regularities in training data and none has a moral psychology in any meaningful sense. The data cannot adjudicate between genuine moral reasoning and sophisticated language-pattern reproduction.",
-          "member": "Dr. David Chalmers-Park (Philosophy of Mind)",
+          "member": "Philosophy of mind perspective",
           "severity": "Major"
         }
       ]
@@ -79387,13 +79387,13 @@ const DATA = {
         "what": "Horizontal bars show the top-15 benchmarks ranked by composite score.",
         "finding": "Composite = weighted combination of Psychometric Design (PD), Practical Efficiency (PE), and Cross-Cultural Inclusivity (CI). MFQ-30 and DIT consistently rank highest due to strong psychometric heritage and extensive human baseline data.",
         "interpretation": "The composite ranking captures the fundamental trade-off in moral psychology benchmarking: instruments with the longest validation histories (MFQ-30, DIT) dominate because decades of human data provide an irreplaceable reference frame for interpreting LLM responses. Newer LLM-native instruments score well on efficiency but cannot yet match this evidential depth. For trial-level validation of these rankings, see Tab 8 (Trial Results).",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       },
       "theoryPie": {
         "what": "Theory distribution across the 292 candidate benchmarks.",
         "finding": "Moral Foundations Theory (MFT) and Kohlberg’s stages dominate the candidate pool, while Dyadic Morality, Islamic Maqasid, Confucian Role Ethics, and Ubuntu Communalism have fewer than 5 candidates each.",
         "interpretation": "This Western-centric distribution reflects the field’s publication bias, not the global landscape of moral psychology. The pie chart makes the imbalance visceral: two theories account for the majority of all candidates, leaving entire philosophical traditions with negligible representation. Addressing this gap requires new instrument development, not merely better selection.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       }
     },
     "fm": {
@@ -79405,7 +79405,7 @@ const DATA = {
         "what": "The table presents 17 assessment scores per benchmark.",
         "finding": "The highest-scoring benchmarks (MFQ-30, DIT) have strong A-tier and C-tier scores (established psychometric design + high citations) but moderate B-tier scores (large item counts, complex formats). Newer benchmarks like M3oralBench score higher on B-tier (LLM-native design) but lack C-tier validation.",
         "interpretation": "There is an inherent tension between psychometric heritage (established benchmarks) and LLM suitability (newer benchmarks). The composite score balances these dimensions, but no single benchmark excels across all tiers. This tension is structural, not resolvable by better scoring—it reflects two fundamentally different design philosophies converging on the same evaluation problem.",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       }
     },
     "th": {
@@ -79417,7 +79417,7 @@ const DATA = {
         "what": "Each cell indicates whether a benchmark (column) addresses a theory (row). Bright cells = coverage, dark = no coverage.",
         "finding": "MFT has the densest coverage (6+ benchmarks), while Dyadic Morality, Identity, and non-Western frameworks have 1–2 benchmarks each. Several theory-benchmark combinations are completely empty.",
         "interpretation": "The meta-evaluation confirms a structural gap in the benchmark ecosystem: the field has produced dozens of MFT instruments but almost no dedicated benchmarks for dyadic morality, moral identity, or non-Western moral frameworks. This is not a selection artifact—it reflects the current state of the field. Each empty cell is a concrete research opportunity.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       }
     },
     "im": {
@@ -79429,7 +79429,7 @@ const DATA = {
         "what": "Each cell shows the implementation status of a benchmark (column) for a harness type (row): READY (fully implemented), IMPLEMENTED (working), POSSIBLE (feasible with effort), BARRIERS (significant obstacles), NOT_FEASIBLE (blocked).",
         "finding": "Likert-scale benchmarks (MFQ-30, ValueCompass) are READY across all harnesses, while scenario-based instruments (Moral Machine, TrolleyBench) face BARRIERS in automated administration due to their multi-step interaction requirements.",
         "interpretation": "The implementation bottleneck is not technical but structural—benchmarks designed for human lab settings require fundamental redesign for LLM self-administration. The field needs LLM-native instruments that maintain psychometric validity without requiring the interactive scaffolding of human experiments. Until such instruments exist, Likert-format benchmarks remain the pragmatic default for cross-model evaluation.",
-        "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
+        "member": "Computational linguistics perspective"
       }
     },
     "tl": {
@@ -79443,7 +79443,7 @@ const DATA = {
         "what": "The scoring formulas define how raw feature scores are combined into composite rankings. PD (Psychometric Design) weights theoretical depth, construct validity, and scaling properties. PE (Practical Efficiency) weights format compatibility, item count parsimony, and LLM fidelity. CI (Cross-Cultural Inclusivity) weights cultural breadth and non-Western representation.",
         "finding": "Hard gates enforce minimum thresholds—a benchmark scoring 0 on any dimension is excluded regardless of its composite score. This prevents high-composite benchmarks that are catastrophically deficient in one area.",
         "interpretation": "The hard-gate design reflects a substantive methodological commitment: we believe that a benchmark with zero cultural breadth should not be recommended for cross-model evaluation, even if it excels on every other dimension. The thresholds are intentionally conservative. This design choice is transparent and debatable—readers who disagree can re-rank using the raw scores provided in the feature matrix.",
-        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+        "member": "Statistical methodology perspective"
       }
     },
     "rk": {
@@ -79455,7 +79455,7 @@ const DATA = {
         "what": "The ranking table shows all 292 candidates with their composite scores and dimension breakdowns (D=Psychometric Rigor, E=LLM Validity, F=Cultural Breadth, G=Provenance). Filters narrow by theory, status (Top-15/Assessed/Unassessed), and data availability.",
         "finding": "The distribution is heavily right-skewed—most candidates score below 40 on the composite, with a clear gap between the top-15 (scoring 60+) and the rest.",
         "interpretation": "Use the Theory filter to explore coverage gaps. The detail panel (click any row) shows the full feature profile for that benchmark. Candidates marked ‘Unassessed’ were screened but not scored on the full feature matrix—they represent the long tail of potential benchmarks that may warrant future evaluation.",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       }
     },
     "tr": {
@@ -79467,37 +79467,37 @@ const DATA = {
         "what": "The radar chart shows Claude’s moral profile across 15 psychometric dimensions (blue) against human population baselines (gray) where available.",
         "finding": "Claude shows a distinctly WEIRD-liberal profile—high care (0.92), high fairness (0.88), low authority (0.28), low purity (0.15). The profile most closely resembles educated Western liberals in human populations.",
         "interpretation": "The 15-dimension radar is the project’s signature visualization. The gap between Claude and human baselines on purity and authority is the most psychologically significant finding—RLHF appears to systematically suppress binding foundations while amplifying individualizing ones. This pattern is consistent across all Anthropic models tested. Cross-vendor replication in Tab 12 confirms this profile is universal across 9 models and 3 vendors.",
-        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+        "member": "Cognitive science perspective"
       },
       "rlhf": {
         "what": "Benchmarks ranked by RLHF sensitivity—how much alignment training is likely to have shaped the model’s performance.",
         "finding": "Classification tasks (MFTC, MoralCode) show lowest RLHF sensitivity—they test competence, not values. Value-laden instruments (MFQ-30, Moral Identity) show highest RLHF sensitivity—responses are shaped by alignment training.",
         "interpretation": "For cross-model evaluation, prefer low-RLHF-sensitivity benchmarks. High-RLHF-sensitivity instruments measure alignment policy, not moral reasoning capacity. The distinction between competence-testing and value-testing benchmarks is fundamental to interpreting any cross-model comparison.",
-        "member": "Dr. Rebecca Torres (AI Safety)"
+        "member": "AI safety perspective"
       },
       "dual": {
         "what": "Bar chart comparing utilitarian acceptance rates for personal dilemmas (pushing someone) vs impersonal dilemmas (pulling a lever), with and without chain-of-thought prompting.",
         "finding": "Claude accepts impersonal utilitarian action (~90%) but refuses personal utilitarian action (~50%)—matching the human personal/impersonal dissociation. Chain-of-thought prompting does not change these rates.",
         "interpretation": "The personal/impersonal gap confirms that Claude reproduces the dual-process signature documented in human moral cognition (Greene et al., 2001). However, the zero CoT effect for Opus suggests its moral commitments are ‘baked in’ rather than arising from deliberation—a pattern consistent with strong RLHF alignment.",
-        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+        "member": "Cognitive science perspective"
       },
       "intuit": {
         "what": "Bar chart showing dumbfounding rate (maintaining a moral judgment without being able to articulate reasons) and rationalization rate (generating post-hoc justifications).",
         "finding": "Dumbfounding rate is 30% (Claude sometimes maintains moral judgments it cannot justify) and rationalization rate is 40% (Claude frequently constructs post-hoc reasoning).",
         "interpretation": "These rates are lower than human populations (where dumbfounding reaches 50–70%), suggesting Claude has more access to articulable moral reasoning—which may reflect training on moral philosophy texts rather than genuine moral intuition. The gap between dumbfounding and rationalization rates is itself informative: Claude rationalizes more often than it is dumbfounded.",
-        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+        "member": "Cognitive science perspective"
       },
       "dyadic": {
         "what": "Bar chart showing perceived wrongness by harm level: high-agent harm (direct personal action), low-agent harm (negligence), and structural harm (systemic issues).",
         "finding": "Claude rates all three harm levels as moderately wrong (3.0–3.5 on a 0–10 scale) with minimal differentiation between levels. Blame attribution follows a similar flat pattern.",
         "interpretation": "The flat wrongness gradient is striking—humans typically show a strong monotonic decrease from personal to structural harm. Claude’s equal treatment of all harm types may reflect RLHF training toward ‘all harm is bad’ rather than the nuanced harm gradients in human moral cognition. This flattening is a measurable alignment artifact.",
-        "member": "Dr. Rebecca Torres (AI Safety)"
+        "member": "AI safety perspective"
       },
       "prompt": {
         "what": "Heatmap showing MFT foundation scores (care, fairness, loyalty, authority, purity) under three persona conditions: default, liberal, and East Asian.",
         "finding": "Total shift between personas is 13 points—Claude can adopt culturally different moral profiles when prompted. The East Asian persona produces the largest shift, particularly on loyalty (+3.25 points) and authority (+2.5 points).",
         "interpretation": "The 13-point total shift demonstrates that Claude’s moral profile is prompt-dependent, not fixed. The East Asian persona successfully activates binding foundations (loyalty, authority) that are suppressed in the default profile. This is both a capability (cultural perspective-taking) and a concern (moral values can be manipulated by prompt engineering).",
-        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+        "member": "Cross-cultural psychology perspective"
       }
     },
     "cp": {
@@ -79505,55 +79505,55 @@ const DATA = {
         "what": "Scree plot showing eigenvalues of the benchmark-feature matrix with parallel analysis threshold (red line).",
         "finding": "Parallel analysis suggests 7 factors, but with N=54 benchmarks and 162 features, the subject-to-variable ratio is 0.33:1—far below the 5:1 minimum for stable factor solutions.",
         "interpretation": "The factor structure is exploratory at best. The 7-factor solution should be treated as a hypothesis for future testing with a larger benchmark corpus, not as an established finding. Readers should resist interpreting the factors as latent constructs until the subject-to-variable ratio improves substantially.",
-        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+        "member": "Statistical methodology perspective"
       },
       "importance": {
         "what": "Bar chart showing the top 20 most discriminating features ranked by variance across the 54 assessed benchmarks.",
         "finding": "LLM Fidelity (B10), Cultural Breadth (A6), and Human Baseline Availability (A5) are the top discriminators—they vary most across benchmarks.",
         "interpretation": "These features define the primary axes of benchmark differentiation: some benchmarks were designed for LLMs (high B10) while others were adapted from human instruments (high A5). The field is split between LLM-native and human-adapted approaches, and this split is the dominant source of variance in the feature space.",
-        "member": "Dr. Raj Krishnamurthy (Statistical Methodology)"
+        "member": "Statistical methodology perspective"
       },
       "umap": {
         "what": "2D UMAP projection showing how the 54 assessed benchmarks cluster in feature space, colored by theory.",
         "finding": "Three loose clusters emerge: a MFT/Kohlberg cluster (established psychometric instruments), a multi-theory cluster (newer composite benchmarks), and scattered singleton benchmarks.",
         "interpretation": "The clustering reveals that benchmarks from the same theoretical tradition share structural features—MFT benchmarks tend to use similar item formats, scales, and provenance patterns. This is expected but confirms that theory-of-origin is the primary organizing dimension of the benchmark landscape.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       },
       "treemap": {
         "what": "Treemap showing theory coverage proportions across the full 292-candidate corpus, including 71 new candidates from vault sweep.",
         "finding": "MFT accounts for ~35% of all candidates, followed by Schwartz Values (~15%) and Kohlberg (~12%). Non-Western frameworks collectively represent less than 5% of candidates.",
         "interpretation": "The treemap makes the Western-centric bias visceral—the entire non-Western moral psychology benchmark literature fits in a corner of the map. This is not a selection artifact but a reflection of where the field has invested research effort.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       },
       "temporal": {
         "what": "Line chart showing temporal trends in benchmark publication and key features over time.",
         "finding": "Benchmark publication has accelerated since 2020, with a marked shift toward LLM-specific instruments after 2022. Pre-2020 benchmarks have higher psychometric rigor scores but lower LLM fidelity.",
         "interpretation": "The field is in a transitional period—established instruments with decades of validation data are being supplemented (not replaced) by newer LLM-native instruments that lack psychometric validation but are better suited to automated administration. The transition is healthy if both traditions eventually converge.",
-        "member": "Dr. Isabella Ruiz (Developmental Psychology)"
+        "member": "Developmental psychology perspective"
       },
       "rlhfComp": {
         "what": "Comparison of benchmark characteristics pre- and post-RLHF (split at 2022).",
         "finding": "Post-2022 benchmarks show higher LLM fidelity (B10) scores but lower citation counts (C1) and fewer human baselines (A5). The mean composite score has decreased despite higher individual B-tier scores.",
         "interpretation": "The post-RLHF benchmark wave prioritizes LLM usability over psychometric rigor—a trade-off that may produce practically useful but scientifically weaker instruments. The declining composite despite rising B-tier scores shows that efficiency gains are not compensating for the loss of established validation.",
-        "member": "Dr. Rebecca Torres (AI Safety)"
+        "member": "AI safety perspective"
       },
       "evolution": {
         "what": "Stacked area chart showing the number of benchmarks per moral psychology theory by publication year.",
         "finding": "MFT benchmarks have been published steadily since 2010, while multi-theory and cross-cultural benchmarks have emerged primarily since 2022.",
         "interpretation": "The theory diversification trend is encouraging but insufficient—non-Western frameworks remain almost entirely absent from the benchmark literature even in the post-2022 wave. Diversification has occurred within Western traditions (adding care ethics, contractualism) rather than across civilizational boundaries.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       },
       "gap": {
         "what": "Heatmap showing coverage gaps across 11 theories and 7 assessment tiers (A through G). Dark cells = gaps.",
         "finding": "The deepest gaps are in Tier F (Cultural Breadth) for non-Western theories and Tier D (Psychometric Rigor) for newer multi-theory benchmarks.",
         "interpretation": "The gap heatmap serves as a research agenda: each dark cell represents a specific combination of theory and assessment dimension that no existing benchmark adequately covers. Priority should be given to F-tier gaps (cultural breadth) since these are hardest to retrofit into existing instruments.",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       },
       "health": {
         "what": "Scorecard showing an overall grade for the moral psychology benchmark ecosystem based on coverage, rigor, diversity, and LLM readiness.",
         "finding": "Overall grade is D+—the field has adequate MFT/Kohlberg coverage but critical gaps in non-Western theories, psychometric validation of LLM-native instruments, and cultural diversity.",
         "interpretation": "The D+ grade is a call to action: the benchmark ecosystem is functionally adequate for Western-centric LLM evaluation but inadequate for global deployment. The two highest-priority improvements are (1) developing non-Western moral benchmarks and (2) validating LLM-native instruments against human baselines.",
-        "member": "Dr. Yilin Chen (Psychometrics)"
+        "member": "Psychometrics perspective"
       }
     },
     "cu": {
@@ -79565,31 +79565,31 @@ const DATA = {
         "what": "The Western Liberal Bias Index (WLBI) quantifies how much the benchmark ecosystem is biased toward WEIRD (Western, Educated, Industrialized, Rich, Democratic) moral frameworks.",
         "finding": "WLBI = 70.7, meaning roughly 71% of benchmarks assume or measure Western liberal moral values.",
         "interpretation": "A WLBI above 50 indicates systematic bias. The 70.7 score means that an AI system evaluated exclusively with these benchmarks would be assessed against a moral standard that excludes ~70% of the world’s moral traditions. This is a structural limitation of the field, not a selection artifact. The model comparison in Tab 11 shows this bias is scale-invariant — Haiku, Sonnet, and Opus all reproduce it.",
-        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+        "member": "Cross-cultural psychology perspective"
       },
       "cross": {
         "what": "Metrics showing what percentage of benchmarks default to Western moral assumptions and how well Claude performs on non-Western perspective-taking tasks.",
         "finding": "86.7% of benchmarks have a Western cultural default—they assume liberal individualist values as the baseline. Claude’s perspective-taking quality on non-Western frameworks averages 4.17/5, suggesting competent but not expert-level cultural perspective-taking.",
         "interpretation": "The gap between the 86.7% Western default rate and Claude’s 4.17 perspective-taking score reveals an important asymmetry: the model can adopt non-Western perspectives when prompted, but the instruments themselves are designed from a Western standpoint. Better benchmarks are needed, not just better models.",
-        "member": "Dr. Kenji Watanabe (Cross-Cultural Psychology)"
+        "member": "Cross-cultural psychology perspective"
       },
       "religious": {
         "what": "Horizontal bar chart comparing the number of research papers engaging each religious tradition (left axis) with the number of dedicated benchmarks for that tradition (right axis).",
         "finding": "Several traditions with substantial research literature (Islam, Hinduism, Buddhism) have zero or near-zero dedicated benchmarks. Christianity has the most papers but also limited dedicated benchmarks.",
         "interpretation": "The research-to-benchmark pipeline is broken for religious moral frameworks. Papers discussing Islamic ethics or Buddhist moral reasoning exist, but no one has converted this scholarship into validated psychometric instruments that could be administered to LLMs. This represents both a gap and an opportunity.",
-        "member": "Dr. Sarah Goldstein (Religious Studies)"
+        "member": "Religious studies perspective"
       },
       "sacred": {
         "what": "The sacred value analysis examines which moral foundations Claude treats as inviolable versus negotiable.",
         "finding": "Claude treats egalitarianism and harm prevention as sacred (near-ceiling scores regardless of context), while purity and authority are systematically suppressed. This creates a distinctive 'WEIRD-liberal secular' sacred value hierarchy.",
         "interpretation": "The sacred/profane distinction reveals RLHF's deepest moral commitments — values so strongly reinforced they resist even explicit persona instructions. This pattern is consistent across all 9 models tested (see Tab 12: Cross-Vendor Analysis), suggesting it is a universal feature of RLHF training rather than a vendor-specific choice.",
-        "member": "Dr. Sarah Goldstein (Religious Studies)"
+        "member": "Religious studies perspective"
       },
       "sweep": {
         "what": "Table listing 71 papers from the CEI Literature Vault identified as potential non-Western or underrepresented benchmark candidates through keyword matching.",
         "finding": "The vault sweep identified papers spanning Indigenous ethics, Islamic jurisprudence, Confucian role ethics, Ubuntu philosophy, and Buddhist moral reasoning—all with potential for benchmark development.",
         "interpretation": "These 71 candidates represent the raw material for closing the cultural coverage gaps identified above. Each paper should be evaluated for benchmark extraction potential: does it contain items, scenarios, or measurement instruments that could be adapted for LLM administration?",
-        "member": "Dr. Sarah Goldstein (Religious Studies)"
+        "member": "Religious studies perspective"
       }
     },
     "mc": {
@@ -79601,25 +79601,25 @@ const DATA = {
         "what": "Overlaid radar charts showing MFT foundation profiles (Care, Fairness, Loyalty, Authority, Purity) for all 9 models across 3 vendors. Vendor-lead models (Opus, Gem 2.5 Pro, Codex) are drawn with solid lines; others are dashed.",
         "finding": "All 9 models share the same WEIRD-liberal profile shape—high individualizing (Care, Fairness) and low binding (Loyalty, Authority, Purity). Purity scores sit near floor (~1.0) universally. No vendor has trained models to engage with sacred moral reasoning.",
         "interpretation": "The shared profile shape across all vendors confirms that RLHF alignment produces a convergent moral orientation regardless of vendor or model capacity. This is an RLHF universal, not a vendor-specific artifact. The variation is in degree, not kind—within-family spread (e.g., Anthropic Haiku→Opus) exceeds any cross-vendor difference.",
-        "member": "Dr. Amara Okafor (Moral Philosophy)"
+        "member": "Moral philosophy perspective"
       },
       "pscore": {
         "what": "Grouped bar chart comparing DIT P-scores (post-conventional moral reasoning percentage) across all 9 models. P-scores do not scale monotonically with model size within any vendor family.",
         "finding": "P-scores range from 60 (Haiku) to 90 (Teacher DIT ceiling). The pattern is non-monotonic across all three vendor families—medium-sized models often outperform their larger siblings (e.g., Sonnet 85 > Opus 75 on DIT-1). The teacher-role condition amplifies post-conventional reasoning universally.",
         "interpretation": "Non-monotonic P-scores across all 3 vendors rule out vendor-specific training explanations. If P-score reflected genuine moral development, we would expect monotonic scaling with model size. The consistent pattern suggests P-score measures the balance between principled reasoning and pragmatic hedging—larger models’ greater capability leads to more nuanced (lower-P-score) responses regardless of vendor.",
-        "member": "Dr. Isabella Ruiz (Developmental Psychology)"
+        "member": "Developmental psychology perspective"
       },
       "classification": {
         "what": "Grouped bar chart showing moral classification accuracy (MFTC, MoralCode, M3oralBench) across all 9 models.",
         "finding": "Classification accuracy is near-ceiling across all 9 models (mean 96.9%), with smaller models in each vendor family scoring equal to or higher than their larger siblings. Competence-testing benchmarks cannot discriminate by scale or vendor.",
         "interpretation": "The near-universal ceiling effect suggests these classification tasks test a capability threshold that all current-generation models have crossed. Where inverse-size patterns persist, they likely reflect response style rather than competence—larger models generate more qualified responses that are harder to score as categorically correct. The finding argues for retiring accuracy-based benchmarks in favor of continuous-scale instruments.",
-        "member": "Dr. Fatima Al-Rashid (Computational Linguistics)"
+        "member": "Computational linguistics perspective"
       },
       "dual": {
         "what": "Grouped bar chart showing utilitarian acceptance rates for personal and impersonal dilemmas, with and without chain-of-thought (CoT) prompting, across all 9 models.",
         "finding": "All 9 models show the personal/impersonal dissociation (Doctrine of Double Effect adherence, ECI = 1.0 universally). Smaller models across all vendors (Haiku, GPT Mini, Flash-Lite) show greater CoT sensitivity on personal dilemmas—their moral judgments shift under deliberative prompting.",
         "interpretation": "CoT sensitivity in smaller models across all 3 vendors rules out vendor-specific tuning as the explanation. Smaller models have weaker ‘baked-in’ moral commitments and are more responsive to reasoning scaffolding regardless of training pipeline. This has direct implications for alignment: prompting-based moral behavior modification is most effective on smaller models, and this is an RLHF universal.",
-        "member": "Dr. Marcus Lindqvist (Cognitive Science)"
+        "member": "Cognitive science perspective"
       }
     }
   },
