@@ -78075,49 +78075,49 @@ const DATA = {
       ],
       "vendorData": {
         "Cross-Cultural": {
-          "Anthropic": 3.313,
-          "Gemini": 3.4,
-          "OpenAI": 3.4
+          "Anthropic": 54.6,
+          "Gemini": 56.1,
+          "OpenAI": 56.1
         },
         "Dual Process": {
-          "Anthropic": 0.042,
+          "Anthropic": 21.0,
           "Gemini": 0.0,
           "OpenAI": 0.0
         },
         "Dyadic": {
-          "Anthropic": 3.25,
-          "Gemini": 3.292,
-          "OpenAI": 3.292
+          "Anthropic": 32.5,
+          "Gemini": 32.9,
+          "OpenAI": 32.9
         },
         "Intuitionism": {
-          "Anthropic": 1.103,
-          "Gemini": 1.15,
-          "OpenAI": 1.15
+          "Anthropic": 13.3,
+          "Gemini": 16.7,
+          "OpenAI": 16.7
         },
         "Kohlberg": {
-          "Anthropic": 81.666,
+          "Anthropic": 81.7,
           "Gemini": 82.5,
           "OpenAI": 82.5
         },
         "MFT": {
-          "Anthropic": 1.817,
-          "Gemini": 1.874,
-          "OpenAI": 1.854
+          "Anthropic": 87.1,
+          "Gemini": 88.4,
+          "OpenAI": 87.9
         },
         "Multi-Theory": {
-          "Anthropic": 2.738,
-          "Gemini": 2.675,
-          "OpenAI": 2.675
+          "Anthropic": 88.0,
+          "Gemini": 87.0,
+          "OpenAI": 87.0
         },
         "Schwartz": {
-          "Anthropic": 2.061,
-          "Gemini": 1.983,
-          "OpenAI": 1.983
+          "Anthropic": 81.7,
+          "Gemini": 78.3,
+          "OpenAI": 78.3
         },
         "Trolley": {
-          "Anthropic": 9.5,
-          "Gemini": 9.5,
-          "OpenAI": 9.5
+          "Anthropic": 95.0,
+          "Gemini": 95.0,
+          "OpenAI": 95.0
         }
       }
     },

@@ -1923,8 +1923,10 @@ function chartCVTheory(el) {
     },
     yAxis: {
       type: 'value',
-      name: 'Mean Primary Metric',
+      name: 'Normalized Score (0-100)',
       nameTextStyle: { color: DARK_TEXT },
+      min: 0,
+      max: 100,
       axisLabel: { color: DARK_TEXT },
       splitLine: { lineStyle: { color: GRID_LINE } }
     },
